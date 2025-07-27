@@ -1,0 +1,163 @@
+2025-03-27 16:52:47,006 - database.db_utils - INFO - Connected to database: :memory:
+2025-03-27 16:52:47,008 - database.db_utils - INFO - Connected to database: :memory:
+2025-03-27 16:52:47,008 - database.db_utils - INFO - Connected to database: :memory:
+2025-03-27 16:52:47,014 - database.db_utils - INFO - Connected to database: :memory:
+2025-03-27 16:52:47,016 - database.db_utils - INFO - Connected to database: :memory:
+2025-03-27 16:52:47,019 - database.db_utils - INFO - Connected to database: :memory:
+2025-03-27 16:52:47,021 - database.db_utils - INFO - Connected to database: :memory:
+2025-03-27 16:52:47,023 - database.db_utils - INFO - Connected to database: :memory:
+2025-03-27 16:53:38,336 - database.db_utils - INFO - Connected to database: :memory:
+2025-03-27 16:53:38,633 - database.db_utils - INFO - Database connection closed
+2025-03-27 16:53:38,633 - database.db_utils - INFO - Connected to database: :memory:
+2025-03-27 16:53:38,636 - database.db_utils - ERROR - Error executing query: Execution failed on sql '
+            SELECT 
+                p.full_name as player_name,
+                p.position,
+                t.name as team_name,
+                COUNT(CASE WHEN is_playoff = 0 THEN 1 END) as regular_season_games,
+                COUNT(CASE WHEN is_playoff = 1 THEN 1 END) as playoff_games,
+                AVG(CASE WHEN is_playoff = 0 THEN points END) as regular_season_points,
+                AVG(CASE WHEN is_playoff = 1 THEN points END) as playoff_points,
+                AVG(CASE WHEN is_playoff = 0 THEN goals END) as regular_season_goals,
+                AVG(CASE WHEN is_playoff = 1 THEN goals END) as playoff_goals,
+                AVG(CASE WHEN is_playoff = 0 THEN time_on_ice_mins END) as regular_season_toi,
+                AVG(CASE WHEN is_playoff = 1 THEN time_on_ice_mins END) as playoff_toi
+            FROM skater_game_logs s
+            JOIN players p ON s.player_id = p.player_id
+            JOIN teams t ON s.team_id = t.team_id
+             WHERE p.position_type = ? GROUP BY p.player_id, p.full_name, p.position, t.name HAVING (COUNT(CASE WHEN is_playoff = 0 THEN 1 END) >= 1 AND COUNT(CASE WHEN is_playoff = 1 THEN 1 END) >= 1) ORDER BY (AVG(CASE WHEN is_playoff = 1 THEN points END) - AVG(CASE WHEN is_playoff = 0 THEN points END)) DESC': no such column: time_on_ice_mins
+2025-03-27 16:53:38,638 - database.db_utils - ERROR - Query: 
+            SELECT 
+                p.full_name as player_name,
+                p.position,
+                t.name as team_name,
+                COUNT(CASE WHEN is_playoff = 0 THEN 1 END) as regular_season_games,
+                COUNT(CASE WHEN is_playoff = 1 THEN 1 END) as playoff_games,
+                AVG(CASE WHEN is_playoff = 0 THEN points END) as regular_season_points,
+                AVG(CASE WHEN is_playoff = 1 THEN points END) as playoff_points,
+                AVG(CASE WHEN is_playoff = 0 THEN goals END) as regular_season_goals,
+                AVG(CASE WHEN is_playoff = 1 THEN goals END) as playoff_goals,
+                AVG(CASE WHEN is_playoff = 0 THEN time_on_ice_mins END) as regular_season_toi,
+                AVG(CASE WHEN is_playoff = 1 THEN time_on_ice_mins END) as playoff_toi
+            FROM skater_game_logs s
+            JOIN players p ON s.player_id = p.player_id
+            JOIN teams t ON s.team_id = t.team_id
+             WHERE p.position_type = ? GROUP BY p.player_id, p.full_name, p.position, t.name HAVING (COUNT(CASE WHEN is_playoff = 0 THEN 1 END) >= 1 AND COUNT(CASE WHEN is_playoff = 1 THEN 1 END) >= 1) ORDER BY (AVG(CASE WHEN is_playoff = 1 THEN points END) - AVG(CASE WHEN is_playoff = 0 THEN points END)) DESC
+2025-03-27 16:53:38,638 - database.db_utils - ERROR - Params: ('F',)
+2025-03-27 16:53:38,643 - database.db_utils - INFO - Database connection closed
+2025-03-27 16:53:38,643 - database.db_utils - INFO - Connected to database: :memory:
+2025-03-27 16:53:38,645 - database.db_utils - INFO - Connected to database: :memory:
+2025-03-27 16:53:38,645 - database.db_utils - INFO - Database connection closed
+2025-03-27 16:53:38,645 - database.db_utils - INFO - Database connection closed
+2025-03-27 16:53:38,646 - database.db_utils - INFO - Connected to database: :memory:
+2025-03-27 16:53:38,654 - database.db_utils - INFO - Database connection closed
+2025-03-27 16:53:38,654 - database.db_utils - INFO - Connected to database: :memory:
+2025-03-27 16:53:38,660 - database.db_utils - INFO - Database connection closed
+2025-03-27 16:53:38,661 - database.db_utils - INFO - Connected to database: :memory:
+2025-03-27 16:53:38,666 - database.db_utils - INFO - Database connection closed
+2025-03-27 16:53:38,666 - database.db_utils - INFO - Connected to database: :memory:
+2025-03-27 16:53:38,670 - database.db_utils - INFO - Database connection closed
+2025-03-27 16:53:38,671 - database.db_utils - INFO - Connected to database: :memory:
+2025-03-27 16:53:38,677 - database.db_utils - INFO - Database connection closed
+2025-03-27 16:54:41,815 - database.db_utils - INFO - Connected to database: :memory:
+2025-03-27 16:54:41,819 - database.db_utils - INFO - Database connection closed
+2025-03-27 16:54:41,819 - database.db_utils - INFO - Connected to database: :memory:
+2025-03-27 16:54:41,821 - database.db_utils - INFO - Database connection closed
+2025-03-27 16:54:41,822 - database.db_utils - INFO - Connected to database: :memory:
+2025-03-27 16:54:41,823 - database.db_utils - INFO - Connected to database: :memory:
+2025-03-27 16:54:41,823 - database.db_utils - INFO - Database connection closed
+2025-03-27 16:54:41,823 - database.db_utils - INFO - Database connection closed
+2025-03-27 16:54:41,824 - database.db_utils - INFO - Connected to database: :memory:
+2025-03-27 16:54:41,832 - database.db_utils - INFO - Database connection closed
+2025-03-27 16:54:41,832 - database.db_utils - INFO - Connected to database: :memory:
+2025-03-27 16:54:41,837 - database.db_utils - INFO - Database connection closed
+2025-03-27 16:54:41,838 - database.db_utils - INFO - Connected to database: :memory:
+2025-03-27 16:54:41,844 - database.db_utils - INFO - Database connection closed
+2025-03-27 16:54:41,846 - database.db_utils - INFO - Connected to database: :memory:
+2025-03-27 16:54:41,850 - database.db_utils - INFO - Database connection closed
+2025-03-27 16:54:41,851 - database.db_utils - INFO - Connected to database: :memory:
+2025-03-27 16:54:41,855 - database.db_utils - INFO - Database connection closed
+2025-03-27 16:55:40,508 - database.db_utils - INFO - Connected to database: :memory:
+2025-03-27 16:55:40,512 - database.db_utils - INFO - Database connection closed
+2025-03-27 16:55:40,512 - database.db_utils - INFO - Connected to database: :memory:
+2025-03-27 16:55:40,515 - database.db_utils - INFO - Database connection closed
+2025-03-27 16:55:40,516 - database.db_utils - INFO - Connected to database: :memory:
+2025-03-27 16:55:40,517 - database.db_utils - INFO - Connected to database: :memory:
+2025-03-27 16:55:40,518 - database.db_utils - INFO - Database connection closed
+2025-03-27 16:55:40,518 - database.db_utils - INFO - Database connection closed
+2025-03-27 16:55:40,518 - database.db_utils - INFO - Connected to database: :memory:
+2025-03-27 16:55:40,528 - database.db_utils - INFO - Database connection closed
+2025-03-27 16:55:40,529 - database.db_utils - INFO - Connected to database: :memory:
+2025-03-27 16:55:40,533 - database.db_utils - INFO - Database connection closed
+2025-03-27 16:55:40,534 - database.db_utils - INFO - Connected to database: :memory:
+2025-03-27 16:55:40,542 - database.db_utils - INFO - Database connection closed
+2025-03-27 16:55:40,542 - database.db_utils - INFO - Connected to database: :memory:
+2025-03-27 16:55:40,546 - database.db_utils - INFO - Database connection closed
+2025-03-27 16:55:40,547 - database.db_utils - INFO - Connected to database: :memory:
+2025-03-27 16:55:40,553 - database.db_utils - INFO - Database connection closed
+2025-03-27 16:56:44,317 - database.db_utils - INFO - Connected to database: :memory:
+2025-03-27 16:56:44,321 - database.db_utils - INFO - Database connection closed
+2025-03-27 16:56:44,321 - database.db_utils - INFO - Connected to database: :memory:
+2025-03-27 16:56:44,324 - database.db_utils - INFO - Database connection closed
+2025-03-27 16:56:44,325 - database.db_utils - INFO - Connected to database: :memory:
+2025-03-27 16:56:44,327 - database.db_utils - INFO - Connected to database: :memory:
+2025-03-27 16:56:44,327 - database.db_utils - INFO - Database connection closed
+2025-03-27 16:56:44,328 - database.db_utils - INFO - Database connection closed
+2025-03-27 16:56:44,330 - database.db_utils - INFO - Connected to database: :memory:
+2025-03-27 16:56:44,342 - database.db_utils - INFO - Database connection closed
+2025-03-27 16:56:44,343 - database.db_utils - INFO - Connected to database: :memory:
+2025-03-27 16:56:44,353 - database.db_utils - INFO - Database connection closed
+2025-03-27 16:56:44,353 - database.db_utils - INFO - Connected to database: :memory:
+2025-03-27 16:56:44,368 - database.db_utils - INFO - Database connection closed
+2025-03-27 16:56:44,368 - database.db_utils - INFO - Connected to database: :memory:
+2025-03-27 16:56:44,372 - database.db_utils - INFO - Database connection closed
+2025-03-27 16:56:44,372 - database.db_utils - INFO - Connected to database: :memory:
+2025-03-27 16:56:44,377 - __main__ - INFO - Found player name: Andrei Vasilevskiy
+2025-03-27 16:56:44,378 - database.db_utils - INFO - Database connection closed
+2025-03-27 16:56:44,790 - database.db_utils - INFO - Connected to database: :memory:
+2025-03-27 16:56:44,794 - database.db_utils - INFO - Database connection closed
+2025-03-27 16:56:44,795 - database.db_utils - INFO - Connected to database: :memory:
+2025-03-27 16:56:44,798 - database.db_utils - INFO - Database connection closed
+2025-03-27 16:56:44,799 - database.db_utils - INFO - Connected to database: :memory:
+2025-03-27 16:56:44,801 - database.db_utils - INFO - Connected to database: :memory:
+2025-03-27 16:56:44,801 - database.db_utils - INFO - Database connection closed
+2025-03-27 16:56:44,802 - database.db_utils - INFO - Database connection closed
+2025-03-27 16:56:44,803 - database.db_utils - INFO - Connected to database: :memory:
+2025-03-27 16:56:44,814 - database.db_utils - INFO - Database connection closed
+2025-03-27 16:56:44,817 - database.db_utils - INFO - Connected to database: :memory:
+2025-03-27 16:56:44,822 - database.db_utils - INFO - Database connection closed
+2025-03-27 16:56:44,823 - database.db_utils - INFO - Connected to database: :memory:
+2025-03-27 16:56:44,833 - database.db_utils - INFO - Database connection closed
+2025-03-27 16:56:44,834 - database.db_utils - INFO - Connected to database: :memory:
+2025-03-27 16:56:44,838 - database.db_utils - INFO - Database connection closed
+2025-03-27 16:56:44,839 - database.db_utils - INFO - Connected to database: :memory:
+2025-03-27 16:56:44,842 - __main__ - INFO - Found player name: Andrei Vasilevskiy
+2025-03-27 16:56:44,843 - database.db_utils - INFO - Database connection closed
+2025-03-27 16:56:49,250 - database.db_utils - INFO - Connected to database: :memory:
+2025-03-27 16:56:49,254 - database.db_utils - INFO - Database connection closed
+2025-03-27 16:56:49,255 - database.db_utils - INFO - Connected to database: :memory:
+2025-03-27 16:56:49,258 - database.db_utils - INFO - Database connection closed
+2025-03-27 16:56:49,258 - database.db_utils - INFO - Connected to database: :memory:
+2025-03-27 16:56:49,260 - database.db_utils - INFO - Connected to database: :memory:
+2025-03-27 16:56:49,260 - database.db_utils - INFO - Database connection closed
+2025-03-27 16:56:49,261 - database.db_utils - INFO - Database connection closed
+2025-03-27 16:56:49,262 - database.db_utils - INFO - Connected to database: :memory:
+2025-03-27 16:56:49,272 - database.db_utils - INFO - Database connection closed
+2025-03-27 16:56:49,273 - database.db_utils - INFO - Connected to database: :memory:
+2025-03-27 16:56:49,279 - database.db_utils - INFO - Database connection closed
+2025-03-27 16:56:49,280 - database.db_utils - INFO - Connected to database: :memory:
+2025-03-27 16:56:49,289 - database.db_utils - INFO - Database connection closed
+2025-03-27 16:56:49,290 - database.db_utils - INFO - Connected to database: :memory:
+2025-03-27 16:56:49,295 - database.db_utils - INFO - Database connection closed
+2025-03-27 16:56:49,296 - database.db_utils - INFO - Connected to database: :memory:
+2025-03-27 16:56:49,299 - __main__ - INFO - Found player name: Andrei Vasilevskiy
+2025-03-27 16:56:49,300 - database.db_utils - INFO - Database connection closed
+2025-03-31 11:41:08,967 - __main__ - INFO - Starting Streamlit Dashboard...
+2025-03-31 11:41:11,089 - database.db_utils - INFO - Creating new NHLDatabase instance.
+2025-03-31 11:41:11,487 - database.db_utils - ERROR - Failed to initialize NHLDatabase: No module named 'psycopg2'
+2025-03-31 11:41:14,314 - __main__ - INFO - Starting Streamlit Dashboard...
+2025-03-31 11:41:16,413 - database.db_utils - INFO - Creating new NHLDatabase instance.
+2025-03-31 11:41:17,020 - database.db_utils - ERROR - Failed to initialize NHLDatabase: No module named 'psycopg2'
+2025-03-31 11:44:41,862 - __main__ - INFO - Starting Streamlit Dashboard...
+2025-03-31 11:44:43,268 - database.db_utils - INFO - Creating new NHLDatabase instance.
+2025-03-31 11:44:43,977 - database.db_utils - ERROR - Failed to initialize NHLDatabase: No module named 'psycopg2'

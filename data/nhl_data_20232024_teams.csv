@@ -1,0 +1,34 @@
+team_id,name,abbreviation,team_name,location,division,conference,season
+1,New Jersey Devils,NJD,Devils,New Jersey,Metropolitan,Eastern,20232024
+2,New York Islanders,NYI,Islanders,New York,Metropolitan,Eastern,20232024
+3,New York Rangers,NYR,Rangers,New York,Metropolitan,Eastern,20232024
+4,Philadelphia Flyers,PHI,Flyers,Philadelphia,Metropolitan,Eastern,20232024
+5,Pittsburgh Penguins,PIT,Penguins,Pittsburgh,Metropolitan,Eastern,20232024
+6,Boston Bruins,BOS,Bruins,Boston,Atlantic,Eastern,20232024
+7,Buffalo Sabres,BUF,Sabres,Buffalo,Atlantic,Eastern,20232024
+8,Montréal Canadiens,MTL,Canadiens,Montréal,Atlantic,Eastern,20232024
+9,Ottawa Senators,OTT,Senators,Ottawa,Atlantic,Eastern,20232024
+10,Toronto Maple Leafs,TOR,Maple Leafs,Toronto,Atlantic,Eastern,20232024
+12,Carolina Hurricanes,CAR,Hurricanes,Carolina,Metropolitan,Eastern,20232024
+13,Florida Panthers,FLA,Panthers,Florida,Atlantic,Eastern,20232024
+14,Tampa Bay Lightning,TBL,Lightning,Tampa Bay,Atlantic,Eastern,20232024
+15,Washington Capitals,WSH,Capitals,Washington,Metropolitan,Eastern,20232024
+16,Chicago Blackhawks,CHI,Blackhawks,Chicago,Central,Western,20232024
+17,Detroit Red Wings,DET,Red Wings,Detroit,Atlantic,Eastern,20232024
+18,Nashville Predators,NSH,Predators,Nashville,Central,Western,20232024
+19,St. Louis Blues,STL,Blues,St. Louis,Central,Western,20232024
+20,Calgary Flames,CGY,Flames,Calgary,Pacific,Western,20232024
+21,Colorado Avalanche,COL,Avalanche,Colorado,Central,Western,20232024
+22,Edmonton Oilers,EDM,Oilers,Edmonton,Pacific,Western,20232024
+23,Vancouver Canucks,VAN,Canucks,Vancouver,Pacific,Western,20232024
+24,Anaheim Ducks,ANA,Ducks,Anaheim,Pacific,Western,20232024
+25,Dallas Stars,DAL,Stars,Dallas,Central,Western,20232024
+26,Los Angeles Kings,LAK,Kings,Los Angeles,Pacific,Western,20232024
+28,San Jose Sharks,SJS,Sharks,San Jose,Pacific,Western,20232024
+29,Columbus Blue Jackets,CBJ,Blue Jackets,Columbus,Metropolitan,Eastern,20232024
+30,Minnesota Wild,MIN,Wild,Minnesota,Central,Western,20232024
+52,Winnipeg Jets,WPG,Jets,Winnipeg,Central,Western,20232024
+53,Arizona Coyotes,ARI,Coyotes,Arizona,Central,Western,20232024
+54,Vegas Golden Knights,VGK,Golden Knights,Vegas,Pacific,Western,20232024
+55,Seattle Kraken,SEA,Kraken,Seattle,Pacific,Western,20232024
+56,Utah Hockey Club,UHC,Hockey Club,Utah,Central,Western,20232024

@@ -1,0 +1,118 @@
+2025-03-31 10:32:58,420 - __main__ - INFO - Starting NHL Performance Analysis Pipeline
+2025-03-31 10:32:58,552 - __main__ - INFO - Seasons: ['20232024']
+2025-03-31 10:32:58,608 - __main__ - INFO - Game types: ['R']
+2025-03-31 10:32:58,632 - __main__ - INFO - Analysis Position(s): all
+2025-03-31 10:32:58,667 - __main__ - INFO - Starting Data Collection...
+2025-03-31 10:32:58,715 - __main__ - INFO - Executing: D:\Python\Kopitar\.conda\python.exe D:\Python\Kopitar\kopitar\analysis\data_collection.py --seasons 20232024 --game_types R --player_types G D F --output_dir kopitar\data
+2025-03-31 10:33:18,999 - __main__ - ERROR - Data Collection failed with exit code 1
+2025-03-31 10:33:19,016 - __main__ - ERROR - STDOUT:
+N/A
+2025-03-31 10:33:19,058 - __main__ - ERROR - STDERR:
+2025-03-31 10:33:17,309 - __main__ - INFO - Collecting data for NHL seasons: ['20232024'], game types: ['R'], player types: ['G', 'D', 'F']
+2025-03-31 10:33:17,309 - utils.nhl_api - INFO - NHL API Client initialized for season 20242025
+2025-03-31 10:33:17,309 - __main__ - INFO - Processing season 20232024...
+2025-03-31 10:33:17,309 - __main__ - INFO - Fetching team information...
+2025-03-31 10:33:17,309 - utils.nhl_api - INFO - NHL API Client initialized for season 20242025
+2025-03-31 10:33:17,309 - utils.nhl_api - INFO - Fetching teams information...
+2025-03-31 10:33:18,299 - utils.nhl_api - WARNING - Error fetching teams from standings: [Errno 13] Permission denied
+2025-03-31 10:33:18,301 - utils.nhl_api - WARNING - Error fetching teams from teams endpoint: 'Teams' object has no attribute 'all_teams'
+2025-03-31 10:33:18,301 - utils.nhl_api - WARNING - Using hardcoded team list as fallback
+2025-03-31 10:33:18,543 - __main__ - INFO - Saved team information for 33 teams
+2025-03-31 10:33:18,543 - __main__ - INFO - Processing regular_season games...
+2025-03-31 10:33:18,544 - __main__ - INFO - Fetching regular_season schedule...
+2025-03-31 10:33:18,544 - utils.nhl_api - INFO - NHL API Client initialized for season 20242025
+2025-03-31 10:33:18,544 - utils.nhl_api - INFO - Fetching schedule...
+2025-03-31 10:33:18,546 - utils.nhl_api - ERROR - Error fetching schedule: [Errno 13] Permission denied
+Traceback (most recent call last):
+  File "D:\Python\Kopitar\kopitar\analysis\data_collection.py", line 345, in <module>
+    main() 
+    ^^^^^^
+  File "D:\Python\Kopitar\kopitar\analysis\data_collection.py", line 342, in main
+    collect_data(args.seasons, args.game_types, args.player_types, args.output_dir)
+  File "D:\Python\Kopitar\kopitar\analysis\data_collection.py", line 93, in collect_data
+    schedule_df = schedule_df[schedule_df['game_type'] == 'R']
+                              ~~~~~~~~~~~^^^^^^^^^^^^^
+  File "D:\Python\Kopitar\.conda\Lib\site-packages\pandas\core\frame.py", line 4102, in __getitem__
+    indexer = self.columns.get_loc(key)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Python\Kopitar\.conda\Lib\site-packages\pandas\core\indexes\range.py", line 417, in get_loc
+    raise KeyError(key)
+KeyError: 'game_type'
+2025-03-31 10:33:19,110 - __main__ - INFO - Data Collection failed after 20.35 seconds.
+2025-03-31 10:33:19,131 - __main__ - ERROR - Pipeline aborted after Data Collection failure.
+2025-03-31 11:08:32,076 - __main__ - INFO - Starting NHL Performance Analysis Pipeline
+2025-03-31 11:08:32,130 - __main__ - INFO - Seasons: ['20232024', '20222023', '20212022', '20202021', '20192020']
+2025-03-31 11:08:32,173 - __main__ - INFO - Game types: ['R']
+2025-03-31 11:08:32,194 - __main__ - INFO - Analysis Position(s): all
+2025-03-31 11:08:32,232 - __main__ - INFO - Starting Data Collection...
+2025-03-31 11:08:32,248 - __main__ - INFO - Executing: D:\Python\Kopitar\.conda\python.exe D:\Python\Kopitar\kopitar\analysis\data_collection.py --seasons 20232024 20222023 20212022 20202021 20192020 --game_types R --player_types G D F --output_dir kopitar\data
+2025-03-31 11:08:51,608 - __main__ - INFO - Starting NHL Performance Analysis Pipeline
+2025-03-31 11:08:51,627 - __main__ - INFO - Seasons: ['20232024', '20222023', '20212022', '20202021', '20192020']
+2025-03-31 11:08:51,667 - __main__ - INFO - Game types: ['R']
+2025-03-31 11:08:51,703 - __main__ - INFO - Analysis Position(s): all
+2025-03-31 11:08:51,725 - __main__ - INFO - Skipping data collection step.
+2025-03-31 11:08:51,743 - __main__ - INFO - Starting Database Setup...
+2025-03-31 11:08:51,785 - __main__ - INFO - Executing: D:\Python\Kopitar\.conda\python.exe D:\Python\Kopitar\kopitar\database\db_setup.py --data_dir kopitar\data --import_mode replace --reset --season 20232024 20222023 20212022 20202021 20192020 --game_type R
+2025-03-31 11:08:55,249 - __main__ - ERROR - Data Collection failed with exit code 1
+2025-03-31 11:08:55,253 - __main__ - ERROR - STDOUT:
+N/A
+2025-03-31 11:08:55,271 - __main__ - ERROR - STDERR:
+2025-03-31 11:08:53,417 - __main__ - INFO - Collecting data for NHL seasons: ['20232024', '20222023', '20212022', '20202021', '20192020'], game types: ['R'], player types: ['G', 'D', 'F']
+2025-03-31 11:08:53,420 - utils.nhl_api - INFO - NHL API Client initialized for season 20242025
+2025-03-31 11:08:53,420 - __main__ - INFO - Processing season 20232024...
+2025-03-31 11:08:53,420 - __main__ - INFO - Fetching team information...
+2025-03-31 11:08:53,420 - utils.nhl_api - INFO - NHL API Client initialized for season 20242025
+2025-03-31 11:08:53,420 - utils.nhl_api - INFO - Fetching teams information...
+2025-03-31 11:08:54,970 - utils.nhl_api - WARNING - Error fetching teams from standings: [Errno 13] Permission denied
+2025-03-31 11:08:54,970 - utils.nhl_api - WARNING - Error fetching teams from teams endpoint: 'Teams' object has no attribute 'all_teams'
+2025-03-31 11:08:54,972 - utils.nhl_api - WARNING - Using hardcoded team list as fallback
+2025-03-31 11:08:54,982 - __main__ - INFO - Saved team information for 33 teams
+2025-03-31 11:08:54,982 - __main__ - INFO - Processing regular_season games...
+2025-03-31 11:08:54,982 - __main__ - INFO - Fetching regular_season schedule...
+2025-03-31 11:08:54,982 - utils.nhl_api - INFO - NHL API Client initialized for season 20242025
+2025-03-31 11:08:54,982 - utils.nhl_api - INFO - Fetching schedule...
+2025-03-31 11:08:54,984 - utils.nhl_api - ERROR - Error fetching schedule: [Errno 13] Permission denied
+Traceback (most recent call last):
+  File "D:\Python\Kopitar\kopitar\analysis\data_collection.py", line 345, in <module>
+    main() 
+    ^^^^^^
+  File "D:\Python\Kopitar\kopitar\analysis\data_collection.py", line 342, in main
+    collect_data(args.seasons, args.game_types, args.player_types, args.output_dir)
+  File "D:\Python\Kopitar\kopitar\analysis\data_collection.py", line 93, in collect_data
+    schedule_df = schedule_df[schedule_df['game_type'] == 'R']
+                              ~~~~~~~~~~~^^^^^^^^^^^^^
+  File "D:\Python\Kopitar\.conda\Lib\site-packages\pandas\core\frame.py", line 4102, in __getitem__
+    indexer = self.columns.get_loc(key)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Python\Kopitar\.conda\Lib\site-packages\pandas\core\indexes\range.py", line 417, in get_loc
+    raise KeyError(key)
+KeyError: 'game_type'
+2025-03-31 11:08:55,286 - __main__ - INFO - Data Collection failed after 22.94 seconds.
+2025-03-31 11:08:55,287 - __main__ - ERROR - Pipeline aborted after Data Collection failure.
+2025-03-31 11:09:02,440 - __main__ - ERROR - Database Setup failed with exit code 1
+2025-03-31 11:09:02,476 - __main__ - ERROR - STDOUT:
+N/A
+2025-03-31 11:09:02,507 - __main__ - ERROR - STDERR:
+Traceback (most recent call last):
+  File "D:\Python\Kopitar\kopitar\database\db_setup.py", line 7, in <module>
+    from sqlalchemy import (
+ModuleNotFoundError: No module named 'sqlalchemy'
+2025-03-31 11:09:02,526 - __main__ - INFO - Database Setup failed after 10.72 seconds.
+2025-03-31 11:09:02,539 - __main__ - ERROR - Pipeline aborted after Database Setup failure.
+2025-03-31 11:09:06,276 - __main__ - INFO - Starting NHL Performance Analysis Pipeline
+2025-03-31 11:09:06,315 - __main__ - INFO - Seasons: ['20232024', '20222023', '20212022', '20202021', '20192020']
+2025-03-31 11:09:06,349 - __main__ - INFO - Game types: ['R']
+2025-03-31 11:09:06,376 - __main__ - INFO - Analysis Position(s): all
+2025-03-31 11:09:06,406 - __main__ - INFO - Skipping data collection step.
+2025-03-31 11:09:06,473 - __main__ - INFO - Skipping database setup step.
+2025-03-31 11:09:06,588 - __main__ - INFO - Running performance analysis...
+2025-03-31 11:09:06,636 - __main__ - INFO - --- Running analysis for position: G ---
+2025-03-31 11:09:06,667 - __main__ - INFO - Starting Analysis (G)...
+2025-03-31 11:09:06,697 - __main__ - INFO - Executing: D:\Python\Kopitar\.conda\python.exe D:\Python\Kopitar\kopitar\analysis\goalie_performance_analysis.py --season 20232024 20222023 20212022 20202021 20192020 --game_type R --min-games 10 --output-dir kopitar\results\G --save-results
+2025-03-31 11:10:03,844 - __main__ - ERROR - Analysis (G) failed with exit code 1
+2025-03-31 11:10:03,890 - __main__ - ERROR - STDOUT:
+N/A
+2025-03-31 11:10:03,901 - __main__ - ERROR - STDERR:
+ERROR:root:Failed to import get_db from kopitar.database.db_utils. Ensure db_utils.py exists and path is correct.
+2025-03-31 11:10:03,913 - __main__ - INFO - Analysis (G) failed after 57.20 seconds.
+2025-03-31 11:10:03,942 - __main__ - ERROR - Pipeline aborted after Analysis (G) failure.

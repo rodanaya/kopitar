@@ -1,0 +1,34 @@
+team_id,name,abbreviation,team_name,location,division,conference,season
+1,New Jersey Devils,NJD,Devils,New Jersey,Metropolitan,Eastern,20222023
+2,New York Islanders,NYI,Islanders,New York,Metropolitan,Eastern,20222023
+3,New York Rangers,NYR,Rangers,New York,Metropolitan,Eastern,20222023
+4,Philadelphia Flyers,PHI,Flyers,Philadelphia,Metropolitan,Eastern,20222023
+5,Pittsburgh Penguins,PIT,Penguins,Pittsburgh,Metropolitan,Eastern,20222023
+6,Boston Bruins,BOS,Bruins,Boston,Atlantic,Eastern,20222023
+7,Buffalo Sabres,BUF,Sabres,Buffalo,Atlantic,Eastern,20222023
+8,Montréal Canadiens,MTL,Canadiens,Montréal,Atlantic,Eastern,20222023
+9,Ottawa Senators,OTT,Senators,Ottawa,Atlantic,Eastern,20222023
+10,Toronto Maple Leafs,TOR,Maple Leafs,Toronto,Atlantic,Eastern,20222023
+12,Carolina Hurricanes,CAR,Hurricanes,Carolina,Metropolitan,Eastern,20222023
+13,Florida Panthers,FLA,Panthers,Florida,Atlantic,Eastern,20222023
+14,Tampa Bay Lightning,TBL,Lightning,Tampa Bay,Atlantic,Eastern,20222023
+15,Washington Capitals,WSH,Capitals,Washington,Metropolitan,Eastern,20222023
+16,Chicago Blackhawks,CHI,Blackhawks,Chicago,Central,Western,20222023
+17,Detroit Red Wings,DET,Red Wings,Detroit,Atlantic,Eastern,20222023
+18,Nashville Predators,NSH,Predators,Nashville,Central,Western,20222023
+19,St. Louis Blues,STL,Blues,St. Louis,Central,Western,20222023
+20,Calgary Flames,CGY,Flames,Calgary,Pacific,Western,20222023
+21,Colorado Avalanche,COL,Avalanche,Colorado,Central,Western,20222023
+22,Edmonton Oilers,EDM,Oilers,Edmonton,Pacific,Western,20222023
+23,Vancouver Canucks,VAN,Canucks,Vancouver,Pacific,Western,20222023
+24,Anaheim Ducks,ANA,Ducks,Anaheim,Pacific,Western,20222023
+25,Dallas Stars,DAL,Stars,Dallas,Central,Western,20222023
+26,Los Angeles Kings,LAK,Kings,Los Angeles,Pacific,Western,20222023
+28,San Jose Sharks,SJS,Sharks,San Jose,Pacific,Western,20222023
+29,Columbus Blue Jackets,CBJ,Blue Jackets,Columbus,Metropolitan,Eastern,20222023
+30,Minnesota Wild,MIN,Wild,Minnesota,Central,Western,20222023
+52,Winnipeg Jets,WPG,Jets,Winnipeg,Central,Western,20222023
+53,Arizona Coyotes,ARI,Coyotes,Arizona,Central,Western,20222023
+54,Vegas Golden Knights,VGK,Golden Knights,Vegas,Pacific,Western,20222023
+55,Seattle Kraken,SEA,Kraken,Seattle,Pacific,Western,20222023
+56,Utah Hockey Club,UHC,Hockey Club,Utah,Central,Western,20222023
