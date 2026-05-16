@@ -1,0 +1,112 @@
+[
+  {
+    "season": "20152016",
+    "label": "2015-16",
+    "total_games": 2644,
+    "b2b_n": 160,
+    "b2b_sv": 0.9088,
+    "rest_sv": 0.9058,
+    "delta": 0.003,
+    "p_value": 0.53,
+    "significant": false
+  },
+  {
+    "season": "20162017",
+    "label": "2016-17",
+    "total_games": 2657,
+    "b2b_n": 162,
+    "b2b_sv": 0.9046,
+    "rest_sv": 0.9054,
+    "delta": -0.0008,
+    "p_value": 0.9074,
+    "significant": false
+  },
+  {
+    "season": "20172018",
+    "label": "2017-18",
+    "total_games": 2760,
+    "b2b_n": 140,
+    "b2b_sv": 0.9112,
+    "rest_sv": 0.9017,
+    "delta": 0.0096,
+    "p_value": 0.0947,
+    "significant": false
+  },
+  {
+    "season": "20182019",
+    "label": "2018-19",
+    "total_games": 2720,
+    "b2b_n": 115,
+    "b2b_sv": 0.896,
+    "rest_sv": 0.9019,
+    "delta": -0.0059,
+    "p_value": 0.5079,
+    "significant": false
+  },
+  {
+    "season": "20192020",
+    "label": "2019-20",
+    "total_games": 2307,
+    "b2b_n": 72,
+    "b2b_sv": 0.904,
+    "rest_sv": 0.9018,
+    "delta": 0.0022,
+    "p_value": 0.8022,
+    "significant": false
+  },
+  {
+    "season": "20202021",
+    "label": "2020-21",
+    "total_games": 1852,
+    "b2b_n": 66,
+    "b2b_sv": 0.9053,
+    "rest_sv": 0.899,
+    "delta": 0.0062,
+    "p_value": 0.5309,
+    "significant": false
+  },
+  {
+    "season": "20212022",
+    "label": "2021-22",
+    "total_games": 2818,
+    "b2b_n": 120,
+    "b2b_sv": 0.8874,
+    "rest_sv": 0.8997,
+    "delta": -0.0123,
+    "p_value": 0.2864,
+    "significant": false
+  },
+  {
+    "season": "20222023",
+    "label": "2022-23",
+    "total_games": 2785,
+    "b2b_n": 81,
+    "b2b_sv": 0.8916,
+    "rest_sv": 0.8972,
+    "delta": -0.0056,
+    "p_value": 0.5012,
+    "significant": false
+  },
+  {
+    "season": "20232024",
+    "label": "2023-24",
+    "total_games": 2797,
+    "b2b_n": 43,
+    "b2b_sv": 0.8583,
+    "rest_sv": 0.8948,
+    "delta": -0.0365,
+    "p_value": 0.2489,
+    "significant": false
+  },
+  {
+    "season": "20242025",
+    "label": "2024-25",
+    "total_games": 2764,
+    "b2b_n": 57,
+    "b2b_sv": 0.8894,
+    "rest_sv": 0.8929,
+    "delta": -0.0035,
+    "p_value": 0.667,
+    "significant": false
+  }
+]

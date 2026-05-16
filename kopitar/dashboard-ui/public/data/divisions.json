@@ -1,0 +1,42 @@
+[
+  {
+    "division": "Pacific",
+    "total_games": 6022,
+    "b2b_rate": 0.0352,
+    "avg_sv": 0.8981,
+    "b2b_sv": 0.9026,
+    "rest_sv": 0.898,
+    "b2b_delta": 0.0046,
+    "avg_travel_miles": 729.8
+  },
+  {
+    "division": "Central",
+    "total_games": 6695,
+    "b2b_rate": 0.0379,
+    "avg_sv": 0.9021,
+    "b2b_sv": 0.9055,
+    "rest_sv": 0.902,
+    "b2b_delta": 0.0035,
+    "avg_travel_miles": 573.8
+  },
+  {
+    "division": "Atlantic",
+    "total_games": 6664,
+    "b2b_rate": 0.0366,
+    "avg_sv": 0.9,
+    "b2b_sv": 0.8972,
+    "rest_sv": 0.9001,
+    "b2b_delta": -0.0029,
+    "avg_travel_miles": 569.0
+  },
+  {
+    "division": "Metropolitan",
+    "total_games": 6723,
+    "b2b_rate": 0.0455,
+    "avg_sv": 0.8991,
+    "b2b_sv": 0.8937,
+    "rest_sv": 0.8993,
+    "b2b_delta": -0.0056,
+    "avg_travel_miles": 495.3
+  }
+]

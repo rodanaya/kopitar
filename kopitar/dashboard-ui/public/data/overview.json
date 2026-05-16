@@ -1,0 +1,16 @@
+{
+  "kpis": {
+    "total_games": 28069,
+    "unique_goalies": 233,
+    "seasons": 10,
+    "b2b_games": 1053,
+    "b2b_rate": 0.0375
+  },
+  "league_b2b": {
+    "b2b_sv": 0.8994,
+    "rest_sv": 0.8999,
+    "delta": -0.0005,
+    "p_value": 0.8521,
+    "significant": false
+  }
+}

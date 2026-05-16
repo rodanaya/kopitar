@@ -1,0 +1,2187 @@
+[
+  {
+    "player_id": 8476945,
+    "player_name": "Connor Hellebuyck",
+    "teams": [
+      "WPG"
+    ],
+    "total_games": 568,
+    "avg_sv": 0.9103,
+    "avg_gaa": 2.5592,
+    "b2b_games": 25,
+    "b2b_sv": 0.9228,
+    "rest_sv": 0.9097,
+    "b2b_delta": 0.0131,
+    "avg_travel_miles": 575.9
+  },
+  {
+    "player_id": 8475683,
+    "player_name": "Sergei Bobrovsky",
+    "teams": [
+      "CBJ",
+      "FLA"
+    ],
+    "total_games": 524,
+    "avg_sv": 0.9046,
+    "avg_gaa": 2.6089,
+    "b2b_games": 35,
+    "b2b_sv": 0.8951,
+    "rest_sv": 0.9053,
+    "b2b_delta": -0.0102,
+    "avg_travel_miles": 543.3
+  },
+  {
+    "player_id": 8476883,
+    "player_name": "Andrei Vasilevskiy",
+    "teams": [
+      "TBL"
+    ],
+    "total_games": 524,
+    "avg_sv": 0.9138,
+    "avg_gaa": 2.5264,
+    "b2b_games": 12,
+    "b2b_sv": 0.9034,
+    "rest_sv": 0.914,
+    "b2b_delta": -0.0106,
+    "avg_travel_miles": 605.3
+  },
+  {
+    "player_id": 8474593,
+    "player_name": "Jacob Markstrom",
+    "teams": [
+      "CGY",
+      "NJD",
+      "VAN"
+    ],
+    "total_games": 484,
+    "avg_sv": 0.9038,
+    "avg_gaa": 2.6619,
+    "b2b_games": 23,
+    "b2b_sv": 0.9125,
+    "rest_sv": 0.9034,
+    "b2b_delta": 0.0091,
+    "avg_travel_miles": 630.6
+  },
+  {
+    "player_id": 8476434,
+    "player_name": "John Gibson",
+    "teams": [
+      "ANA"
+    ],
+    "total_games": 480,
+    "avg_sv": 0.9042,
+    "avg_gaa": 2.9148,
+    "b2b_games": 9,
+    "b2b_sv": 0.8993,
+    "rest_sv": 0.9043,
+    "b2b_delta": -0.005,
+    "avg_travel_miles": 684.9
+  },
+  {
+    "player_id": 8475660,
+    "player_name": "Cam Talbot",
+    "teams": [
+      "CGY",
+      "DET",
+      "EDM",
+      "LAK",
+      "MIN",
+      "OTT",
+      "PHI"
+    ],
+    "total_games": 476,
+    "avg_sv": 0.9002,
+    "avg_gaa": 2.7478,
+    "b2b_games": 18,
+    "b2b_sv": 0.8925,
+    "rest_sv": 0.9005,
+    "b2b_delta": -0.008,
+    "avg_travel_miles": 632.8
+  },
+  {
+    "player_id": 8470594,
+    "player_name": "Marc-Andre Fleury",
+    "teams": [
+      "CHI",
+      "MIN",
+      "PIT",
+      "VGK"
+    ],
+    "total_games": 456,
+    "avg_sv": 0.9079,
+    "avg_gaa": 2.6321,
+    "b2b_games": 17,
+    "b2b_sv": 0.932,
+    "rest_sv": 0.907,
+    "b2b_delta": 0.025,
+    "avg_travel_miles": 543.5
+  },
+  {
+    "player_id": 8475883,
+    "player_name": "Frederik Andersen",
+    "teams": [
+      "ANA",
+      "CAR",
+      "TOR"
+    ],
+    "total_games": 435,
+    "avg_sv": 0.9062,
+    "avg_gaa": 2.5916,
+    "b2b_games": 8,
+    "b2b_sv": 0.9153,
+    "rest_sv": 0.9061,
+    "b2b_delta": 0.0092,
+    "avg_travel_miles": 540.2
+  },
+  {
+    "player_id": 8474889,
+    "player_name": "Martin Jones",
+    "teams": [
+      "PHI",
+      "SEA",
+      "SJS",
+      "TOR"
+    ],
+    "total_games": 432,
+    "avg_sv": 0.8937,
+    "avg_gaa": 2.7761,
+    "b2b_games": 20,
+    "b2b_sv": 0.9008,
+    "rest_sv": 0.8933,
+    "b2b_delta": 0.0075,
+    "avg_travel_miles": 651.2
+  },
+  {
+    "player_id": 8474596,
+    "player_name": "Jake Allen",
+    "teams": [
+      "MTL",
+      "NJD",
+      "STL"
+    ],
+    "total_games": 408,
+    "avg_sv": 0.8989,
+    "avg_gaa": 2.8027,
+    "b2b_games": 16,
+    "b2b_sv": 0.9181,
+    "rest_sv": 0.8981,
+    "b2b_delta": 0.02,
+    "avg_travel_miles": 570.3
+  },
+  {
+    "player_id": 8477424,
+    "player_name": "Juuse Saros",
+    "teams": [
+      "NSH"
+    ],
+    "total_games": 408,
+    "avg_sv": 0.9063,
+    "avg_gaa": 2.6787,
+    "b2b_games": 10,
+    "b2b_sv": 0.8841,
+    "rest_sv": 0.9069,
+    "b2b_delta": -0.0228,
+    "avg_travel_miles": 587.7
+  },
+  {
+    "player_id": 8471734,
+    "player_name": "Jonathan Quick",
+    "teams": [
+      "LAK",
+      "NYR",
+      "VGK"
+    ],
+    "total_games": 397,
+    "avg_sv": 0.8985,
+    "avg_gaa": 2.7293,
+    "b2b_games": 12,
+    "b2b_sv": 0.8969,
+    "rest_sv": 0.8986,
+    "b2b_delta": -0.0017,
+    "avg_travel_miles": 622.5
+  },
+  {
+    "player_id": 8475852,
+    "player_name": "Petr Mrazek",
+    "teams": [
+      "CAR",
+      "CHI",
+      "DET",
+      "PHI",
+      "TOR"
+    ],
+    "total_games": 388,
+    "avg_sv": 0.8952,
+    "avg_gaa": 2.9156,
+    "b2b_games": 15,
+    "b2b_sv": 0.9266,
+    "rest_sv": 0.894,
+    "b2b_delta": 0.0326,
+    "avg_travel_miles": 553.4
+  },
+  {
+    "player_id": 8475311,
+    "player_name": "Darcy Kuemper",
+    "teams": [
+      "ARI",
+      "COL",
+      "LAK",
+      "MIN",
+      "WSH"
+    ],
+    "total_games": 376,
+    "avg_sv": 0.9096,
+    "avg_gaa": 2.5539,
+    "b2b_games": 11,
+    "b2b_sv": 0.9315,
+    "rest_sv": 0.9089,
+    "b2b_delta": 0.0226,
+    "avg_travel_miles": 509.2
+  },
+  {
+    "player_id": 8473575,
+    "player_name": "Semyon Varlamov",
+    "teams": [
+      "COL",
+      "NYI"
+    ],
+    "total_games": 354,
+    "avg_sv": 0.9038,
+    "avg_gaa": 2.7245,
+    "b2b_games": 12,
+    "b2b_sv": 0.9315,
+    "rest_sv": 0.9029,
+    "b2b_delta": 0.0286,
+    "avg_travel_miles": 562.5
+  },
+  {
+    "player_id": 8473503,
+    "player_name": "James Reimer",
+    "teams": [
+      "ANA",
+      "BUF",
+      "CAR",
+      "DET",
+      "FLA",
+      "SJS",
+      "TOR"
+    ],
+    "total_games": 350,
+    "avg_sv": 0.9027,
+    "avg_gaa": 2.8786,
+    "b2b_games": 20,
+    "b2b_sv": 0.9232,
+    "rest_sv": 0.9015,
+    "b2b_delta": 0.0217,
+    "avg_travel_miles": 704.8
+  },
+  {
+    "player_id": 8475831,
+    "player_name": "Philipp Grubauer",
+    "teams": [
+      "COL",
+      "SEA",
+      "WSH"
+    ],
+    "total_games": 350,
+    "avg_sv": 0.8957,
+    "avg_gaa": 2.6604,
+    "b2b_games": 7,
+    "b2b_sv": 0.8728,
+    "rest_sv": 0.8962,
+    "b2b_delta": -0.0234,
+    "avg_travel_miles": 651.5
+  },
+  {
+    "player_id": 8476412,
+    "player_name": "Jordan Binnington",
+    "teams": [
+      "STL"
+    ],
+    "total_games": 336,
+    "avg_sv": 0.8989,
+    "avg_gaa": 2.7823,
+    "b2b_games": 5,
+    "b2b_sv": 0.879,
+    "rest_sv": 0.8992,
+    "b2b_delta": -0.0202,
+    "avg_travel_miles": 543.0
+  },
+  {
+    "player_id": 8474651,
+    "player_name": "Braden Holtby",
+    "teams": [
+      "DAL",
+      "VAN",
+      "WSH"
+    ],
+    "total_games": 335,
+    "avg_sv": 0.9039,
+    "avg_gaa": 2.6756,
+    "b2b_games": 8,
+    "b2b_sv": 0.8979,
+    "rest_sv": 0.904,
+    "b2b_delta": -0.0061,
+    "avg_travel_miles": 507.5
+  },
+  {
+    "player_id": 8471227,
+    "player_name": "Devan Dubnyk",
+    "teams": [
+      "COL",
+      "MIN",
+      "SJS"
+    ],
+    "total_games": 311,
+    "avg_sv": 0.9064,
+    "avg_gaa": 2.5551,
+    "b2b_games": 20,
+    "b2b_sv": 0.8811,
+    "rest_sv": 0.9081,
+    "b2b_delta": -0.027,
+    "avg_travel_miles": 509.0
+  },
+  {
+    "player_id": 8467950,
+    "player_name": "Craig Anderson",
+    "teams": [
+      "BUF",
+      "OTT",
+      "WSH"
+    ],
+    "total_games": 303,
+    "avg_sv": 0.9004,
+    "avg_gaa": 3.0411,
+    "b2b_games": 13,
+    "b2b_sv": 0.9404,
+    "rest_sv": 0.8986,
+    "b2b_delta": 0.0418,
+    "avg_travel_miles": 497.3
+  },
+  {
+    "player_id": 8476914,
+    "player_name": "Joonas Korpisalo",
+    "teams": [
+      "BOS",
+      "CBJ",
+      "LAK",
+      "OTT"
+    ],
+    "total_games": 303,
+    "avg_sv": 0.8929,
+    "avg_gaa": 3.0588,
+    "b2b_games": 14,
+    "b2b_sv": 0.9141,
+    "rest_sv": 0.8918,
+    "b2b_delta": 0.0223,
+    "avg_travel_miles": 495.6
+  },
+  {
+    "player_id": 8480382,
+    "player_name": "Alexandar Georgiev",
+    "teams": [
+      "COL",
+      "NYR",
+      "SJS"
+    ],
+    "total_games": 303,
+    "avg_sv": 0.8941,
+    "avg_gaa": 2.9952,
+    "b2b_games": 17,
+    "b2b_sv": 0.8871,
+    "rest_sv": 0.8945,
+    "b2b_delta": -0.0074,
+    "avg_travel_miles": 560.0
+  },
+  {
+    "player_id": 8471469,
+    "player_name": "Pekka Rinne",
+    "teams": [
+      "NSH"
+    ],
+    "total_games": 302,
+    "avg_sv": 0.906,
+    "avg_gaa": 2.5357,
+    "b2b_games": 9,
+    "b2b_sv": 0.9029,
+    "rest_sv": 0.9061,
+    "b2b_delta": -0.0032,
+    "avg_travel_miles": 517.8
+  },
+  {
+    "player_id": 8471695,
+    "player_name": "Tuukka Rask",
+    "teams": [
+      "BOS"
+    ],
+    "total_games": 298,
+    "avg_sv": 0.9109,
+    "avg_gaa": 2.3817,
+    "b2b_games": 7,
+    "b2b_sv": 0.9013,
+    "rest_sv": 0.9111,
+    "b2b_delta": -0.0098,
+    "avg_travel_miles": 511.0
+  },
+  {
+    "player_id": 8477465,
+    "player_name": "Tristan Jarry",
+    "teams": [
+      "PIT"
+    ],
+    "total_games": 293,
+    "avg_sv": 0.8968,
+    "avg_gaa": 2.7542,
+    "b2b_games": 6,
+    "b2b_sv": 0.9218,
+    "rest_sv": 0.8963,
+    "b2b_delta": 0.0255,
+    "avg_travel_miles": 419.5
+  },
+  {
+    "player_id": 8476999,
+    "player_name": "Linus Ullmark",
+    "teams": [
+      "BOS",
+      "BUF",
+      "OTT"
+    ],
+    "total_games": 291,
+    "avg_sv": 0.9128,
+    "avg_gaa": 2.5441,
+    "b2b_games": 5,
+    "b2b_sv": 0.9031,
+    "rest_sv": 0.9129,
+    "b2b_delta": -0.0098,
+    "avg_travel_miles": 546.3
+  },
+  {
+    "player_id": 8469608,
+    "player_name": "Mike Smith",
+    "teams": [
+      "ARI",
+      "CGY",
+      "EDM"
+    ],
+    "total_games": 283,
+    "avg_sv": 0.9001,
+    "avg_gaa": 2.7309,
+    "b2b_games": 9,
+    "b2b_sv": 0.8766,
+    "rest_sv": 0.9009,
+    "b2b_delta": -0.0243,
+    "avg_travel_miles": 566.0
+  },
+  {
+    "player_id": 8471306,
+    "player_name": "Thomas Greiss",
+    "teams": [
+      "DET",
+      "NYI",
+      "STL"
+    ],
+    "total_games": 279,
+    "avg_sv": 0.8963,
+    "avg_gaa": 2.8731,
+    "b2b_games": 15,
+    "b2b_sv": 0.9092,
+    "rest_sv": 0.8955,
+    "b2b_delta": 0.0137,
+    "avg_travel_miles": 570.7
+  },
+  {
+    "player_id": 8475215,
+    "player_name": "Robin Lehner",
+    "teams": [
+      "BUF",
+      "CHI",
+      "NYI",
+      "VGK"
+    ],
+    "total_games": 278,
+    "avg_sv": 0.9092,
+    "avg_gaa": 2.6596,
+    "b2b_games": 11,
+    "b2b_sv": 0.8743,
+    "rest_sv": 0.9106,
+    "b2b_delta": -0.0363,
+    "avg_travel_miles": 519.1
+  },
+  {
+    "player_id": 8471679,
+    "player_name": "Carey Price",
+    "teams": [
+      "MTL"
+    ],
+    "total_games": 277,
+    "avg_sv": 0.9085,
+    "avg_gaa": 2.6205,
+    "b2b_games": 15,
+    "b2b_sv": 0.9112,
+    "rest_sv": 0.9084,
+    "b2b_delta": 0.0028,
+    "avg_travel_miles": 459.9
+  },
+  {
+    "player_id": 8476899,
+    "player_name": "Matt Murray",
+    "teams": [
+      "OTT",
+      "PIT",
+      "TOR"
+    ],
+    "total_games": 274,
+    "avg_sv": 0.9007,
+    "avg_gaa": 2.803,
+    "b2b_games": 12,
+    "b2b_sv": 0.8858,
+    "rest_sv": 0.9014,
+    "b2b_delta": -0.0156,
+    "avg_travel_miles": 477.3
+  },
+  {
+    "player_id": 8478048,
+    "player_name": "Igor Shesterkin",
+    "teams": [
+      "NYR"
+    ],
+    "total_games": 274,
+    "avg_sv": 0.9104,
+    "avg_gaa": 2.5247,
+    "b2b_games": 6,
+    "b2b_sv": 0.9299,
+    "rest_sv": 0.91,
+    "b2b_delta": 0.0199,
+    "avg_travel_miles": 430.7
+  },
+  {
+    "player_id": 8468685,
+    "player_name": "Henrik Lundqvist",
+    "teams": [
+      "NYR"
+    ],
+    "total_games": 267,
+    "avg_sv": 0.9026,
+    "avg_gaa": 2.8447,
+    "b2b_games": 19,
+    "b2b_sv": 0.9077,
+    "rest_sv": 0.9023,
+    "b2b_delta": 0.0054,
+    "avg_travel_miles": 468.4
+  },
+  {
+    "player_id": 8470880,
+    "player_name": "Brian Elliott",
+    "teams": [
+      "CGY",
+      "PHI",
+      "STL",
+      "TBL"
+    ],
+    "total_games": 262,
+    "avg_sv": 0.9,
+    "avg_gaa": 2.6912,
+    "b2b_games": 11,
+    "b2b_sv": 0.9278,
+    "rest_sv": 0.8988,
+    "b2b_delta": 0.029,
+    "avg_travel_miles": 547.8
+  },
+  {
+    "player_id": 8478009,
+    "player_name": "Ilya Sorokin",
+    "teams": [
+      "NYI"
+    ],
+    "total_games": 253,
+    "avg_sv": 0.9107,
+    "avg_gaa": 2.5764,
+    "b2b_games": 12,
+    "b2b_sv": 0.9388,
+    "rest_sv": 0.9093,
+    "b2b_delta": 0.0295,
+    "avg_travel_miles": 462.6
+  },
+  {
+    "player_id": 8478406,
+    "player_name": "Mackenzie Blackwood",
+    "teams": [
+      "COL",
+      "NJD",
+      "SJS"
+    ],
+    "total_games": 252,
+    "avg_sv": 0.8956,
+    "avg_gaa": 2.9616,
+    "b2b_games": 11,
+    "b2b_sv": 0.8583,
+    "rest_sv": 0.8973,
+    "b2b_delta": -0.039,
+    "avg_travel_miles": 531.3
+  },
+  {
+    "player_id": 8479979,
+    "player_name": "Jake Oettinger",
+    "teams": [
+      "DAL"
+    ],
+    "total_games": 251,
+    "avg_sv": 0.9026,
+    "avg_gaa": 2.5244,
+    "b2b_games": 8,
+    "b2b_sv": 0.93,
+    "rest_sv": 0.9017,
+    "b2b_delta": 0.0283,
+    "avg_travel_miles": 595.4
+  },
+  {
+    "player_id": 8470860,
+    "player_name": "Jaroslav Halak",
+    "teams": [
+      "BOS",
+      "NYI",
+      "NYR",
+      "VAN"
+    ],
+    "total_games": 250,
+    "avg_sv": 0.9046,
+    "avg_gaa": 2.6695,
+    "b2b_games": 8,
+    "b2b_sv": 0.8797,
+    "rest_sv": 0.9054,
+    "b2b_delta": -0.0257,
+    "avg_travel_miles": 584.1
+  },
+  {
+    "player_id": 8478007,
+    "player_name": "Elvis Merzlikins",
+    "teams": [
+      "CBJ"
+    ],
+    "total_games": 244,
+    "avg_sv": 0.8911,
+    "avg_gaa": 3.2035,
+    "b2b_games": 13,
+    "b2b_sv": 0.8251,
+    "rest_sv": 0.8948,
+    "b2b_delta": -0.0697,
+    "avg_travel_miles": 481.0
+  },
+  {
+    "player_id": 8471750,
+    "player_name": "Ben Bishop",
+    "teams": [
+      "DAL",
+      "LAK",
+      "TBL"
+    ],
+    "total_games": 243,
+    "avg_sv": 0.915,
+    "avg_gaa": 2.2951,
+    "b2b_games": 7,
+    "b2b_sv": 0.9277,
+    "rest_sv": 0.9147,
+    "b2b_delta": 0.013,
+    "avg_travel_miles": 592.9
+  },
+  {
+    "player_id": 8477967,
+    "player_name": "Thatcher Demko",
+    "teams": [
+      "VAN"
+    ],
+    "total_games": 242,
+    "avg_sv": 0.9066,
+    "avg_gaa": 2.8039,
+    "b2b_games": 5,
+    "b2b_sv": 0.908,
+    "rest_sv": 0.9065,
+    "b2b_delta": 0.0015,
+    "avg_travel_miles": 721.6
+  },
+  {
+    "player_id": 8477293,
+    "player_name": "Antti Raanta",
+    "teams": [
+      "ARI",
+      "CAR",
+      "NYR"
+    ],
+    "total_games": 238,
+    "avg_sv": 0.9076,
+    "avg_gaa": 2.4855,
+    "b2b_games": 10,
+    "b2b_sv": 0.9028,
+    "rest_sv": 0.9078,
+    "b2b_delta": -0.005,
+    "avg_travel_miles": 413.5
+  },
+  {
+    "player_id": 8479496,
+    "player_name": "David Rittich",
+    "teams": [
+      "CGY",
+      "LAK",
+      "NSH",
+      "TOR",
+      "WPG"
+    ],
+    "total_games": 230,
+    "avg_sv": 0.8969,
+    "avg_gaa": 2.798,
+    "b2b_games": 9,
+    "b2b_sv": 0.8845,
+    "rest_sv": 0.8974,
+    "b2b_delta": -0.0129,
+    "avg_travel_miles": 868.9
+  },
+  {
+    "player_id": 8473541,
+    "player_name": "Jonathan Bernier",
+    "teams": [
+      "ANA",
+      "COL",
+      "DET",
+      "NJD",
+      "TOR"
+    ],
+    "total_games": 229,
+    "avg_sv": 0.9007,
+    "avg_gaa": 2.8848,
+    "b2b_games": 12,
+    "b2b_sv": 0.9251,
+    "rest_sv": 0.8993,
+    "b2b_delta": 0.0258,
+    "avg_travel_miles": 576.3
+  },
+  {
+    "player_id": 8479394,
+    "player_name": "Carter Hart",
+    "teams": [
+      "PHI"
+    ],
+    "total_games": 227,
+    "avg_sv": 0.8929,
+    "avg_gaa": 2.9404,
+    "b2b_games": 5,
+    "b2b_sv": 0.8998,
+    "rest_sv": 0.8928,
+    "b2b_delta": 0.007,
+    "avg_travel_miles": 405.2
+  },
+  {
+    "player_id": 8470645,
+    "player_name": "Corey Crawford",
+    "teams": [
+      "CHI"
+    ],
+    "total_games": 220,
+    "avg_sv": 0.9118,
+    "avg_gaa": 2.5731,
+    "b2b_games": 9,
+    "b2b_sv": 0.904,
+    "rest_sv": 0.9121,
+    "b2b_delta": -0.0081,
+    "avg_travel_miles": 512.4
+  },
+  {
+    "player_id": 8478470,
+    "player_name": "Samuel Montembeault",
+    "teams": [
+      "FLA",
+      "MTL"
+    ],
+    "total_games": 206,
+    "avg_sv": 0.8901,
+    "avg_gaa": 3.2211,
+    "b2b_games": 13,
+    "b2b_sv": 0.8668,
+    "rest_sv": 0.8917,
+    "b2b_delta": -0.0249,
+    "avg_travel_miles": 607.3
+  },
+  {
+    "player_id": 8470657,
+    "player_name": "Jimmy Howard",
+    "teams": [
+      "DET"
+    ],
+    "total_games": 205,
+    "avg_sv": 0.8903,
+    "avg_gaa": 2.9818,
+    "b2b_games": 10,
+    "b2b_sv": 0.9135,
+    "rest_sv": 0.8891,
+    "b2b_delta": 0.0244,
+    "avg_travel_miles": 481.9
+  },
+  {
+    "player_id": 8478492,
+    "player_name": "Ilya Samsonov",
+    "teams": [
+      "TOR",
+      "VGK",
+      "WSH"
+    ],
+    "total_games": 200,
+    "avg_sv": 0.8916,
+    "avg_gaa": 2.7756,
+    "b2b_games": 2,
+    "b2b_sv": null,
+    "rest_sv": 0.8949,
+    "b2b_delta": null,
+    "avg_travel_miles": 549.2
+  },
+  {
+    "player_id": 8471239,
+    "player_name": "Cory Schneider",
+    "teams": [
+      "NJD",
+      "NYI"
+    ],
+    "total_games": 198,
+    "avg_sv": 0.9012,
+    "avg_gaa": 2.7234,
+    "b2b_games": 13,
+    "b2b_sv": 0.9205,
+    "rest_sv": 0.8998,
+    "b2b_delta": 0.0207,
+    "avg_travel_miles": 500.3
+  },
+  {
+    "player_id": 8478872,
+    "player_name": "Karel Vejmelka",
+    "teams": [
+      "ARI",
+      "UTA"
+    ],
+    "total_games": 198,
+    "avg_sv": 0.8858,
+    "avg_gaa": 3.2315,
+    "b2b_games": 7,
+    "b2b_sv": 0.7758,
+    "rest_sv": 0.8898,
+    "b2b_delta": -0.114,
+    "avg_travel_miles": 363.7
+  },
+  {
+    "player_id": 8468011,
+    "player_name": "Ryan Miller",
+    "teams": [
+      "ANA",
+      "VAN"
+    ],
+    "total_games": 192,
+    "avg_sv": 0.906,
+    "avg_gaa": 2.8,
+    "b2b_games": 9,
+    "b2b_sv": 0.9221,
+    "rest_sv": 0.9052,
+    "b2b_delta": 0.0169,
+    "avg_travel_miles": 738.4
+  },
+  {
+    "player_id": 8479193,
+    "player_name": "Casey DeSmith",
+    "teams": [
+      "DAL",
+      "PIT",
+      "VAN"
+    ],
+    "total_games": 190,
+    "avg_sv": 0.904,
+    "avg_gaa": 2.7891,
+    "b2b_games": 3,
+    "b2b_sv": 0.8769,
+    "rest_sv": 0.9044,
+    "b2b_delta": -0.0275,
+    "avg_travel_miles": 663.5
+  },
+  {
+    "player_id": 8480280,
+    "player_name": "Jeremy Swayman",
+    "teams": [
+      "BOS"
+    ],
+    "total_games": 190,
+    "avg_sv": 0.9048,
+    "avg_gaa": 2.5755,
+    "b2b_games": 2,
+    "b2b_sv": null,
+    "rest_sv": 0.9095,
+    "b2b_delta": null,
+    "avg_travel_miles": 617.2
+  },
+  {
+    "player_id": 8470320,
+    "player_name": "Cam Ward",
+    "teams": [
+      "CAR",
+      "CHI"
+    ],
+    "total_games": 189,
+    "avg_sv": 0.8952,
+    "avg_gaa": 2.7918,
+    "b2b_games": 19,
+    "b2b_sv": 0.9058,
+    "rest_sv": 0.894,
+    "b2b_delta": 0.0118,
+    "avg_travel_miles": 516.2
+  },
+  {
+    "player_id": 8477970,
+    "player_name": "Vitek Vanecek",
+    "teams": [
+      "FLA",
+      "NJD",
+      "SJS",
+      "WSH"
+    ],
+    "total_games": 188,
+    "avg_sv": 0.8923,
+    "avg_gaa": 2.8258,
+    "b2b_games": 4,
+    "b2b_sv": 0.8935,
+    "rest_sv": 0.8923,
+    "b2b_delta": 0.0012,
+    "avg_travel_miles": 493.3
+  },
+  {
+    "player_id": 8478499,
+    "player_name": "Adin Hill",
+    "teams": [
+      "ARI",
+      "SJS",
+      "VGK"
+    ],
+    "total_games": 186,
+    "avg_sv": 0.9028,
+    "avg_gaa": 2.6251,
+    "b2b_games": 5,
+    "b2b_sv": 0.9737,
+    "rest_sv": 0.9008,
+    "b2b_delta": 0.0729,
+    "avg_travel_miles": 615.5
+  },
+  {
+    "player_id": 8476341,
+    "player_name": "Anton Forsberg",
+    "teams": [
+      "CAR",
+      "CBJ",
+      "CHI",
+      "OTT"
+    ],
+    "total_games": 185,
+    "avg_sv": 0.8884,
+    "avg_gaa": 3.0009,
+    "b2b_games": 6,
+    "b2b_sv": 0.9105,
+    "rest_sv": 0.8876,
+    "b2b_delta": 0.0229,
+    "avg_travel_miles": 590.6
+  },
+  {
+    "player_id": 8466141,
+    "player_name": "Roberto Luongo",
+    "teams": [
+      "FLA"
+    ],
+    "total_games": 180,
+    "avg_sv": 0.9105,
+    "avg_gaa": 2.6307,
+    "b2b_games": 6,
+    "b2b_sv": 0.9037,
+    "rest_sv": 0.9108,
+    "b2b_delta": -0.0071,
+    "avg_travel_miles": 659.3
+  },
+  {
+    "player_id": 8477968,
+    "player_name": "Alex Nedeljkovic",
+    "teams": [
+      "CAR",
+      "DET",
+      "PIT"
+    ],
+    "total_games": 179,
+    "avg_sv": 0.8978,
+    "avg_gaa": 3.0023,
+    "b2b_games": 8,
+    "b2b_sv": 0.8886,
+    "rest_sv": 0.8982,
+    "b2b_delta": -0.0096,
+    "avg_travel_miles": 498.2
+  },
+  {
+    "player_id": 8475622,
+    "player_name": "Carter Hutton",
+    "teams": [
+      "ARI",
+      "BUF",
+      "NSH",
+      "STL"
+    ],
+    "total_games": 176,
+    "avg_sv": 0.9023,
+    "avg_gaa": 2.8114,
+    "b2b_games": 5,
+    "b2b_sv": 0.9416,
+    "rest_sv": 0.9011,
+    "b2b_delta": 0.0405,
+    "avg_travel_miles": 560.9
+  },
+  {
+    "player_id": 8475789,
+    "player_name": "Jack Campbell",
+    "teams": [
+      "EDM",
+      "LAK",
+      "TOR"
+    ],
+    "total_games": 175,
+    "avg_sv": 0.9008,
+    "avg_gaa": 2.7314,
+    "b2b_games": 8,
+    "b2b_sv": 0.9357,
+    "rest_sv": 0.8991,
+    "b2b_delta": 0.0366,
+    "avg_travel_miles": 672.3
+  },
+  {
+    "player_id": 8479973,
+    "player_name": "Stuart Skinner",
+    "teams": [
+      "EDM"
+    ],
+    "total_games": 174,
+    "avg_sv": 0.898,
+    "avg_gaa": 2.7287,
+    "b2b_games": 1,
+    "b2b_sv": null,
+    "rest_sv": 0.898,
+    "b2b_delta": null,
+    "avg_travel_miles": 794.3
+  },
+  {
+    "player_id": 8471418,
+    "player_name": "Anton Khudobin",
+    "teams": [
+      "ANA",
+      "BOS",
+      "CHI",
+      "DAL"
+    ],
+    "total_games": 169,
+    "avg_sv": 0.9033,
+    "avg_gaa": 2.5904,
+    "b2b_games": 11,
+    "b2b_sv": 0.9236,
+    "rest_sv": 0.9019,
+    "b2b_delta": 0.0217,
+    "avg_travel_miles": 727.9
+  },
+  {
+    "player_id": 8479406,
+    "player_name": "Filip Gustavsson",
+    "teams": [
+      "MIN",
+      "OTT"
+    ],
+    "total_games": 169,
+    "avg_sv": 0.905,
+    "avg_gaa": 2.6726,
+    "b2b_games": 5,
+    "b2b_sv": 0.8975,
+    "rest_sv": 0.9053,
+    "b2b_delta": -0.0078,
+    "avg_travel_miles": 614.6
+  },
+  {
+    "player_id": 8475156,
+    "player_name": "Mikko Koskinen",
+    "teams": [
+      "EDM"
+    ],
+    "total_games": 164,
+    "avg_sv": 0.8904,
+    "avg_gaa": 2.9737,
+    "b2b_games": 10,
+    "b2b_sv": 0.8846,
+    "rest_sv": 0.8908,
+    "b2b_delta": -0.0062,
+    "avg_travel_miles": 686.9
+  },
+  {
+    "player_id": 8480947,
+    "player_name": "Kevin Lankinen",
+    "teams": [
+      "CHI",
+      "NSH",
+      "VAN"
+    ],
+    "total_games": 163,
+    "avg_sv": 0.898,
+    "avg_gaa": 2.9267,
+    "b2b_games": 6,
+    "b2b_sv": 0.9429,
+    "rest_sv": 0.8963,
+    "b2b_delta": 0.0466,
+    "avg_travel_miles": 647.9
+  },
+  {
+    "player_id": 8475717,
+    "player_name": "Calvin Pickard",
+    "teams": [
+      "ARI",
+      "COL",
+      "DET",
+      "EDM",
+      "PHI",
+      "TOR"
+    ],
+    "total_games": 159,
+    "avg_sv": 0.8901,
+    "avg_gaa": 2.9667,
+    "b2b_games": 10,
+    "b2b_sv": 0.8473,
+    "rest_sv": 0.8929,
+    "b2b_delta": -0.0456,
+    "avg_travel_miles": 799.8
+  },
+  {
+    "player_id": 8480045,
+    "player_name": "Ukko-Pekka Luukkonen",
+    "teams": [
+      "BUF"
+    ],
+    "total_games": 155,
+    "avg_sv": 0.8886,
+    "avg_gaa": 3.0581,
+    "b2b_games": 2,
+    "b2b_sv": null,
+    "rest_sv": 0.888,
+    "b2b_delta": null,
+    "avg_travel_miles": 464.0
+  },
+  {
+    "player_id": 8475809,
+    "player_name": "Scott Wedgewood",
+    "teams": [
+      "ARI",
+      "COL",
+      "DAL",
+      "NJD",
+      "NSH"
+    ],
+    "total_games": 154,
+    "avg_sv": 0.902,
+    "avg_gaa": 2.8805,
+    "b2b_games": 8,
+    "b2b_sv": 0.8644,
+    "rest_sv": 0.904,
+    "b2b_delta": -0.0396,
+    "avg_travel_miles": 550.7
+  },
+  {
+    "player_id": 8476234,
+    "player_name": "Keith Kinkaid",
+    "teams": [
+      "BOS",
+      "COL",
+      "MTL",
+      "NJD",
+      "NYR"
+    ],
+    "total_games": 149,
+    "avg_sv": 0.8991,
+    "avg_gaa": 2.94,
+    "b2b_games": 10,
+    "b2b_sv": 0.9339,
+    "rest_sv": 0.8966,
+    "b2b_delta": 0.0373,
+    "avg_travel_miles": 508.2
+  },
+  {
+    "player_id": 8479292,
+    "player_name": "Charlie Lindgren",
+    "teams": [
+      "MTL",
+      "STL",
+      "WSH"
+    ],
+    "total_games": 149,
+    "avg_sv": 0.9013,
+    "avg_gaa": 2.7684,
+    "b2b_games": 3,
+    "b2b_sv": 0.9315,
+    "rest_sv": 0.9007,
+    "b2b_delta": 0.0308,
+    "avg_travel_miles": 528.9
+  },
+  {
+    "player_id": 8480313,
+    "player_name": "Logan Thompson",
+    "teams": [
+      "VGK",
+      "WSH"
+    ],
+    "total_games": 146,
+    "avg_sv": 0.9086,
+    "avg_gaa": 2.6031,
+    "b2b_games": 6,
+    "b2b_sv": 0.9243,
+    "rest_sv": 0.9079,
+    "b2b_delta": 0.0164,
+    "avg_travel_miles": 675.2
+  },
+  {
+    "player_id": 8478024,
+    "player_name": "Ville Husso",
+    "teams": [
+      "ANA",
+      "DET",
+      "STL"
+    ],
+    "total_games": 145,
+    "avg_sv": 0.8891,
+    "avg_gaa": 3.0612,
+    "b2b_games": 3,
+    "b2b_sv": 0.9494,
+    "rest_sv": 0.8878,
+    "b2b_delta": 0.0616,
+    "avg_travel_miles": 540.6
+  },
+  {
+    "player_id": 8476932,
+    "player_name": "Anthony Stolarz",
+    "teams": [
+      "ANA",
+      "EDM",
+      "FLA",
+      "PHI",
+      "TOR"
+    ],
+    "total_games": 142,
+    "avg_sv": 0.9125,
+    "avg_gaa": 2.6033,
+    "b2b_games": 6,
+    "b2b_sv": 0.8107,
+    "rest_sv": 0.917,
+    "b2b_delta": -0.1063,
+    "avg_travel_miles": 817.4
+  },
+  {
+    "player_id": 8478039,
+    "player_name": "Kaapo Kahkonen",
+    "teams": [
+      "COL",
+      "MIN",
+      "NJD",
+      "SJS"
+    ],
+    "total_games": 140,
+    "avg_sv": 0.8931,
+    "avg_gaa": 3.3438,
+    "b2b_games": 3,
+    "b2b_sv": 0.9287,
+    "rest_sv": 0.8923,
+    "b2b_delta": 0.0364,
+    "avg_travel_miles": 775.0
+  },
+  {
+    "player_id": 8470140,
+    "player_name": "Kari Lehtonen",
+    "teams": [
+      "DAL"
+    ],
+    "total_games": 139,
+    "avg_sv": 0.8914,
+    "avg_gaa": 2.7473,
+    "b2b_games": 10,
+    "b2b_sv": 0.8974,
+    "rest_sv": 0.891,
+    "b2b_delta": 0.0064,
+    "avg_travel_miles": 646.4
+  },
+  {
+    "player_id": 8476316,
+    "player_name": "Laurent Brossoit",
+    "teams": [
+      "EDM",
+      "VGK",
+      "WPG"
+    ],
+    "total_games": 139,
+    "avg_sv": 0.9009,
+    "avg_gaa": 2.6473,
+    "b2b_games": 5,
+    "b2b_sv": 0.9239,
+    "rest_sv": 0.9,
+    "b2b_delta": 0.0239,
+    "avg_travel_miles": 888.0
+  },
+  {
+    "player_id": 8475195,
+    "player_name": "Anders Nilsson",
+    "teams": [
+      "BUF",
+      "EDM",
+      "OTT",
+      "STL",
+      "VAN"
+    ],
+    "total_games": 138,
+    "avg_sv": 0.8984,
+    "avg_gaa": 3.0681,
+    "b2b_games": 6,
+    "b2b_sv": 0.8436,
+    "rest_sv": 0.9009,
+    "b2b_delta": -0.0573,
+    "avg_travel_miles": 738.1
+  },
+  {
+    "player_id": 8475839,
+    "player_name": "Louis Domingue",
+    "teams": [
+      "ARI",
+      "CGY",
+      "NJD",
+      "NYR",
+      "PIT",
+      "TBL",
+      "VAN"
+    ],
+    "total_games": 137,
+    "avg_sv": 0.9009,
+    "avg_gaa": 3.0457,
+    "b2b_games": 8,
+    "b2b_sv": 0.8933,
+    "rest_sv": 0.9013,
+    "b2b_delta": -0.008,
+    "avg_travel_miles": 386.0
+  },
+  {
+    "player_id": 8473434,
+    "player_name": "Chad Johnson",
+    "teams": [
+      "ANA",
+      "BUF",
+      "CGY",
+      "STL"
+    ],
+    "total_games": 136,
+    "avg_sv": 0.8966,
+    "avg_gaa": 2.9149,
+    "b2b_games": 8,
+    "b2b_sv": 0.8986,
+    "rest_sv": 0.8964,
+    "b2b_delta": 0.0022,
+    "avg_travel_miles": 651.8
+  },
+  {
+    "player_id": 8471774,
+    "player_name": "Alex Stalock",
+    "teams": [
+      "CHI",
+      "MIN",
+      "SJS"
+    ],
+    "total_games": 130,
+    "avg_sv": 0.9033,
+    "avg_gaa": 2.8793,
+    "b2b_games": 6,
+    "b2b_sv": 0.905,
+    "rest_sv": 0.9032,
+    "b2b_delta": 0.0018,
+    "avg_travel_miles": 687.7
+  },
+  {
+    "player_id": 8477180,
+    "player_name": "Aaron Dell",
+    "teams": [
+      "BUF",
+      "NJD",
+      "SJS"
+    ],
+    "total_games": 130,
+    "avg_sv": 0.9044,
+    "avg_gaa": 2.9493,
+    "b2b_games": 5,
+    "b2b_sv": 0.8976,
+    "rest_sv": 0.9047,
+    "b2b_delta": -0.0071,
+    "avg_travel_miles": 872.0
+  },
+  {
+    "player_id": 8477237,
+    "player_name": "Mike Condon",
+    "teams": [
+      "MTL",
+      "OTT",
+      "PIT"
+    ],
+    "total_games": 129,
+    "avg_sv": 0.8959,
+    "avg_gaa": 2.8217,
+    "b2b_games": 8,
+    "b2b_sv": 0.8668,
+    "rest_sv": 0.8979,
+    "b2b_delta": -0.0311,
+    "avg_travel_miles": 501.8
+  },
+  {
+    "player_id": 8474550,
+    "player_name": "Antti Niemi",
+    "teams": [
+      "DAL",
+      "FLA",
+      "MTL",
+      "PIT"
+    ],
+    "total_games": 126,
+    "avg_sv": 0.8748,
+    "avg_gaa": 3.0877,
+    "b2b_games": 6,
+    "b2b_sv": 0.8845,
+    "rest_sv": 0.8743,
+    "b2b_delta": 0.0102,
+    "avg_travel_miles": 709.4
+  },
+  {
+    "player_id": 8478916,
+    "player_name": "Joey Daccord",
+    "teams": [
+      "OTT",
+      "SEA"
+    ],
+    "total_games": 126,
+    "avg_sv": 0.8994,
+    "avg_gaa": 2.7615,
+    "b2b_games": 5,
+    "b2b_sv": 0.8611,
+    "rest_sv": 0.901,
+    "b2b_delta": -0.0399,
+    "avg_travel_miles": 648.5
+  },
+  {
+    "player_id": 8473461,
+    "player_name": "Steve Mason",
+    "teams": [
+      "PHI",
+      "WPG"
+    ],
+    "total_games": 125,
+    "avg_sv": 0.9022,
+    "avg_gaa": 2.6577,
+    "b2b_games": 14,
+    "b2b_sv": 0.8977,
+    "rest_sv": 0.9028,
+    "b2b_delta": -0.0051,
+    "avg_travel_miles": 425.2
+  },
+  {
+    "player_id": 8480843,
+    "player_name": "Lukas Dostal",
+    "teams": [
+      "ANA"
+    ],
+    "total_games": 121,
+    "avg_sv": 0.8938,
+    "avg_gaa": 3.2878,
+    "b2b_games": 9,
+    "b2b_sv": 0.872,
+    "rest_sv": 0.8955,
+    "b2b_delta": -0.0235,
+    "avg_travel_miles": 733.8
+  },
+  {
+    "player_id": 8470147,
+    "player_name": "Curtis McElhinney",
+    "teams": [
+      "CAR",
+      "CBJ",
+      "TBL",
+      "TOR"
+    ],
+    "total_games": 120,
+    "avg_sv": 0.904,
+    "avg_gaa": 2.74,
+    "b2b_games": 3,
+    "b2b_sv": 0.9208,
+    "rest_sv": 0.9036,
+    "b2b_delta": 0.0172,
+    "avg_travel_miles": 636.4
+  },
+  {
+    "player_id": 8481611,
+    "player_name": "Pyotr Kochetkov",
+    "teams": [
+      "CAR"
+    ],
+    "total_games": 116,
+    "avg_sv": 0.8952,
+    "avg_gaa": 2.4635,
+    "b2b_games": 2,
+    "b2b_sv": null,
+    "rest_sv": 0.8954,
+    "b2b_delta": null,
+    "avg_travel_miles": 530.9
+  },
+  {
+    "player_id": 8474636,
+    "player_name": "Michael Hutchinson",
+    "teams": [
+      "CBJ",
+      "COL",
+      "DET",
+      "FLA",
+      "TOR",
+      "WPG"
+    ],
+    "total_games": 113,
+    "avg_sv": 0.8842,
+    "avg_gaa": 3.201,
+    "b2b_games": 8,
+    "b2b_sv": 0.8699,
+    "rest_sv": 0.8852,
+    "b2b_delta": -0.0153,
+    "avg_travel_miles": 698.0
+  },
+  {
+    "player_id": 8479312,
+    "player_name": "Alex Lyon",
+    "teams": [
+      "CAR",
+      "DET",
+      "FLA",
+      "PHI"
+    ],
+    "total_games": 113,
+    "avg_sv": 0.8892,
+    "avg_gaa": 2.9971,
+    "b2b_games": 6,
+    "b2b_sv": 0.8695,
+    "rest_sv": 0.8903,
+    "b2b_delta": -0.0208,
+    "avg_travel_miles": 530.9
+  },
+  {
+    "player_id": 8474152,
+    "player_name": "Scott Darling",
+    "teams": [
+      "CAR",
+      "CHI"
+    ],
+    "total_games": 112,
+    "avg_sv": 0.8968,
+    "avg_gaa": 2.8049,
+    "b2b_games": 3,
+    "b2b_sv": 0.9456,
+    "rest_sv": 0.8954,
+    "b2b_delta": 0.0502,
+    "avg_travel_miles": 632.4
+  },
+  {
+    "player_id": 8481035,
+    "player_name": "Samuel Ersson",
+    "teams": [
+      "PHI"
+    ],
+    "total_games": 110,
+    "avg_sv": 0.8767,
+    "avg_gaa": 2.982,
+    "b2b_games": 2,
+    "b2b_sv": null,
+    "rest_sv": 0.8762,
+    "b2b_delta": null,
+    "avg_travel_miles": 561.9
+  },
+  {
+    "player_id": 8477361,
+    "player_name": "Calvin Petersen",
+    "teams": [
+      "LAK",
+      "PHI"
+    ],
+    "total_games": 106,
+    "avg_sv": 0.8986,
+    "avg_gaa": 2.9714,
+    "b2b_games": 5,
+    "b2b_sv": 0.9167,
+    "rest_sv": 0.8977,
+    "b2b_delta": 0.019,
+    "avg_travel_miles": 724.1
+  },
+  {
+    "player_id": 8478435,
+    "player_name": "Dan Vladar",
+    "teams": [
+      "BOS",
+      "CGY"
+    ],
+    "total_games": 105,
+    "avg_sv": 0.8893,
+    "avg_gaa": 3.0006,
+    "b2b_games": 4,
+    "b2b_sv": 0.8932,
+    "rest_sv": 0.8892,
+    "b2b_delta": 0.004,
+    "avg_travel_miles": 896.4
+  },
+  {
+    "player_id": 8478971,
+    "player_name": "Connor Ingram",
+    "teams": [
+      "ARI",
+      "NSH",
+      "UTA"
+    ],
+    "total_games": 102,
+    "avg_sv": 0.8861,
+    "avg_gaa": 3.133,
+    "b2b_games": 1,
+    "b2b_sv": null,
+    "rest_sv": 0.8855,
+    "b2b_delta": null,
+    "avg_travel_miles": 323.1
+  },
+  {
+    "player_id": 8481519,
+    "player_name": "Spencer Knight",
+    "teams": [
+      "CHI",
+      "FLA"
+    ],
+    "total_games": 95,
+    "avg_sv": 0.9022,
+    "avg_gaa": 2.8315,
+    "b2b_games": 4,
+    "b2b_sv": 0.8953,
+    "rest_sv": 0.9025,
+    "b2b_delta": -0.0072,
+    "avg_travel_miles": 725.1
+  },
+  {
+    "player_id": 8473607,
+    "player_name": "Michal Neuvirth",
+    "teams": [
+      "PHI"
+    ],
+    "total_games": 89,
+    "avg_sv": 0.9013,
+    "avg_gaa": 2.6794,
+    "b2b_games": 8,
+    "b2b_sv": 0.9096,
+    "rest_sv": 0.9005,
+    "b2b_delta": 0.0091,
+    "avg_travel_miles": 544.0
+  },
+  {
+    "player_id": 8476876,
+    "player_name": "Malcolm Subban",
+    "teams": [
+      "BOS",
+      "BUF",
+      "CBJ",
+      "CHI",
+      "VGK"
+    ],
+    "total_games": 86,
+    "avg_sv": 0.8977,
+    "avg_gaa": 3.1018,
+    "b2b_games": 4,
+    "b2b_sv": 0.9107,
+    "rest_sv": 0.897,
+    "b2b_delta": 0.0137,
+    "avg_travel_miles": 761.2
+  },
+  {
+    "player_id": 8482821,
+    "player_name": "Arvid Soderblom",
+    "teams": [
+      "CHI"
+    ],
+    "total_games": 86,
+    "avg_sv": 0.8787,
+    "avg_gaa": 3.5649,
+    "b2b_games": 2,
+    "b2b_sv": null,
+    "rest_sv": 0.8779,
+    "b2b_delta": null,
+    "avg_travel_miles": 631.1
+  },
+  {
+    "player_id": 8477992,
+    "player_name": "Jonas Johansson",
+    "teams": [
+      "BUF",
+      "COL",
+      "FLA",
+      "TBL"
+    ],
+    "total_games": 80,
+    "avg_sv": 0.879,
+    "avg_gaa": 3.3204,
+    "b2b_games": 2,
+    "b2b_sv": null,
+    "rest_sv": 0.8783,
+    "b2b_delta": null,
+    "avg_travel_miles": 726.8
+  },
+  {
+    "player_id": 8479361,
+    "player_name": "Joseph Woll",
+    "teams": [
+      "TOR"
+    ],
+    "total_games": 78,
+    "avg_sv": 0.9055,
+    "avg_gaa": 2.7442,
+    "b2b_games": 0,
+    "b2b_sv": null,
+    "rest_sv": 0.9055,
+    "b2b_delta": null,
+    "avg_travel_miles": 591.1
+  },
+  {
+    "player_id": 8477480,
+    "player_name": "Eric Comrie",
+    "teams": [
+      "BUF",
+      "DET",
+      "NJD",
+      "WPG"
+    ],
+    "total_games": 77,
+    "avg_sv": 0.8981,
+    "avg_gaa": 3.1204,
+    "b2b_games": 2,
+    "b2b_sv": null,
+    "rest_sv": 0.8963,
+    "b2b_delta": null,
+    "avg_travel_miles": 804.8
+  },
+  {
+    "player_id": 8477831,
+    "player_name": "Pheonix Copley",
+    "teams": [
+      "LAK",
+      "STL",
+      "WSH"
+    ],
+    "total_games": 77,
+    "avg_sv": 0.884,
+    "avg_gaa": 2.8517,
+    "b2b_games": 3,
+    "b2b_sv": 0.873,
+    "rest_sv": 0.8844,
+    "b2b_delta": -0.0114,
+    "avg_travel_miles": 604.6
+  },
+  {
+    "player_id": 8480925,
+    "player_name": "Pavel Francouz",
+    "teams": [
+      "COL"
+    ],
+    "total_games": 73,
+    "avg_sv": 0.9173,
+    "avg_gaa": 2.4838,
+    "b2b_games": 3,
+    "b2b_sv": 0.9347,
+    "rest_sv": 0.9165,
+    "b2b_delta": 0.0182,
+    "avg_travel_miles": 829.9
+  },
+  {
+    "player_id": 8469514,
+    "player_name": "Peter Budaj",
+    "teams": [
+      "LAK",
+      "TBL"
+    ],
+    "total_games": 72,
+    "avg_sv": 0.8976,
+    "avg_gaa": 2.4944,
+    "b2b_games": 8,
+    "b2b_sv": 0.8794,
+    "rest_sv": 0.8999,
+    "b2b_delta": -0.0205,
+    "avg_travel_miles": 700.4
+  },
+  {
+    "player_id": 8481692,
+    "player_name": "Dustin Wolf",
+    "teams": [
+      "CGY"
+    ],
+    "total_games": 71,
+    "avg_sv": 0.9052,
+    "avg_gaa": 2.7402,
+    "b2b_games": 0,
+    "b2b_sv": null,
+    "rest_sv": 0.9052,
+    "b2b_delta": null,
+    "avg_travel_miles": 621.1
+  },
+  {
+    "player_id": 8480981,
+    "player_name": "Joel Hofer",
+    "teams": [
+      "STL"
+    ],
+    "total_games": 69,
+    "avg_sv": 0.9034,
+    "avg_gaa": 2.7102,
+    "b2b_games": 1,
+    "b2b_sv": null,
+    "rest_sv": 0.903,
+    "b2b_delta": null,
+    "avg_travel_miles": 761.3
+  },
+  {
+    "player_id": 8476904,
+    "player_name": "Chris Driedger",
+    "teams": [
+      "FLA",
+      "OTT",
+      "SEA"
+    ],
+    "total_games": 66,
+    "avg_sv": 0.9098,
+    "avg_gaa": 2.4741,
+    "b2b_games": 2,
+    "b2b_sv": null,
+    "rest_sv": 0.9101,
+    "b2b_delta": null,
+    "avg_travel_miles": 934.6
+  },
+  {
+    "player_id": 8477484,
+    "player_name": "Spencer Martin",
+    "teams": [
+      "CAR",
+      "CBJ",
+      "COL",
+      "VAN"
+    ],
+    "total_games": 66,
+    "avg_sv": 0.8698,
+    "avg_gaa": 3.5896,
+    "b2b_games": 2,
+    "b2b_sv": null,
+    "rest_sv": 0.8695,
+    "b2b_delta": null,
+    "avg_travel_miles": 646.8
+  },
+  {
+    "player_id": 8480193,
+    "player_name": "Daniil Tarasov",
+    "teams": [
+      "CBJ"
+    ],
+    "total_games": 65,
+    "avg_sv": 0.892,
+    "avg_gaa": 3.4365,
+    "b2b_games": 1,
+    "b2b_sv": null,
+    "rest_sv": 0.892,
+    "b2b_delta": null,
+    "avg_travel_miles": 756.1
+  },
+  {
+    "player_id": 8475663,
+    "player_name": "Eddie Lack",
+    "teams": [
+      "CAR",
+      "CGY",
+      "NJD"
+    ],
+    "total_games": 62,
+    "avg_sv": 0.8886,
+    "avg_gaa": 2.9129,
+    "b2b_games": 2,
+    "b2b_sv": null,
+    "rest_sv": 0.8893,
+    "b2b_delta": null,
+    "avg_travel_miles": 702.9
+  },
+  {
+    "player_id": 8471715,
+    "player_name": "Ondrej Pavelec",
+    "teams": [
+      "NYR",
+      "WPG"
+    ],
+    "total_games": 60,
+    "avg_sv": 0.8969,
+    "avg_gaa": 2.9696,
+    "b2b_games": 3,
+    "b2b_sv": 0.9076,
+    "rest_sv": 0.8963,
+    "b2b_delta": 0.0113,
+    "avg_travel_miles": 601.6
+  },
+  {
+    "player_id": 8474682,
+    "player_name": "Dustin Tokarski",
+    "teams": [
+      "ANA",
+      "BUF",
+      "CAR",
+      "MTL",
+      "PIT"
+    ],
+    "total_games": 59,
+    "avg_sv": 0.8932,
+    "avg_gaa": 3.1632,
+    "b2b_games": 4,
+    "b2b_sv": 0.919,
+    "rest_sv": 0.8913,
+    "b2b_delta": 0.0277,
+    "avg_travel_miles": 590.0
+  },
+  {
+    "player_id": 8471219,
+    "player_name": "Al Montoya",
+    "teams": [
+      "EDM",
+      "FLA",
+      "MTL"
+    ],
+    "total_games": 57,
+    "avg_sv": 0.9087,
+    "avg_gaa": 2.5752,
+    "b2b_games": 0,
+    "b2b_sv": null,
+    "rest_sv": 0.9087,
+    "b2b_delta": null,
+    "avg_travel_miles": 931.6
+  },
+  {
+    "player_id": 8477405,
+    "player_name": "Marcus Hogberg",
+    "teams": [
+      "NYI",
+      "OTT"
+    ],
+    "total_games": 57,
+    "avg_sv": 0.8863,
+    "avg_gaa": 3.4095,
+    "b2b_games": 1,
+    "b2b_sv": null,
+    "rest_sv": 0.8857,
+    "b2b_delta": null,
+    "avg_travel_miles": 708.9
+  },
+  {
+    "player_id": 8480051,
+    "player_name": "Cayden Primeau",
+    "teams": [
+      "MTL"
+    ],
+    "total_games": 55,
+    "avg_sv": 0.8625,
+    "avg_gaa": 3.781,
+    "b2b_games": 2,
+    "b2b_sv": null,
+    "rest_sv": 0.8604,
+    "b2b_delta": null,
+    "avg_travel_miles": 517.2
+  },
+  {
+    "player_id": 8480420,
+    "player_name": "Collin Delia",
+    "teams": [
+      "CHI",
+      "VAN"
+    ],
+    "total_games": 52,
+    "avg_sv": 0.8875,
+    "avg_gaa": 3.5288,
+    "b2b_games": 2,
+    "b2b_sv": null,
+    "rest_sv": 0.8889,
+    "b2b_delta": null,
+    "avg_travel_miles": 876.7
+  },
+  {
+    "player_id": 8481020,
+    "player_name": "Justus Annunen",
+    "teams": [
+      "COL",
+      "NSH"
+    ],
+    "total_games": 52,
+    "avg_sv": 0.8779,
+    "avg_gaa": 2.9918,
+    "b2b_games": 1,
+    "b2b_sv": null,
+    "rest_sv": 0.8772,
+    "b2b_delta": null,
+    "avg_travel_miles": 819.0
+  },
+  {
+    "player_id": 8482076,
+    "player_name": "Nico Daws",
+    "teams": [
+      "NJD"
+    ],
+    "total_games": 52,
+    "avg_sv": 0.8846,
+    "avg_gaa": 2.9524,
+    "b2b_games": 5,
+    "b2b_sv": 0.8881,
+    "rest_sv": 0.8842,
+    "b2b_delta": 0.0039,
+    "avg_travel_miles": 521.4
+  },
+  {
+    "player_id": 8481033,
+    "player_name": "Akira Schmid",
+    "teams": [
+      "NJD",
+      "VGK"
+    ],
+    "total_games": 48,
+    "avg_sv": 0.8906,
+    "avg_gaa": 2.781,
+    "b2b_games": 3,
+    "b2b_sv": 0.8109,
+    "rest_sv": 0.8959,
+    "b2b_delta": -0.085,
+    "avg_travel_miles": 633.9
+  },
+  {
+    "player_id": 8477202,
+    "player_name": "Andrew Hammond",
+    "teams": [
+      "COL",
+      "MTL",
+      "NJD",
+      "OTT"
+    ],
+    "total_games": 42,
+    "avg_sv": 0.8965,
+    "avg_gaa": 3.1637,
+    "b2b_games": 2,
+    "b2b_sv": null,
+    "rest_sv": 0.897,
+    "b2b_delta": null,
+    "avg_travel_miles": 716.9
+  },
+  {
+    "player_id": 8475234,
+    "player_name": "J-F Berube",
+    "teams": [
+      "CBJ",
+      "CHI",
+      "NYI"
+    ],
+    "total_games": 40,
+    "avg_sv": 0.8897,
+    "avg_gaa": 3.515,
+    "b2b_games": 2,
+    "b2b_sv": null,
+    "rest_sv": 0.8893,
+    "b2b_delta": null,
+    "avg_travel_miles": 663.9
+  },
+  {
+    "player_id": 8476343,
+    "player_name": "Garret Sparks",
+    "teams": [
+      "LAK",
+      "TOR",
+      "VGK"
+    ],
+    "total_games": 40,
+    "avg_sv": 0.8998,
+    "avg_gaa": 3.0588,
+    "b2b_games": 1,
+    "b2b_sv": null,
+    "rest_sv": 0.9009,
+    "b2b_delta": null,
+    "avg_travel_miles": 588.3
+  },
+  {
+    "player_id": 8482221,
+    "player_name": "Devon Levi",
+    "teams": [
+      "BUF"
+    ],
+    "total_games": 39,
+    "avg_sv": 0.8798,
+    "avg_gaa": 3.3087,
+    "b2b_games": 1,
+    "b2b_sv": null,
+    "rest_sv": 0.8804,
+    "b2b_delta": null,
+    "avg_travel_miles": 493.4
+  },
+  {
+    "player_id": 8471403,
+    "player_name": "Karri Ramo",
+    "teams": [
+      "CGY"
+    ],
+    "total_games": 37,
+    "avg_sv": 0.9057,
+    "avg_gaa": 2.6298,
+    "b2b_games": 3,
+    "b2b_sv": 0.9298,
+    "rest_sv": 0.9035,
+    "b2b_delta": 0.0263,
+    "avg_travel_miles": 610.1
+  },
+  {
+    "player_id": 8476903,
+    "player_name": "Jon Gillies",
+    "teams": [
+      "CBJ",
+      "CGY",
+      "NJD",
+      "STL"
+    ],
+    "total_games": 35,
+    "avg_sv": 0.8858,
+    "avg_gaa": 3.44,
+    "b2b_games": 2,
+    "b2b_sv": null,
+    "rest_sv": 0.8829,
+    "b2b_delta": null,
+    "avg_travel_miles": 722.0
+  },
+  {
+    "player_id": 8475361,
+    "player_name": "Jonas Gustavsson",
+    "teams": [
+      "BOS",
+      "EDM"
+    ],
+    "total_games": 31,
+    "avg_sv": 0.8987,
+    "avg_gaa": 2.8041,
+    "b2b_games": 1,
+    "b2b_sv": null,
+    "rest_sv": 0.8984,
+    "b2b_delta": null,
+    "avg_travel_miles": 914.3
+  },
+  {
+    "player_id": 8478433,
+    "player_name": "Felix Sandstrom",
+    "teams": [
+      "PHI"
+    ],
+    "total_games": 30,
+    "avg_sv": 0.8677,
+    "avg_gaa": 3.6636,
+    "b2b_games": 2,
+    "b2b_sv": null,
+    "rest_sv": 0.8712,
+    "b2b_delta": null,
+    "avg_travel_miles": 545.1
+  }
+]
