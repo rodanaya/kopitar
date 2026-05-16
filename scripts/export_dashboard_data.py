@@ -225,6 +225,23 @@ def export_goalies(gl: pd.DataFrame, ss: pd.DataFrame) -> list:
         .to_dict()
     )
 
+    # Career GSAx and HDSV% from season_stats
+    career_gsax_lookup = ss_rs.groupby("player_id")["gsax"].sum().to_dict() if "gsax" in ss_rs.columns else {}
+
+    def _weighted_hdsv(g):
+        if "hd_shots_ag" not in g.columns or "hdsv_pct" not in g.columns:
+            return None
+        shots = g["hd_shots_ag"].fillna(0)
+        total = float(shots.sum())
+        if total == 0:
+            return None
+        return float((shots * g["hdsv_pct"].fillna(0)).sum() / total)
+
+    career_hdsv_lookup = (
+        ss_rs.groupby("player_id").apply(_weighted_hdsv, include_groups=False).to_dict()
+        if "hdsv_pct" in ss_rs.columns and "hd_shots_ag" in ss_rs.columns else {}
+    )
+
     records = []
     for pid, grp in rs.groupby("player_id"):
         if len(grp) < 30:
@@ -250,6 +267,8 @@ def export_goalies(gl: pd.DataFrame, ss: pd.DataFrame) -> list:
             "rest_sv": rest_sv_val,
             "b2b_delta": b2b_delta,
             "avg_travel_miles": safe_round(grp["travel_miles"].mean(), 1),
+            "career_gsax": safe_round(career_gsax_lookup.get(pid), 2),
+            "career_hdsv_pct": safe_round(career_hdsv_lookup.get(pid)),
         })
 
     records.sort(key=lambda x: x["total_games"], reverse=True)
@@ -350,7 +369,153 @@ def export_divisions(gl: pd.DataFrame) -> list:
 
 
 # ---------------------------------------------------------------------------
-# 7. team_logs/{TEAM}.json
+# 8. gsax.json
+# ---------------------------------------------------------------------------
+
+def export_gsax(ss: pd.DataFrame) -> list:
+    print("\n[8/9] Building gsax.json ...")
+    ss_rs = ss[(ss["game_type"] == 2) & ss["gsax"].notna()].copy() if "gsax" in ss.columns else pd.DataFrame()
+    if ss_rs.empty:
+        print("  No GSAx data available")
+        return []
+
+    name_lookup = (
+        ss_rs.sort_values("season", ascending=False)
+        .drop_duplicates("player_id")
+        .set_index("player_id")["player_name"]
+        .to_dict()
+    )
+
+    records = []
+    for pid, grp in ss_rs.groupby("player_id"):
+        career_gsax = float(grp["gsax"].sum())
+        career_gsax_per60 = float(grp["gsax_per60"].mean()) if "gsax_per60" in grp.columns and grp["gsax_per60"].notna().any() else None
+
+        if "hd_shots_ag" in grp.columns and "hdsv_pct" in grp.columns:
+            shots = grp["hd_shots_ag"].fillna(0)
+            total_shots = float(shots.sum())
+            career_hdsv = float((shots * grp["hdsv_pct"].fillna(0)).sum() / total_shots) if total_shots > 0 else None
+        else:
+            career_hdsv = None
+
+        seasons_data = []
+        for _, row in grp.sort_values("season").iterrows():
+            gp = row.get("games_played", None)
+            seasons_data.append({
+                "season": row["season"],
+                "label": season_label(row["season"]),
+                "gsax": safe_round(row.get("gsax"), 2),
+                "gsax_per60": safe_round(row.get("gsax_per60"), 4),
+                "hdsv_pct": safe_round(row.get("hdsv_pct")),
+                "games": int(gp) if gp is not None and pd.notna(gp) else 0,
+            })
+
+        records.append({
+            "player_id": int(pid),
+            "player_name": name_lookup.get(pid, f"Player {pid}"),
+            "career_gsax": safe_round(career_gsax, 2),
+            "career_gsax_per60": safe_round(career_gsax_per60, 4),
+            "career_hdsv_pct": safe_round(career_hdsv),
+            "seasons_with_gsax": len(grp),
+            "seasons": seasons_data,
+        })
+
+    records.sort(key=lambda x: x["career_gsax"] if x["career_gsax"] is not None else -9999, reverse=True)
+    print(f"  GSAx leaders: {len(records)} goalies")
+    return records
+
+
+# ---------------------------------------------------------------------------
+# 9. schedule_stress.json
+# ---------------------------------------------------------------------------
+
+def export_schedule_stress(gl: pd.DataFrame) -> dict:
+    print("\n[9/9] Building schedule_stress.json ...")
+    rs = gl[gl["game_type"] == 2].copy()
+    sv = "save_pct"
+    result: dict = {}
+
+    # 4-in-6 and 3-in-4
+    for key, col, label in [("four_in_six", "is_4_in_6", "4-in-6"), ("three_in_four", "is_3_in_4", "3-in-4")]:
+        if col not in rs.columns:
+            continue
+        with_f = rs[rs[col] == 1][sv].dropna()
+        without_f = rs[rs[col] == 0][sv].dropna()
+        if len(with_f) > 5 and len(without_f) > 5:
+            _, p = stats.ttest_ind(with_f, without_f)
+            delta = float(with_f.mean() - without_f.mean())
+            result[key] = {
+                "label": label,
+                "mean_with": safe_round(float(with_f.mean())),
+                "mean_without": safe_round(float(without_f.mean())),
+                "delta": safe_round(delta),
+                "p_value": safe_round(float(p)),
+                "n_with": int(len(with_f)),
+                "n_without": int(len(without_f)),
+                "significant": bool(p < 0.05),
+            }
+            print(f"  {label}: delta={delta:+.5f}  p={p:.4f}  n_with={len(with_f)}")
+
+    # Road trip legs
+    if "road_trip_leg" in rs.columns:
+        legs = []
+        for leg in sorted(rs["road_trip_leg"].dropna().unique()):
+            leg_i = int(leg)
+            g = rs[rs["road_trip_leg"] == leg_i][sv].dropna()
+            if len(g) < 50:
+                continue
+            legs.append({
+                "leg": leg_i,
+                "label": "Home" if leg_i == 0 else f"Road Leg {leg_i}",
+                "mean_sv": safe_round(float(g.mean())),
+                "count": int(len(g)),
+            })
+        result["road_trip_legs"] = legs
+        print(f"  Road trip legs: {len(legs)} groups")
+
+    # Altitude bins
+    if "venue_altitude_ft" in rs.columns:
+        alt_bins = [
+            ("Sea Level (<100ft)", rs["venue_altitude_ft"] < 100),
+            ("Low (100–999ft)", (rs["venue_altitude_ft"] >= 100) & (rs["venue_altitude_ft"] < 1000)),
+            ("Mid (1000–1999ft)", (rs["venue_altitude_ft"] >= 1000) & (rs["venue_altitude_ft"] < 2000)),
+            ("High (≥2000ft)", rs["venue_altitude_ft"] >= 2000),
+        ]
+        alt_records = []
+        for label, mask in alt_bins:
+            sub = rs[mask][sv].dropna()
+            if len(sub) < 50:
+                continue
+            alt_records.append({
+                "label": label,
+                "mean_sv": safe_round(float(sub.mean())),
+                "count": int(len(sub)),
+            })
+        result["altitude"] = alt_records
+        print(f"  Altitude bins: {len(alt_records)} groups")
+
+    # Season phase
+    if "season_phase" in rs.columns:
+        phase_labels = {"early": "Early (Gm 1–20)", "mid": "Mid (Gm 21–60)", "stretch": "Stretch (Gm 61+)"}
+        phase_records = []
+        for phase in ["early", "mid", "stretch"]:
+            g = rs[rs["season_phase"] == phase][sv].dropna()
+            if len(g) < 50:
+                continue
+            phase_records.append({
+                "phase": phase,
+                "label": phase_labels[phase],
+                "mean_sv": safe_round(float(g.mean())),
+                "count": int(len(g)),
+            })
+        result["season_phase"] = phase_records
+        print(f"  Season phases: {len(phase_records)} groups")
+
+    return result
+
+
+# ---------------------------------------------------------------------------
+# 10. team_logs/{TEAM}.json
 # ---------------------------------------------------------------------------
 
 def export_team_logs(gl: pd.DataFrame, ss: pd.DataFrame):
@@ -454,6 +619,15 @@ def main():
 
     # 7. team_logs/
     n_team_logs = export_team_logs(gl, ss)
+
+    # 8. gsax.json
+    gsax_data = export_gsax(ss)
+    sizes["gsax.json"] = write_json(OUT_DIR / "gsax.json", gsax_data, "gsax")
+    print(f"  GSAx entries: {len(gsax_data)}")
+
+    # 9. schedule_stress.json
+    stress_data = export_schedule_stress(gl)
+    sizes["schedule_stress.json"] = write_json(OUT_DIR / "schedule_stress.json", stress_data, "schedule_stress")
 
     print("\n" + "=" * 60)
     print("Export complete!")

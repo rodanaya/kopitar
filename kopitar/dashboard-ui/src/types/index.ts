@@ -46,6 +46,8 @@ export interface GoalieStat {
   rest_sv: number;
   b2b_delta: number | null;
   avg_travel_miles: number;
+  career_gsax: number | null;
+  career_hdsv_pct: number | null;
 }
 
 export interface RecoveryPoint {
@@ -93,4 +95,62 @@ export interface GameLog {
   goalie: string;
   season: string;
   decision: string;
+}
+
+export interface GsaxSeasonPoint {
+  season: string;
+  label: string;
+  gsax: number | null;
+  gsax_per60: number | null;
+  hdsv_pct: number | null;
+  games: number;
+}
+
+export interface GsaxEntry {
+  player_id: number;
+  player_name: string;
+  career_gsax: number;
+  career_gsax_per60: number | null;
+  career_hdsv_pct: number | null;
+  seasons_with_gsax: number;
+  seasons: GsaxSeasonPoint[];
+}
+
+export interface ScheduleStressMetric {
+  label: string;
+  mean_with: number;
+  mean_without: number;
+  delta: number;
+  p_value: number;
+  n_with: number;
+  n_without: number;
+  significant: boolean;
+}
+
+export interface RoadTripLeg {
+  leg: number;
+  label: string;
+  mean_sv: number;
+  count: number;
+}
+
+export interface AltitudeBin {
+  label: string;
+  mean_sv: number;
+  count: number;
+}
+
+export interface SeasonPhaseStat {
+  phase: string;
+  label: string;
+  mean_sv: number;
+  count: number;
+}
+
+export interface ScheduleStress {
+  four_in_six?: ScheduleStressMetric;
+  three_in_four?: ScheduleStressMetric;
+  road_trip_legs?: RoadTripLeg[];
+  altitude?: AltitudeBin[];
+  season_phase?: SeasonPhaseStat[];
 }

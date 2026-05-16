@@ -1,0 +1,114 @@
+{
+  "four_in_six": {
+    "label": "4-in-6",
+    "mean_with": 0.8931,
+    "mean_without": 0.9,
+    "delta": -0.0069,
+    "p_value": 0.035,
+    "n_with": 559,
+    "n_without": 25507,
+    "significant": true
+  },
+  "three_in_four": {
+    "label": "3-in-4",
+    "mean_with": 0.8983,
+    "mean_without": 0.8999,
+    "delta": -0.0016,
+    "p_value": 0.5625,
+    "n_with": 788,
+    "n_without": 25278,
+    "significant": false
+  },
+  "road_trip_legs": [
+    {
+      "leg": 0,
+      "label": "Home",
+      "mean_sv": 0.9018,
+      "count": 12984
+    },
+    {
+      "leg": 1,
+      "label": "Road Leg 1",
+      "mean_sv": 0.8982,
+      "count": 6271
+    },
+    {
+      "leg": 2,
+      "label": "Road Leg 2",
+      "mean_sv": 0.8969,
+      "count": 3554
+    },
+    {
+      "leg": 3,
+      "label": "Road Leg 3",
+      "mean_sv": 0.8975,
+      "count": 1829
+    },
+    {
+      "leg": 4,
+      "label": "Road Leg 4",
+      "mean_sv": 0.8996,
+      "count": 804
+    },
+    {
+      "leg": 5,
+      "label": "Road Leg 5",
+      "mean_sv": 0.8967,
+      "count": 341
+    },
+    {
+      "leg": 6,
+      "label": "Road Leg 6",
+      "mean_sv": 0.9006,
+      "count": 146
+    },
+    {
+      "leg": 7,
+      "label": "Road Leg 7",
+      "mean_sv": 0.913,
+      "count": 63
+    }
+  ],
+  "altitude": [
+    {
+      "label": "Sea Level (<100ft)",
+      "mean_sv": 0.9013,
+      "count": 8324
+    },
+    {
+      "label": "Low (100\u2013999ft)",
+      "mean_sv": 0.8994,
+      "count": 13745
+    },
+    {
+      "label": "Mid (1000\u20131999ft)",
+      "mean_sv": 0.898,
+      "count": 758
+    },
+    {
+      "label": "High (\u22652000ft)",
+      "mean_sv": 0.8988,
+      "count": 3239
+    }
+  ],
+  "season_phase": [
+    {
+      "phase": "early",
+      "label": "Early (Gm 1\u201320)",
+      "mean_sv": 0.8994,
+      "count": 14366
+    },
+    {
+      "phase": "mid",
+      "label": "Mid (Gm 21\u201360)",
+      "mean_sv": 0.9004,
+      "count": 11498
+    },
+    {
+      "phase": "stretch",
+      "label": "Stretch (Gm 61+)",
+      "mean_sv": 0.9016,
+      "count": 202
+    }
+  ]
+}

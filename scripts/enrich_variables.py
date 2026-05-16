@@ -70,6 +70,9 @@ def enrich(df: pd.DataFrame) -> pd.DataFrame:
     df = df.copy()
     df["game_date"] = pd.to_datetime(df["game_date"], errors="coerce")
     df = df.sort_values(["player_id", "game_date"]).reset_index(drop=True)
+    # DB stores team abbreviation as 'team'
+    if "team_abbrev" not in df.columns:
+        df["team_abbrev"] = df["team"]
 
     # --- Altitude ---
     df["venue_altitude_ft"] = df["team_abbrev"].map(ARENA_ALTITUDE).fillna(0).astype(int)

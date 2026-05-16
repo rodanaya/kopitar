@@ -2,6 +2,8 @@ import { useEffect, useState, useMemo } from 'react'
 import {
   ScatterChart,
   Scatter,
+  BarChart,
+  Bar,
   XAxis,
   YAxis,
   CartesianGrid,
@@ -14,7 +16,14 @@ import type { GoalieStat } from '../types'
 import { fmt } from '../utils'
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
-type SortField = 'total_games' | 'avg_sv' | 'b2b_delta' | 'avg_travel_miles' | 'avg_gaa'
+type SortField =
+  | 'total_games'
+  | 'avg_sv'
+  | 'b2b_delta'
+  | 'avg_travel_miles'
+  | 'avg_gaa'
+  | 'career_gsax'
+  | 'career_hdsv_pct'
 
 function deltaColor(v: number | null): string {
   if (v == null) return '#8b91a8'
@@ -23,6 +32,14 @@ function deltaColor(v: number | null): string {
   if (v > 0.01) return '#4caf7d'
   if (v > 0.002) return '#81c784'
   return '#8b91a8'
+}
+
+function gsaxColor(v: number | null): string {
+  if (v == null) return '#8b91a8'
+  if (v > 30) return '#4caf7d'
+  if (v > 0) return '#81c784'
+  if (v > -15) return '#ff8a65'
+  return '#ef5350'
 }
 
 function initials(name: string): string {
@@ -58,15 +75,14 @@ function ScatterTooltip({ active, payload }: ScatterTooltipProps) {
         {g.teams.join(', ')} · {g.total_games} games
       </div>
       <div>Avg SV%: <strong>{fmt.sv(g.avg_sv)}</strong></div>
-      <div>Avg GAA: <strong>{g.avg_gaa.toFixed(2)}</strong></div>
-      <div>B2B Games: <strong>{g.b2b_games}</strong></div>
       <div>B2B Delta: <strong style={{ color: deltaColor(g.b2b_delta) }}>{fmt.delta(g.b2b_delta)}</strong></div>
-      <div>Avg Travel: <strong>{fmt.miles(g.avg_travel_miles)}</strong></div>
+      {g.career_gsax != null && <div>Career GSAx: <strong style={{ color: gsaxColor(g.career_gsax) }}>{g.career_gsax >= 0 ? '+' : ''}{g.career_gsax.toFixed(1)}</strong></div>}
+      {g.career_hdsv_pct != null && <div>HDSV%: <strong>{fmt.sv(g.career_hdsv_pct)}</strong></div>}
     </div>
   )
 }
 
-// ── Custom Dot with label for outliers ────────────────────────────────────────
+// ── Custom Dot ────────────────────────────────────────────────────────────────
 interface CustomDotProps {
   cx?: number
   cy?: number
@@ -82,13 +98,7 @@ function CustomDot({ cx, cy, payload }: CustomDotProps) {
     <g>
       <circle cx={cx} cy={cy} r={isOutlier ? 6 : 4} fill={color} fillOpacity={0.85} stroke="#0b0e18" strokeWidth={1} />
       {isOutlier && (
-        <text
-          x={cx + 8}
-          y={cy + 4}
-          fontSize={9}
-          fill="#e8eaf0"
-          style={{ pointerEvents: 'none', userSelect: 'none' }}
-        >
+        <text x={cx + 8} y={cy + 4} fontSize={9} fill="#e8eaf0" style={{ pointerEvents: 'none', userSelect: 'none' }}>
           {initials(payload.player_name)}
         </text>
       )}
@@ -96,20 +106,42 @@ function CustomDot({ cx, cy, payload }: CustomDotProps) {
   )
 }
 
-// ── Goalie Scatter ────────────────────────────────────────────────────────────
+// ── HDSV% Scatter Dot ─────────────────────────────────────────────────────────
+interface HdsvDotProps {
+  cx?: number
+  cy?: number
+  payload?: GoalieStat
+}
+
+function HdsvDot({ cx, cy, payload }: HdsvDotProps) {
+  if (!payload || cx == null || cy == null) return null
+  const gsax = payload.career_gsax
+  const color = gsaxColor(gsax)
+  const isElite = gsax != null && gsax > 40
+  return (
+    <g>
+      <circle cx={cx} cy={cy} r={isElite ? 7 : 4} fill={color} fillOpacity={0.85} stroke="#0b0e18" strokeWidth={1} />
+      {isElite && (
+        <text x={cx + 9} y={cy + 4} fontSize={9} fill="#e8eaf0" style={{ pointerEvents: 'none', userSelect: 'none' }}>
+          {initials(payload.player_name)}
+        </text>
+      )}
+    </g>
+  )
+}
+
+// ── B2B Impact Scatter ────────────────────────────────────────────────────────
 function GoalieScatter({ goalies }: { goalies: GoalieStat[] }) {
   const hasB2B = useMemo(() => goalies.filter((g) => g.b2b_delta != null), [goalies])
   const leagueAvgSv = useMemo(() => {
     if (!goalies.length) return 0.910
     return goalies.reduce((s, g) => s + g.avg_sv, 0) / goalies.length
   }, [goalies])
-
   const xDomain = useMemo(() => {
     if (!goalies.length) return [0.87, 0.95]
     const vals = goalies.map((g) => g.avg_sv)
     return [Math.max(0.85, Math.min(...vals) - 0.005), Math.min(1.0, Math.max(...vals) + 0.005)]
   }, [goalies])
-
   const yDomain = useMemo(() => {
     if (!hasB2B.length) return [-0.08, 0.06]
     const vals = hasB2B.map((g) => g.b2b_delta as number)
@@ -117,60 +149,122 @@ function GoalieScatter({ goalies }: { goalies: GoalieStat[] }) {
   }, [hasB2B])
 
   return (
-    <ResponsiveContainer width="100%" height={400}>
+    <ResponsiveContainer width="100%" height={360}>
       <ScatterChart margin={{ top: 20, right: 20, bottom: 20, left: 10 }}>
         <CartesianGrid strokeDasharray="3 3" stroke="#2a2f45" />
-        <XAxis
-          type="number"
-          dataKey="avg_sv"
-          domain={xDomain}
-          stroke="#555c70"
-          tick={{ fill: '#8b91a8', fontSize: 11 }}
-          tickFormatter={(v) => (v * 100).toFixed(1) + '%'}
-          name="Avg SV%"
-          label={{ value: 'Avg Save %', position: 'insideBottom', offset: -10, fill: '#555c70', fontSize: 12 }}
-        />
-        <YAxis
-          type="number"
-          dataKey="b2b_delta"
-          domain={yDomain}
-          stroke="#555c70"
-          tick={{ fill: '#8b91a8', fontSize: 11 }}
-          tickFormatter={(v) => (v >= 0 ? '+' : '') + v.toFixed(3)}
-          name="B2B Delta"
-          label={{ value: 'B2B Delta', angle: -90, position: 'insideLeft', fill: '#555c70', fontSize: 12 }}
-        />
+        <XAxis type="number" dataKey="avg_sv" domain={xDomain} stroke="#555c70"
+          tick={{ fill: '#8b91a8', fontSize: 11 }} tickFormatter={(v) => (v * 100).toFixed(1) + '%'}
+          label={{ value: 'Avg Save %', position: 'insideBottom', offset: -10, fill: '#555c70', fontSize: 12 }} />
+        <YAxis type="number" dataKey="b2b_delta" domain={yDomain} stroke="#555c70"
+          tick={{ fill: '#8b91a8', fontSize: 11 }} tickFormatter={(v) => (v >= 0 ? '+' : '') + v.toFixed(3)}
+          label={{ value: 'B2B Delta', angle: -90, position: 'insideLeft', fill: '#555c70', fontSize: 12 }} />
         <Tooltip content={<ScatterTooltip />} cursor={{ strokeDasharray: '3 3' }} />
-        <ReferenceLine y={0} stroke="#555c70" strokeDasharray="4 3" label={{ value: 'B2B Neutral', fill: '#555c70', fontSize: 10, position: 'right' }} />
-        <ReferenceLine x={leagueAvgSv} stroke="#4f9cf9" strokeDasharray="4 3" label={{ value: 'League Avg', fill: '#4f9cf9', fontSize: 10, position: 'top' }} />
-        <Scatter
-          data={hasB2B}
-          shape={<CustomDot />}
-          name="Goalies"
-        >
-          {hasB2B.map((g) => (
-            <Cell key={g.player_id} fill={deltaColor(g.b2b_delta)} />
-          ))}
+        <ReferenceLine y={0} stroke="#555c70" strokeDasharray="4 3"
+          label={{ value: 'B2B Neutral', fill: '#555c70', fontSize: 10, position: 'right' }} />
+        <ReferenceLine x={leagueAvgSv} stroke="#4f9cf9" strokeDasharray="4 3"
+          label={{ value: 'League Avg', fill: '#4f9cf9', fontSize: 10, position: 'top' }} />
+        <Scatter data={hasB2B} shape={<CustomDot />} name="Goalies">
+          {hasB2B.map((g) => <Cell key={g.player_id} fill={deltaColor(g.b2b_delta)} />)}
         </Scatter>
       </ScatterChart>
     </ResponsiveContainer>
   )
 }
 
-// ── Mini Top/Bottom table ────────────────────────────────────────────────────
-function TopBottomTable({ goalies }: { goalies: GoalieStat[] }) {
-  const withDelta = useMemo(() =>
-    goalies.filter((g) => g.b2b_delta != null && g.b2b_games >= 5),
+// ── HDSV% vs SV% Scatter ──────────────────────────────────────────────────────
+function HdsvScatter({ goalies }: { goalies: GoalieStat[] }) {
+  const hasHdsv = useMemo(
+    () => goalies.filter((g) => g.career_hdsv_pct != null && g.avg_sv != null),
+    [goalies]
+  )
+  const xDomain = useMemo(() => {
+    if (!hasHdsv.length) return [0.80, 0.92]
+    const vals = hasHdsv.map((g) => g.career_hdsv_pct as number)
+    return [Math.max(0.78, Math.min(...vals) - 0.005), Math.min(1.0, Math.max(...vals) + 0.005)]
+  }, [hasHdsv])
+  const yDomain = useMemo(() => {
+    if (!hasHdsv.length) return [0.88, 0.94]
+    const vals = hasHdsv.map((g) => g.avg_sv)
+    return [Math.max(0.87, Math.min(...vals) - 0.003), Math.min(1.0, Math.max(...vals) + 0.003)]
+  }, [hasHdsv])
+
+  if (!hasHdsv.length) return <div className="loading-state">No HDSV% data</div>
+
+  return (
+    <ResponsiveContainer width="100%" height={360}>
+      <ScatterChart margin={{ top: 20, right: 20, bottom: 20, left: 10 }}>
+        <CartesianGrid strokeDasharray="3 3" stroke="#2a2f45" />
+        <XAxis type="number" dataKey="career_hdsv_pct" domain={xDomain} stroke="#555c70"
+          tick={{ fill: '#8b91a8', fontSize: 11 }} tickFormatter={(v) => (v * 100).toFixed(1) + '%'}
+          label={{ value: 'Career HDSV%', position: 'insideBottom', offset: -10, fill: '#555c70', fontSize: 12 }} />
+        <YAxis type="number" dataKey="avg_sv" domain={yDomain} stroke="#555c70"
+          tick={{ fill: '#8b91a8', fontSize: 11 }} tickFormatter={(v) => (v * 100).toFixed(1) + '%'}
+          label={{ value: 'Avg SV%', angle: -90, position: 'insideLeft', fill: '#555c70', fontSize: 12 }} />
+        <Tooltip content={<ScatterTooltip />} cursor={{ strokeDasharray: '3 3' }} />
+        <Scatter data={hasHdsv} shape={<HdsvDot />} name="Goalies">
+          {hasHdsv.map((g) => <Cell key={g.player_id} fill={gsaxColor(g.career_gsax)} />)}
+        </Scatter>
+      </ScatterChart>
+    </ResponsiveContainer>
+  )
+}
+
+// ── GSAx Leaders Bar Chart ────────────────────────────────────────────────────
+function GsaxLeaders({ goalies }: { goalies: GoalieStat[] }) {
+  const top15 = useMemo(
+    () =>
+      [...goalies]
+        .filter((g) => g.career_gsax != null)
+        .sort((a, b) => (b.career_gsax as number) - (a.career_gsax as number))
+        .slice(0, 15),
     [goalies]
   )
 
-  const top5 = useMemo(() =>
-    [...withDelta].sort((a, b) => (b.b2b_delta as number) - (a.b2b_delta as number)).slice(0, 5),
+  if (!top15.length) return <div className="loading-state">No GSAx data</div>
+
+  interface LabelProps { x?: number; y?: number; width?: number; value?: number }
+  const ValueLabel = ({ x, y, width, value }: LabelProps) => {
+    if (value == null || x == null || y == null || width == null) return null
+    return (
+      <text x={x + width + 4} y={y + 12} fontSize={10} fill="#8b91a8" textAnchor="start">
+        {value >= 0 ? '+' : ''}{value.toFixed(1)}
+      </text>
+    )
+  }
+
+  return (
+    <ResponsiveContainer width="100%" height={420}>
+      <BarChart data={top15} layout="vertical" margin={{ top: 5, right: 60, bottom: 5, left: 140 }}>
+        <CartesianGrid strokeDasharray="3 3" stroke="#2a2f45" horizontal={false} />
+        <XAxis type="number" stroke="#555c70" tick={{ fill: '#8b91a8', fontSize: 10 }}
+          tickFormatter={(v) => (v >= 0 ? '+' : '') + v.toFixed(0)} />
+        <YAxis type="category" dataKey="player_name" stroke="#555c70"
+          tick={{ fill: '#e8eaf0', fontSize: 11 }} width={135} />
+        <Tooltip
+          contentStyle={{ background: '#141824', border: '1px solid #2a2f45', borderRadius: 8, color: '#e8eaf0', fontSize: '0.85rem' }}
+          formatter={(v: number) => [(v >= 0 ? '+' : '') + v.toFixed(1), 'Career GSAx']}
+        />
+        <ReferenceLine x={0} stroke="#555c70" strokeWidth={1.5} />
+        <Bar dataKey="career_gsax" name="Career GSAx" radius={[0, 3, 3, 0]} label={<ValueLabel />}>
+          {top15.map((g) => <Cell key={g.player_id} fill={gsaxColor(g.career_gsax)} />)}
+        </Bar>
+      </BarChart>
+    </ResponsiveContainer>
+  )
+}
+
+// ── Mini Top/Bottom table ─────────────────────────────────────────────────────
+function TopBottomTable({ goalies }: { goalies: GoalieStat[] }) {
+  const withDelta = useMemo(
+    () => goalies.filter((g) => g.b2b_delta != null && g.b2b_games >= 5),
+    [goalies]
+  )
+  const top5 = useMemo(
+    () => [...withDelta].sort((a, b) => (b.b2b_delta as number) - (a.b2b_delta as number)).slice(0, 5),
     [withDelta]
   )
-
-  const bottom5 = useMemo(() =>
-    [...withDelta].sort((a, b) => (a.b2b_delta as number) - (b.b2b_delta as number)).slice(0, 5),
+  const bottom5 = useMemo(
+    () => [...withDelta].sort((a, b) => (a.b2b_delta as number) - (b.b2b_delta as number)).slice(0, 5),
     [withDelta]
   )
 
@@ -179,10 +273,7 @@ function TopBottomTable({ goalies }: { goalies: GoalieStat[] }) {
       <span className={`rank-badge ${rank <= 3 ? 'top3' : ''}`}>{rank}</span>
       <span className="mini-table-name">{g.player_name}</span>
       <span className="mini-table-team">{g.teams[0]}</span>
-      <span
-        className="mini-table-value"
-        style={{ color: dir === 'top' ? 'var(--success)' : 'var(--danger)' }}
-      >
+      <span className="mini-table-value" style={{ color: dir === 'top' ? 'var(--success)' : 'var(--danger)' }}>
         {fmt.delta(g.b2b_delta)}
       </span>
     </div>
@@ -219,12 +310,8 @@ function GoalieTable({ goalies, sortField, sortDir, onSort }: TableProps) {
     if (field !== sortField) return <span style={{ opacity: 0.3 }}>↕</span>
     return <span style={{ color: 'var(--accent-blue)' }}>{sortDir === 'asc' ? '↑' : '↓'}</span>
   }
-
   const Th = ({ field, label }: { field: SortField; label: string }) => (
-    <th
-      className={sortField === field ? 'sort-active' : ''}
-      onClick={() => onSort(field)}
-    >
+    <th className={sortField === field ? 'sort-active' : ''} onClick={() => onSort(field)}>
       {label} <SortIcon field={field} />
     </th>
   )
@@ -240,6 +327,8 @@ function GoalieTable({ goalies, sortField, sortDir, onSort }: TableProps) {
             <Th field="total_games" label="Games" />
             <Th field="avg_sv" label="Avg SV%" />
             <Th field="avg_gaa" label="GAA" />
+            <Th field="career_gsax" label="Career GSAx" />
+            <Th field="career_hdsv_pct" label="HDSV%" />
             <th>B2B Games</th>
             <th>B2B SV%</th>
             <th>Rest SV%</th>
@@ -250,28 +339,24 @@ function GoalieTable({ goalies, sortField, sortDir, onSort }: TableProps) {
         <tbody>
           {goalies.map((g, i) => (
             <tr key={g.player_id}>
-              <td>
-                <span className={`rank-badge ${i < 3 ? 'top3' : ''}`}>{i + 1}</span>
-              </td>
+              <td><span className={`rank-badge ${i < 3 ? 'top3' : ''}`}>{i + 1}</span></td>
               <td style={{ fontWeight: 500 }}>{g.player_name}</td>
               <td className="td-muted">{g.teams.join(', ')}</td>
               <td>{g.total_games}</td>
               <td>{fmt.sv(g.avg_sv)}</td>
-              <td>{g.avg_gaa.toFixed(2)}</td>
+              <td>{g.avg_gaa?.toFixed(2) ?? '—'}</td>
+              <td style={{ color: gsaxColor(g.career_gsax), fontWeight: g.career_gsax != null ? 600 : 400 }}>
+                {g.career_gsax != null ? (g.career_gsax >= 0 ? '+' : '') + g.career_gsax.toFixed(1) : '—'}
+              </td>
+              <td className={g.career_hdsv_pct == null ? 'td-muted' : ''}>
+                {g.career_hdsv_pct != null ? fmt.sv(g.career_hdsv_pct) : '—'}
+              </td>
               <td className="td-muted">{g.b2b_games}</td>
               <td>{fmt.sv(g.b2b_sv)}</td>
               <td>{fmt.sv(g.rest_sv)}</td>
-              <td
-                className={
-                  g.b2b_delta == null
-                    ? 'td-muted'
-                    : g.b2b_delta < -0.01
-                    ? 'td-negative'
-                    : g.b2b_delta > 0.01
-                    ? 'td-positive'
-                    : ''
-                }
-              >
+              <td className={
+                g.b2b_delta == null ? 'td-muted' : g.b2b_delta < -0.01 ? 'td-negative' : g.b2b_delta > 0.01 ? 'td-positive' : ''
+              }>
                 {fmt.delta(g.b2b_delta)}
               </td>
               <td className="td-muted">{fmt.miles(g.avg_travel_miles)}</td>
@@ -321,6 +406,9 @@ export default function Goalies() {
       })
   }, [allGoalies, minGames, sortField, sortDir])
 
+  const hasGsax = useMemo(() => filtered.some((g) => g.career_gsax != null), [filtered])
+  const hasHdsv = useMemo(() => filtered.some((g) => g.career_hdsv_pct != null), [filtered])
+
   if (loading) return <div className="loading-state">Loading...</div>
   if (error) return <div className="error-state">{error}</div>
 
@@ -328,10 +416,9 @@ export default function Goalies() {
     <main className="page">
       <h1 className="page-title">Goalie Rankings</h1>
       <p className="page-subtitle">
-        {filtered.length} goalies · sorted by {sortField.replace('_', ' ')} · min {minGames} games
+        {filtered.length} goalies · sorted by {sortField.replace(/_/g, ' ')} · min {minGames} games
       </p>
 
-      {/* Filters */}
       <div className="filter-row">
         <label className="filter-label">Min games:</label>
         <input
@@ -347,16 +434,15 @@ export default function Goalies() {
         </span>
       </div>
 
-      {/* Scatter + Top/Bottom */}
+      {/* B2B Scatter + Top/Bottom */}
       <div className="grid-5545">
         <div className="chart-card">
           <div className="chart-title">SV% vs B2B Impact</div>
           <div className="chart-subtitle">
-            Each dot = one goalie · outlier labels = |delta| &gt; 0.03 · red line = B2B neutral
+            Each dot = one goalie · outlier labels = |delta| &gt; 0.03 · dashed = B2B neutral
           </div>
           <GoalieScatter goalies={filtered} />
         </div>
-
         <div className="chart-card">
           <div className="chart-title">B2B Impact Extremes</div>
           <div className="chart-subtitle">Min 5 B2B games for inclusion</div>
@@ -364,11 +450,33 @@ export default function Goalies() {
         </div>
       </div>
 
+      {/* GSAx Leaders */}
+      {hasGsax && (
+        <div className="grid-5545">
+          <div className="chart-card">
+            <div className="chart-title">Career GSAx Leaders</div>
+            <div className="chart-subtitle">
+              Goals Saved Above Expected (MoneyPuck) · green = elite, red = below average
+            </div>
+            <GsaxLeaders goalies={filtered} />
+          </div>
+          {hasHdsv && (
+            <div className="chart-card">
+              <div className="chart-title">HDSV% vs Overall SV%</div>
+              <div className="chart-subtitle">
+                High-Danger Save % vs career average · dot color = career GSAx tier
+              </div>
+              <HdsvScatter goalies={filtered} />
+            </div>
+          )}
+        </div>
+      )}
+
       {/* Data Table */}
       <div className="chart-card">
         <div className="chart-title">Goalie Data Table</div>
         <div className="chart-subtitle">
-          Click column headers to sort · green/red = B2B delta impact
+          Click column headers to sort · GSAx &amp; HDSV% from MoneyPuck season data
         </div>
         <GoalieTable
           goalies={filtered}
