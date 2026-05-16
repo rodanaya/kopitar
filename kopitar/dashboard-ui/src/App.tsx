@@ -3,6 +3,7 @@ import Overview from './pages/Overview'
 import Teams from './pages/Teams'
 import Goalies from './pages/Goalies'
 import Research from './pages/Research'
+import Players from './pages/Players'
 
 function Header() {
   return (
@@ -32,6 +33,12 @@ function Header() {
             Goalies
           </NavLink>
           <NavLink
+            to="/players"
+            className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}
+          >
+            Players
+          </NavLink>
+          <NavLink
             to="/research"
             className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}
           >
@@ -51,6 +58,7 @@ export default function App() {
         <Route path="/" element={<Overview />} />
         <Route path="/teams" element={<Teams />} />
         <Route path="/goalies" element={<Goalies />} />
+        <Route path="/players" element={<Players />} />
         <Route path="/research" element={<Research />} />
       </Routes>
     </div>

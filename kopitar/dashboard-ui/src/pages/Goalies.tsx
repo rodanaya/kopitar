@@ -14,6 +14,7 @@ import {
 } from 'recharts'
 import type { GoalieStat } from '../types'
 import { fmt } from '../utils'
+import { TeamLogo } from '../components/TeamLogo'
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 type SortField =
@@ -341,7 +342,14 @@ function GoalieTable({ goalies, sortField, sortDir, onSort }: TableProps) {
             <tr key={g.player_id}>
               <td><span className={`rank-badge ${i < 3 ? 'top3' : ''}`}>{i + 1}</span></td>
               <td style={{ fontWeight: 500 }}>{g.player_name}</td>
-              <td className="td-muted">{g.teams.join(', ')}</td>
+              <td>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 4, flexWrap: 'wrap' }}>
+                  {g.teams.slice(0, 3).map((t) => (
+                    <TeamLogo key={t} team={t} size={20} />
+                  ))}
+                  {g.teams.length > 3 && <span className="td-muted">+{g.teams.length - 3}</span>}
+                </div>
+              </td>
               <td>{g.total_games}</td>
               <td>{fmt.sv(g.avg_sv)}</td>
               <td>{g.avg_gaa?.toFixed(2) ?? '—'}</td>

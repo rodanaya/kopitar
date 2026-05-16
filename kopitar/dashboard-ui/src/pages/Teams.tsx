@@ -15,6 +15,7 @@ import {
 } from 'recharts'
 import type { TeamStat, GameLog } from '../types'
 import { fmt, TEAM_NAMES, DIVISION_COLORS } from '../utils'
+import { TeamLogo } from '../components/TeamLogo'
 
 // ── Recharts shared style ─────────────────────────────────────────────────────
 const tooltipStyle = {
@@ -318,15 +319,17 @@ export default function Teams() {
       {/* Team Selector */}
       <div className="filter-row" style={{ marginBottom: '1.5rem' }}>
         <label className="filter-label">Select Team:</label>
-        <div style={{ width: 260 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+          {selectedTeam && <TeamLogo team={selectedTeam} size={36} />}
           <select
             className="select-input"
+            style={{ width: 260 }}
             value={selectedTeam}
             onChange={(e) => setSelectedTeam(e.target.value)}
           >
             {sortedTeams.map((t) => (
               <option key={t.team} value={t.team}>
-                {t.team} — {TEAM_NAMES[t.team] ?? t.team} ({t.division})
+                {TEAM_NAMES[t.team] ?? t.team} ({t.division})
               </option>
             ))}
           </select>
@@ -433,7 +436,10 @@ export default function Teams() {
                       <tr key={i}>
                         <td className="td-muted">{g.date}</td>
                         <td>{g.goalie}</td>
-                        <td>{g.opponent}</td>
+                        <td style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                          <TeamLogo team={g.opponent} size={18} />
+                          {g.opponent}
+                        </td>
                         <td className="td-muted">{g.home_away}</td>
                         <td
                           className={

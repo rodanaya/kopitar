@@ -369,7 +369,50 @@ def export_divisions(gl: pd.DataFrame) -> list:
 
 
 # ---------------------------------------------------------------------------
-# 8. gsax.json
+# 8. players.json
+# ---------------------------------------------------------------------------
+
+def export_players(conn) -> list:
+    print("\n[8/10] Building players.json ...")
+    try:
+        df = pd.read_sql(
+            "SELECT * FROM skater_season_stats WHERE game_type=2 ORDER BY season, points DESC",
+            conn,
+        )
+    except Exception as e:
+        print(f"  skater_season_stats not found: {e}")
+        return []
+
+    records = []
+    for _, row in df.iterrows():
+        pos = row.get("position", "")
+        pos_label = "Forward" if pos in ("C", "L", "R") else ("Defenseman" if pos == "D" else pos)
+        records.append({
+            "player_id": int(row["player_id"]) if pd.notna(row["player_id"]) else None,
+            "player_name": row["player_name"],
+            "position": pos,
+            "position_label": pos_label,
+            "team": row["team"],
+            "season": row["season"],
+            "season_label": season_label(row["season"]),
+            "games_played": int(row.get("games_played", 0) or 0),
+            "goals": int(row.get("goals", 0) or 0),
+            "assists": int(row.get("assists", 0) or 0),
+            "points": int(row.get("points", 0) or 0),
+            "plus_minus": int(row.get("plus_minus", 0) or 0),
+            "pim": int(row.get("pim", 0) or 0),
+            "shots": int(row.get("shots", 0) or 0),
+            "toi_per_game": safe_round(row.get("toi_per_game"), 2),
+            "pp_points": int(row.get("pp_points", 0) or 0),
+            "sh_points": int(row.get("sh_points", 0) or 0),
+            "points_per_game": safe_round(row.get("points_per_game"), 3),
+        })
+
+    return records
+
+
+# ---------------------------------------------------------------------------
+# 9. gsax.json
 # ---------------------------------------------------------------------------
 
 def export_gsax(ss: pd.DataFrame) -> list:
@@ -620,7 +663,13 @@ def main():
     # 7. team_logs/
     n_team_logs = export_team_logs(gl, ss)
 
-    # 8. gsax.json
+    # 8. players.json (skater season stats)
+    players_data = export_players(conn_raw := sqlite3.connect(DB_PATH))
+    conn_raw.close()
+    sizes["players.json"] = write_json(OUT_DIR / "players.json", players_data, "players")
+    print(f"  Players exported: {len(players_data)}")
+
+    # 9. gsax.json
     gsax_data = export_gsax(ss)
     sizes["gsax.json"] = write_json(OUT_DIR / "gsax.json", gsax_data, "gsax")
     print(f"  GSAx entries: {len(gsax_data)}")
