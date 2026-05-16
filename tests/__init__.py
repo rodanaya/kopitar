@@ -1,0 +1,1 @@
+"""Tests for Kopitar NHL Analytics Platform."""

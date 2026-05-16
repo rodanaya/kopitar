@@ -1,0 +1,55 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg
+*.egg-info/
+dist/
+build/
+eggs/
+parts/
+var/
+sdist/
+wheels/
+*.egg-info/
+.installed.cfg
+MANIFEST
+.env
+.venv
+env/
+venv/
+ENV/
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# Data files (raw scraped data)
+data/scraped/*.db
+data/scraped/*.csv
+
+# Models (trained artifacts)
+models/*.pkl
+models/*.joblib
+models/*.json
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Jupyter
+.ipynb_checkpoints/

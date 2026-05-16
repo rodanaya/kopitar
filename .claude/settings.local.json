@@ -1,8 +1,14 @@
 {
   "permissions": {
+    "defaultMode": "bypassPermissions",
     "allow": [
       "Bash(git add:*)",
-      "Bash(git init:*)"
+      "Bash(git init:*)",
+      "Bash(mkdir:*)",
+      "Bash(chmod:*)",
+      "Skill(update-config)",
+      "Bash(pytest *)",
+      "Bash(uvicorn *)"
     ],
     "deny": []
   }

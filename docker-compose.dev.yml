@@ -1,0 +1,121 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: kopitar_postgres
+    environment:
+      POSTGRES_DB: kopitar_nhl
+      POSTGRES_USER: kopitar_user
+      POSTGRES_PASSWORD: kopitar_pass
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./docker/postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - kopitar_network
+
+  # Redis Cache
+  redis:
+    image: redis:7-alpine
+    container_name: kopitar_redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - kopitar_network
+
+  # InfluxDB Time Series Database
+  influxdb:
+    image: influxdb:2.7-alpine
+    container_name: kopitar_influxdb
+    environment:
+      DOCKER_INFLUXDB_INIT_MODE: setup
+      DOCKER_INFLUXDB_INIT_USERNAME: kopitar_admin
+      DOCKER_INFLUXDB_INIT_PASSWORD: kopitar_influx_pass
+      DOCKER_INFLUXDB_INIT_ORG: kopitar_org
+      DOCKER_INFLUXDB_INIT_BUCKET: nhl_metrics
+      DOCKER_INFLUXDB_INIT_ADMIN_TOKEN: kopitar_super_secret_admin_token
+    ports:
+      - "8086:8086"
+    volumes:
+      - influxdb_data:/var/lib/influxdb2
+    networks:
+      - kopitar_network
+
+  # Jupyter Lab for Development
+  jupyter:
+    build:
+      context: .
+      dockerfile: docker/jupyter/Dockerfile
+    container_name: kopitar_jupyter
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./notebooks:/home/jovyan/work/notebooks
+      - ./data:/home/jovyan/work/data
+      - ./kopitar:/home/jovyan/work/kopitar
+    environment:
+      JUPYTER_ENABLE_LAB: "yes"
+    networks:
+      - kopitar_network
+    depends_on:
+      - postgres
+      - redis
+      - influxdb
+
+  # Apache Airflow (Standalone)
+  airflow:
+    build:
+      context: .
+      dockerfile: docker/airflow/Dockerfile
+    container_name: kopitar_airflow
+    environment:
+      AIRFLOW__CORE__EXECUTOR: LocalExecutor
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://kopitar_user:kopitar_pass@postgres:5432/kopitar_nhl
+      AIRFLOW__CORE__FERNET_KEY: 'fernet_key_here_please_change_this_to_random_key'
+      AIRFLOW__WEBSERVER__SECRET_KEY: 'secret_key_here_please_change_this'
+      AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: 'true'
+      AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./airflow/dags:/opt/airflow/dags
+      - ./airflow/logs:/opt/airflow/logs
+      - ./airflow/plugins:/opt/airflow/plugins
+      - ./data:/opt/airflow/data
+    networks:
+      - kopitar_network
+    depends_on:
+      - postgres
+      - redis
+
+  # Grafana for Monitoring
+  grafana:
+    image: grafana/grafana:10.0.0
+    container_name: kopitar_grafana
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: kopitar_grafana_pass
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./docker/grafana/dashboards:/etc/grafana/provisioning/dashboards
+      - ./docker/grafana/datasources:/etc/grafana/provisioning/datasources
+    networks:
+      - kopitar_network
+    depends_on:
+      - influxdb
+
+volumes:
+  postgres_data:
+  redis_data:
+  influxdb_data:
+  grafana_data:
+
+networks:
+  kopitar_network:
+    driver: bridge
