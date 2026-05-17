@@ -7,7 +7,10 @@
     "p_value": 0.035,
     "n_with": 559,
     "n_without": 25507,
-    "significant": true
+    "significant": true,
+    "goals_cost_per_game": 0.196,
+    "total_extra_goals": 109.7,
+    "extra_goals_per_team_season": 0.34
   },
   "three_in_four": {
     "label": "3-in-4",
@@ -17,7 +20,10 @@
     "p_value": 0.5625,
     "n_with": 788,
     "n_without": 25278,
-    "significant": false
+    "significant": false,
+    "goals_cost_per_game": 0.046,
+    "total_extra_goals": 35.9,
+    "extra_goals_per_team_season": 0.11
   },
   "road_trip_legs": [
     {

@@ -1,0 +1,635 @@
+{
+  "toi_by_rest": [
+    {
+      "rest_days": 1,
+      "mean_toi": 19.38,
+      "count": 11762
+    },
+    {
+      "rest_days": 2,
+      "mean_toi": 19.56,
+      "count": 41480
+    },
+    {
+      "rest_days": 3,
+      "mean_toi": 19.52,
+      "count": 13640
+    },
+    {
+      "rest_days": 4,
+      "mean_toi": 19.43,
+      "count": 3291
+    },
+    {
+      "rest_days": 5,
+      "mean_toi": 19.38,
+      "count": 1316
+    },
+    {
+      "rest_days": 6,
+      "mean_toi": 19.29,
+      "count": 474
+    },
+    {
+      "rest_days": 7,
+      "mean_toi": 19.74,
+      "count": 286
+    },
+    {
+      "rest_days": 8,
+      "mean_toi": 19.19,
+      "count": 106
+    },
+    {
+      "rest_days": 9,
+      "mean_toi": 19.76,
+      "count": 163
+    },
+    {
+      "rest_days": 10,
+      "mean_toi": 19.65,
+      "count": 267
+    }
+  ],
+  "b2b_overall": {
+    "b2b_toi": 19.38,
+    "rest_toi": 19.53,
+    "delta": -0.15,
+    "p_value": 0.0,
+    "significant": true,
+    "n_b2b": 11762,
+    "n_rest": 62603
+  },
+  "by_position": [
+    {
+      "position": "Defense",
+      "b2b_toi": 24.26,
+      "rest_toi": 24.22,
+      "delta": 0.04,
+      "p_value": 0.6602,
+      "n_b2b": 1373,
+      "n_rest": 7612
+    },
+    {
+      "position": "Forward",
+      "b2b_toi": 18.74,
+      "rest_toi": 18.89,
+      "delta": -0.15,
+      "p_value": 0.0,
+      "n_b2b": 10389,
+      "n_rest": 54991
+    }
+  ],
+  "top_players": [
+    {
+      "player_id": 8474563,
+      "player_name": "Drew Doughty",
+      "position": "Defense",
+      "avg_toi": 27.43,
+      "b2b_toi": 28.06,
+      "rest_toi": 27.3,
+      "b2b_delta": 0.76,
+      "games": 164,
+      "b2b_games": 27
+    },
+    {
+      "player_id": 8474578,
+      "player_name": "Erik Karlsson",
+      "position": "Defense",
+      "avg_toi": 27.06,
+      "b2b_toi": 26.43,
+      "rest_toi": 27.19,
+      "b2b_delta": -0.76,
+      "games": 312,
+      "b2b_games": 56
+    },
+    {
+      "player_id": 8470600,
+      "player_name": "Ryan Suter",
+      "position": "Defense",
+      "avg_toi": 26.79,
+      "b2b_toi": 27.46,
+      "rest_toi": 26.66,
+      "b2b_delta": 0.8,
+      "games": 151,
+      "b2b_games": 23
+    },
+    {
+      "player_id": 8478460,
+      "player_name": "Zach Werenski",
+      "position": "Defense",
+      "avg_toi": 26.75,
+      "b2b_toi": 26.76,
+      "rest_toi": 26.74,
+      "b2b_delta": 0.02,
+      "games": 81,
+      "b2b_games": 12
+    },
+    {
+      "player_id": 8470834,
+      "player_name": "Dustin Byfuglien",
+      "position": "Defense",
+      "avg_toi": 26.32,
+      "b2b_toi": 25.98,
+      "rest_toi": 26.38,
+      "b2b_delta": -0.39,
+      "games": 161,
+      "b2b_games": 24
+    },
+    {
+      "player_id": 8471724,
+      "player_name": "Kris Letang",
+      "position": "Defense",
+      "avg_toi": 25.9,
+      "b2b_toi": 25.82,
+      "rest_toi": 25.91,
+      "b2b_delta": -0.09,
+      "games": 269,
+      "b2b_games": 40
+    },
+    {
+      "player_id": 8470281,
+      "player_name": "Duncan Keith",
+      "position": "Defense",
+      "avg_toi": 25.62,
+      "b2b_toi": 25.53,
+      "rest_toi": 25.64,
+      "b2b_delta": -0.11,
+      "games": 80,
+      "b2b_games": 14
+    },
+    {
+      "player_id": 8477498,
+      "player_name": "Darnell Nurse",
+      "position": "Defense",
+      "avg_toi": 25.62,
+      "b2b_toi": 26.4,
+      "rest_toi": 25.46,
+      "b2b_delta": 0.94,
+      "games": 56,
+      "b2b_games": 10
+    },
+    {
+      "player_id": 8476875,
+      "player_name": "Mike Matheson",
+      "position": "Defense",
+      "avg_toi": 25.55,
+      "b2b_toi": 25.31,
+      "rest_toi": 25.6,
+      "b2b_delta": -0.29,
+      "games": 82,
+      "b2b_games": 13
+    },
+    {
+      "player_id": 8480036,
+      "player_name": "Miro Heiskanen",
+      "position": "Defense",
+      "avg_toi": 25.49,
+      "b2b_toi": 25.56,
+      "rest_toi": 25.48,
+      "b2b_delta": 0.08,
+      "games": 79,
+      "b2b_games": 9
+    },
+    {
+      "player_id": 8470642,
+      "player_name": "Shea Weber",
+      "position": "Defense",
+      "avg_toi": 25.38,
+      "b2b_toi": 25.71,
+      "rest_toi": 25.32,
+      "b2b_delta": 0.39,
+      "games": 78,
+      "b2b_games": 11
+    },
+    {
+      "player_id": 8478038,
+      "player_name": "Devon Toews",
+      "position": "Defense",
+      "avg_toi": 25.37,
+      "b2b_toi": 25.15,
+      "rest_toi": 25.41,
+      "b2b_delta": -0.26,
+      "games": 66,
+      "b2b_games": 10
+    },
+    {
+      "player_id": 8474600,
+      "player_name": "Roman Josi",
+      "position": "Defense",
+      "avg_toi": 25.17,
+      "b2b_toi": 25.33,
+      "rest_toi": 25.15,
+      "b2b_delta": 0.18,
+      "games": 536,
+      "b2b_games": 71
+    },
+    {
+      "player_id": 8480839,
+      "player_name": "Rasmus Dahlin",
+      "position": "Defense",
+      "avg_toi": 25.17,
+      "b2b_toi": 25.63,
+      "rest_toi": 25.09,
+      "b2b_delta": 0.54,
+      "games": 232,
+      "b2b_games": 36
+    },
+    {
+      "player_id": 8474056,
+      "player_name": "P.K. Subban",
+      "position": "Defense",
+      "avg_toi": 25.13,
+      "b2b_toi": 24.76,
+      "rest_toi": 25.21,
+      "b2b_delta": -0.44,
+      "games": 150,
+      "b2b_games": 25
+    },
+    {
+      "player_id": 8474565,
+      "player_name": "Alex Pietrangelo",
+      "position": "Defense",
+      "avg_toi": 25.0,
+      "b2b_toi": 25.73,
+      "rest_toi": 24.87,
+      "b2b_delta": 0.87,
+      "games": 148,
+      "b2b_games": 23
+    },
+    {
+      "player_id": 8470613,
+      "player_name": "Brent Burns",
+      "position": "Defense",
+      "avg_toi": 24.94,
+      "b2b_toi": 25.07,
+      "rest_toi": 24.91,
+      "b2b_delta": 0.16,
+      "games": 480,
+      "b2b_games": 83
+    },
+    {
+      "player_id": 8477932,
+      "player_name": "Aaron Ekblad",
+      "position": "Defense",
+      "avg_toi": 24.92,
+      "b2b_toi": 22.71,
+      "rest_toi": 25.3,
+      "b2b_delta": -2.6,
+      "games": 61,
+      "b2b_games": 9
+    },
+    {
+      "player_id": 8480069,
+      "player_name": "Cale Makar",
+      "position": "Defense",
+      "avg_toi": 24.79,
+      "b2b_toi": 24.36,
+      "rest_toi": 24.85,
+      "b2b_delta": -0.49,
+      "games": 395,
+      "b2b_games": 52
+    },
+    {
+      "player_id": 8475171,
+      "player_name": "Oliver Ekman-Larsson",
+      "position": "Defense",
+      "avg_toi": 24.77,
+      "b2b_toi": 25.49,
+      "rest_toi": 24.62,
+      "b2b_delta": 0.87,
+      "games": 75,
+      "b2b_games": 13
+    },
+    {
+      "player_id": 8479325,
+      "player_name": "Charlie McAvoy",
+      "position": "Defense",
+      "avg_toi": 24.64,
+      "b2b_toi": 24.02,
+      "rest_toi": 24.73,
+      "b2b_delta": -0.7,
+      "games": 78,
+      "b2b_games": 10
+    },
+    {
+      "player_id": 8477495,
+      "player_name": "Seth Jones",
+      "position": "Defense",
+      "avg_toi": 24.6,
+      "b2b_toi": 25.07,
+      "rest_toi": 24.48,
+      "b2b_delta": 0.6,
+      "games": 78,
+      "b2b_games": 16
+    },
+    {
+      "player_id": 8470966,
+      "player_name": "Mark Giordano",
+      "position": "Defense",
+      "avg_toi": 24.52,
+      "b2b_toi": 23.96,
+      "rest_toi": 24.6,
+      "b2b_delta": -0.64,
+      "games": 160,
+      "b2b_games": 20
+    },
+    {
+      "player_id": 8480865,
+      "player_name": "Noah Dobson",
+      "position": "Defense",
+      "avg_toi": 24.51,
+      "b2b_toi": 25.18,
+      "rest_toi": 24.41,
+      "b2b_delta": 0.77,
+      "games": 79,
+      "b2b_games": 10
+    },
+    {
+      "player_id": 8474590,
+      "player_name": "John Carlson",
+      "position": "Defense",
+      "avg_toi": 24.46,
+      "b2b_toi": 24.89,
+      "rest_toi": 24.38,
+      "b2b_delta": 0.5,
+      "games": 361,
+      "b2b_games": 57
+    },
+    {
+      "player_id": 8480800,
+      "player_name": "Quinn Hughes",
+      "position": "Defense",
+      "avg_toi": 24.44,
+      "b2b_toi": 24.72,
+      "rest_toi": 24.39,
+      "b2b_delta": 0.33,
+      "games": 428,
+      "b2b_games": 58
+    },
+    {
+      "player_id": 8482105,
+      "player_name": "Jake Sanderson",
+      "position": "Defense",
+      "avg_toi": 24.44,
+      "b2b_toi": 24.2,
+      "rest_toi": 24.49,
+      "b2b_delta": -0.29,
+      "games": 80,
+      "b2b_games": 14
+    },
+    {
+      "player_id": 8475167,
+      "player_name": "Victor Hedman",
+      "position": "Defense",
+      "avg_toi": 24.4,
+      "b2b_toi": 24.62,
+      "rest_toi": 24.37,
+      "b2b_delta": 0.25,
+      "games": 585,
+      "b2b_games": 84
+    },
+    {
+      "player_id": 8478469,
+      "player_name": "Thomas Chabot",
+      "position": "Defense",
+      "avg_toi": 24.29,
+      "b2b_toi": 24.82,
+      "rest_toi": 24.18,
+      "b2b_delta": 0.64,
+      "games": 70,
+      "b2b_games": 12
+    },
+    {
+      "player_id": 8477504,
+      "player_name": "Josh Morrissey",
+      "position": "Defense",
+      "avg_toi": 24.27,
+      "b2b_toi": 24.38,
+      "rest_toi": 24.25,
+      "b2b_delta": 0.12,
+      "games": 239,
+      "b2b_games": 27
+    },
+    {
+      "player_id": 8477986,
+      "player_name": "Brandon Montour",
+      "position": "Defense",
+      "avg_toi": 24.13,
+      "b2b_toi": 23.8,
+      "rest_toi": 24.18,
+      "b2b_delta": -0.39,
+      "games": 80,
+      "b2b_games": 12
+    },
+    {
+      "player_id": 8479323,
+      "player_name": "Adam Fox",
+      "position": "Defense",
+      "avg_toi": 23.91,
+      "b2b_toi": 23.84,
+      "rest_toi": 23.92,
+      "b2b_delta": -0.08,
+      "games": 361,
+      "b2b_games": 58
+    },
+    {
+      "player_id": 8479410,
+      "player_name": "Mikhail Sergachev",
+      "position": "Defense",
+      "avg_toi": 23.81,
+      "b2b_toi": 24.25,
+      "rest_toi": 23.71,
+      "b2b_delta": 0.54,
+      "games": 79,
+      "b2b_games": 15
+    },
+    {
+      "player_id": 8478407,
+      "player_name": "Vince Dunn",
+      "position": "Defense",
+      "avg_toi": 23.67,
+      "b2b_toi": 23.56,
+      "rest_toi": 23.68,
+      "b2b_delta": -0.12,
+      "games": 81,
+      "b2b_games": 7
+    },
+    {
+      "player_id": 8476853,
+      "player_name": "Morgan Rielly",
+      "position": "Defense",
+      "avg_toi": 23.54,
+      "b2b_toi": 23.48,
+      "rest_toi": 23.55,
+      "b2b_delta": -0.07,
+      "games": 291,
+      "b2b_games": 44
+    },
+    {
+      "player_id": 8479345,
+      "player_name": "Jakob Chychrun",
+      "position": "Defense",
+      "avg_toi": 23.39,
+      "b2b_toi": 23.34,
+      "rest_toi": 23.4,
+      "b2b_delta": -0.06,
+      "games": 56,
+      "b2b_games": 9
+    },
+    {
+      "player_id": 8480145,
+      "player_name": "Neal Pionk",
+      "position": "Defense",
+      "avg_toi": 23.38,
+      "b2b_toi": 24.39,
+      "rest_toi": 23.23,
+      "b2b_delta": 1.16,
+      "games": 71,
+      "b2b_games": 9
+    },
+    {
+      "player_id": 8475906,
+      "player_name": "John Klingberg",
+      "position": "Defense",
+      "avg_toi": 23.23,
+      "b2b_toi": 23.87,
+      "rest_toi": 23.11,
+      "b2b_delta": 0.75,
+      "games": 211,
+      "b2b_games": 32
+    },
+    {
+      "player_id": 8480803,
+      "player_name": "Evan Bouchard",
+      "position": "Defense",
+      "avg_toi": 23.23,
+      "b2b_toi": 23.08,
+      "rest_toi": 23.25,
+      "b2b_delta": -0.18,
+      "games": 163,
+      "b2b_games": 23
+    },
+    {
+      "player_id": 8473507,
+      "player_name": "Jeff Petry",
+      "position": "Defense",
+      "avg_toi": 22.74,
+      "b2b_toi": 23.34,
+      "rest_toi": 22.59,
+      "b2b_delta": 0.76,
+      "games": 55,
+      "b2b_games": 11
+    },
+    {
+      "player_id": 8483457,
+      "player_name": "Lane Hutson",
+      "position": "Defense",
+      "avg_toi": 22.73,
+      "b2b_toi": 22.74,
+      "rest_toi": 22.73,
+      "b2b_delta": 0.01,
+      "games": 82,
+      "b2b_games": 15
+    },
+    {
+      "player_id": 8476979,
+      "player_name": "Erik Gustafsson",
+      "position": "Defense",
+      "avg_toi": 22.58,
+      "b2b_toi": 23.03,
+      "rest_toi": 22.5,
+      "b2b_delta": 0.53,
+      "games": 79,
+      "b2b_games": 12
+    },
+    {
+      "player_id": 8471735,
+      "player_name": "Keith Yandle",
+      "position": "Defense",
+      "avg_toi": 22.35,
+      "b2b_toi": 22.21,
+      "rest_toi": 22.38,
+      "b2b_delta": -0.17,
+      "games": 233,
+      "b2b_games": 46
+    },
+    {
+      "player_id": 8475197,
+      "player_name": "Tyson Barrie",
+      "position": "Defense",
+      "avg_toi": 22.32,
+      "b2b_toi": 22.55,
+      "rest_toi": 22.28,
+      "b2b_delta": 0.27,
+      "games": 280,
+      "b2b_games": 40
+    },
+    {
+      "player_id": 8477447,
+      "player_name": "Shea Theodore",
+      "position": "Defense",
+      "avg_toi": 22.24,
+      "b2b_toi": 21.95,
+      "rest_toi": 22.29,
+      "b2b_delta": -0.34,
+      "games": 191,
+      "b2b_games": 30
+    },
+    {
+      "player_id": 8477346,
+      "player_name": "MacKenzie Weegar",
+      "position": "Defense",
+      "avg_toi": 22.12,
+      "b2b_toi": 21.56,
+      "rest_toi": 22.23,
+      "b2b_delta": -0.67,
+      "games": 54,
+      "b2b_games": 9
+    },
+    {
+      "player_id": 8478402,
+      "player_name": "Connor McDavid",
+      "position": "Forward",
+      "avg_toi": 21.92,
+      "b2b_toi": 21.3,
+      "rest_toi": 22.01,
+      "b2b_delta": -0.71,
+      "games": 667,
+      "b2b_games": 87
+    },
+    {
+      "player_id": 8476906,
+      "player_name": "Shayne Gostisbehere",
+      "position": "Defense",
+      "avg_toi": 21.46,
+      "b2b_toi": 20.56,
+      "rest_toi": 21.65,
+      "b2b_delta": -1.1,
+      "games": 78,
+      "b2b_games": 14
+    },
+    {
+      "player_id": 8476462,
+      "player_name": "Dougie Hamilton",
+      "position": "Defense",
+      "avg_toi": 21.24,
+      "b2b_toi": 21.17,
+      "rest_toi": 21.25,
+      "b2b_delta": -0.08,
+      "games": 218,
+      "b2b_games": 32
+    },
+    {
+      "player_id": 8477492,
+      "player_name": "Nathan MacKinnon",
+      "position": "Forward",
+      "avg_toi": 21.19,
+      "b2b_toi": 21.0,
+      "rest_toi": 21.22,
+      "b2b_delta": -0.22,
+      "games": 724,
+      "b2b_games": 101
+    }
+  ]
+}

@@ -9,6 +9,7 @@ import {
   CartesianGrid,
   Tooltip,
   ReferenceLine,
+  ReferenceArea,
   ResponsiveContainer,
   Cell,
 } from 'recharts'
@@ -131,44 +132,123 @@ function HdsvDot({ cx, cy, payload }: HdsvDotProps) {
   )
 }
 
-// ── B2B Impact Scatter ────────────────────────────────────────────────────────
-function GoalieScatter({ goalies }: { goalies: GoalieStat[] }) {
-  const hasB2B = useMemo(() => goalies.filter((g) => g.b2b_delta != null), [goalies])
-  const leagueAvgSv = useMemo(() => {
-    if (!goalies.length) return 0.910
-    return goalies.reduce((s, g) => s + g.avg_sv, 0) / goalies.length
-  }, [goalies])
+// ── Quadrant Color Map ────────────────────────────────────────────────────────
+const QUADRANT_COLOR: Record<string, string> = {
+  iron_man: '#34d399',
+  workhorse: '#38bdf8',
+  vulnerable_star: '#f43f5e',
+  high_risk: '#fbbf24',
+}
+
+const QUADRANT_META = [
+  { key: 'iron_man',       label: 'Iron Man',       color: '#34d399', desc: 'Elite + resilient — the complete package' },
+  { key: 'workhorse',      label: 'Workhorse',       color: '#38bdf8', desc: 'Average SV%, fatigue-resistant — ideal backup' },
+  { key: 'vulnerable_star',label: 'Vulnerable Star', color: '#f43f5e', desc: 'Elite SV%, B2B fragile — protect the schedule' },
+  { key: 'high_risk',      label: 'High Risk',       color: '#fbbf24', desc: 'Below average + fragile — avoid B2B entirely' },
+]
+
+// ── Resilience Quadrant Scatter ───────────────────────────────────────────────
+function QuadrantScatter({ goalies }: { goalies: GoalieStat[] }) {
+  const qualified = useMemo(
+    () => goalies.filter(g => g.b2b_delta != null && g.b2b_games >= 5),
+    [goalies]
+  )
+
+  const leagueMedianSv = useMemo(() => {
+    if (!qualified.length) return 0.910
+    const sorted = [...qualified].sort((a, b) => a.avg_sv - b.avg_sv)
+    const mid = Math.floor(sorted.length / 2)
+    return sorted.length % 2 === 0
+      ? (sorted[mid - 1].avg_sv + sorted[mid].avg_sv) / 2
+      : sorted[mid].avg_sv
+  }, [qualified])
+
   const xDomain = useMemo(() => {
-    if (!goalies.length) return [0.87, 0.95]
-    const vals = goalies.map((g) => g.avg_sv)
-    return [Math.max(0.85, Math.min(...vals) - 0.005), Math.min(1.0, Math.max(...vals) + 0.005)]
-  }, [goalies])
+    if (!qualified.length) return [0.88, 0.940]
+    const vals = qualified.map(g => g.avg_sv)
+    return [Math.max(0.875, Math.min(...vals) - 0.004), Math.min(0.948, Math.max(...vals) + 0.004)]
+  }, [qualified])
+
   const yDomain = useMemo(() => {
-    if (!hasB2B.length) return [-0.08, 0.06]
-    const vals = hasB2B.map((g) => g.b2b_delta as number)
-    return [Math.min(-0.05, Math.min(...vals) - 0.005), Math.max(0.04, Math.max(...vals) + 0.005)]
-  }, [hasB2B])
+    if (!qualified.length) return [-0.07, 0.06]
+    const vals = qualified.map(g => g.b2b_delta as number)
+    return [Math.min(-0.055, Math.min(...vals) - 0.005), Math.max(0.04, Math.max(...vals) + 0.005)]
+  }, [qualified])
+
+  // Dot: size by career games, color by quadrant, label for top starters
+  function QDot({ cx, cy, payload }: { cx?: number; cy?: number; payload?: GoalieStat }) {
+    if (!payload || cx == null || cy == null) return null
+    const q = payload.quadrant
+    const color = q ? QUADRANT_COLOR[q] : '#7ea4c4'
+    const r = Math.min(10, Math.max(4, 4 + Math.sqrt(payload.total_games / 25)))
+    const showName = payload.total_games >= 120
+    const lastName = payload.player_name.split(' ').slice(1).join(' ') || payload.player_name
+    return (
+      <g>
+        <circle cx={cx} cy={cy} r={r} fill={color} fillOpacity={0.88}
+          stroke={q === 'iron_man' ? 'rgba(52,211,153,0.4)' : '#060c18'}
+          strokeWidth={q === 'iron_man' ? 2 : 1} />
+        {showName && (
+          <text x={cx + r + 3} y={cy + 4} fontSize={8.5} fill="rgba(238,244,255,0.65)"
+            style={{ pointerEvents: 'none', userSelect: 'none' }}>
+            {lastName}
+          </text>
+        )}
+      </g>
+    )
+  }
 
   return (
-    <ResponsiveContainer width="100%" height={360}>
-      <ScatterChart margin={{ top: 20, right: 20, bottom: 20, left: 10 }}>
-        <CartesianGrid strokeDasharray="3 3" stroke="#2a2f45" />
-        <XAxis type="number" dataKey="avg_sv" domain={xDomain} stroke="#555c70"
-          tick={{ fill: '#8b91a8', fontSize: 11 }} tickFormatter={(v) => (v * 100).toFixed(1) + '%'}
-          label={{ value: 'Avg Save %', position: 'insideBottom', offset: -10, fill: '#555c70', fontSize: 12 }} />
-        <YAxis type="number" dataKey="b2b_delta" domain={yDomain} stroke="#555c70"
-          tick={{ fill: '#8b91a8', fontSize: 11 }} tickFormatter={(v) => (v >= 0 ? '+' : '') + v.toFixed(3)}
-          label={{ value: 'B2B Delta', angle: -90, position: 'insideLeft', fill: '#555c70', fontSize: 12 }} />
-        <Tooltip content={<ScatterTooltip />} cursor={{ strokeDasharray: '3 3' }} />
-        <ReferenceLine y={0} stroke="#555c70" strokeDasharray="4 3"
-          label={{ value: 'B2B Neutral', fill: '#555c70', fontSize: 10, position: 'right' }} />
-        <ReferenceLine x={leagueAvgSv} stroke="#4f9cf9" strokeDasharray="4 3"
-          label={{ value: 'League Avg', fill: '#4f9cf9', fontSize: 10, position: 'top' }} />
-        <Scatter data={hasB2B} shape={<CustomDot />} name="Goalies">
-          {hasB2B.map((g) => <Cell key={g.player_id} fill={deltaColor(g.b2b_delta)} />)}
-        </Scatter>
-      </ScatterChart>
-    </ResponsiveContainer>
+    <>
+      <ResponsiveContainer width="100%" height={400}>
+        <ScatterChart margin={{ top: 15, right: 30, bottom: 30, left: 15 }}>
+          {/* Quadrant backgrounds */}
+          <ReferenceArea x1={xDomain[0]} x2={leagueMedianSv} y1={0} y2={yDomain[1]}
+            fill="rgba(56,189,248,0.04)"
+            label={{ value: 'WORKHORSE', position: 'insideTopLeft', fill: 'rgba(56,189,248,0.22)', fontSize: 9, fontWeight: 700 }} />
+          <ReferenceArea x1={leagueMedianSv} x2={xDomain[1]} y1={0} y2={yDomain[1]}
+            fill="rgba(52,211,153,0.04)"
+            label={{ value: 'IRON MAN', position: 'insideTopRight', fill: 'rgba(52,211,153,0.22)', fontSize: 9, fontWeight: 700 }} />
+          <ReferenceArea x1={xDomain[0]} x2={leagueMedianSv} y1={yDomain[0]} y2={0}
+            fill="rgba(251,191,36,0.04)"
+            label={{ value: 'HIGH RISK', position: 'insideBottomLeft', fill: 'rgba(251,191,36,0.22)', fontSize: 9, fontWeight: 700 }} />
+          <ReferenceArea x1={leagueMedianSv} x2={xDomain[1]} y1={yDomain[0]} y2={0}
+            fill="rgba(244,63,94,0.04)"
+            label={{ value: 'VULNERABLE STAR', position: 'insideBottomRight', fill: 'rgba(244,63,94,0.22)', fontSize: 9, fontWeight: 700 }} />
+
+          <CartesianGrid strokeDasharray="3 3" stroke="rgba(56,189,248,0.07)" />
+          <XAxis type="number" dataKey="avg_sv" domain={xDomain}
+            stroke="rgba(56,189,248,0.2)" tick={{ fill: '#7ea4c4', fontSize: 11 }}
+            tickFormatter={v => (v * 100).toFixed(1) + '%'}
+            label={{ value: 'Career Avg SV%  ← weaker · stronger →', position: 'insideBottom', offset: -15, fill: '#7ea4c4', fontSize: 10 }} />
+          <YAxis type="number" dataKey="b2b_delta" domain={yDomain}
+            stroke="rgba(56,189,248,0.2)" tick={{ fill: '#7ea4c4', fontSize: 10 }}
+            tickFormatter={v => (v >= 0 ? '+' : '') + v.toFixed(3)}
+            label={{ value: 'B2B Delta  ↑ resilient · fragile ↓', angle: -90, position: 'insideLeft', dy: 60, fill: '#7ea4c4', fontSize: 10 }} />
+          <Tooltip content={<ScatterTooltip />} cursor={{ strokeDasharray: '3 3' }} />
+
+          {/* Dividing lines */}
+          <ReferenceLine y={0} stroke="rgba(56,189,248,0.35)" strokeWidth={1.5} />
+          <ReferenceLine x={leagueMedianSv} stroke="rgba(56,189,248,0.35)" strokeWidth={1.5}
+            label={{ value: 'Median SV%', fill: 'rgba(56,189,248,0.4)', fontSize: 9, position: 'top' }} />
+
+          <Scatter data={qualified} shape={<QDot />} name="Goalies" />
+        </ScatterChart>
+      </ResponsiveContainer>
+
+      {/* Quadrant legend */}
+      <div className="quadrant-legend">
+        {QUADRANT_META.map(q => (
+          <div key={q.key} className="quadrant-chip">
+            <div className="qc-dot" style={{ background: q.color }} />
+            <div>
+              <div className="qc-name" style={{ color: q.color }}>{q.label}</div>
+              <div className="qc-desc">{q.desc}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </>
   )
 }
 
@@ -420,12 +500,37 @@ export default function Goalies() {
   if (loading) return <div className="loading-state">Loading...</div>
   if (error) return <div className="error-state">{error}</div>
 
+  const qualified = useMemo(
+    () => filtered.filter(g => g.quadrant != null),
+    [filtered]
+  )
+  const quadrantCounts = useMemo(() => {
+    const c: Record<string, number> = {}
+    qualified.forEach(g => { if (g.quadrant) c[g.quadrant] = (c[g.quadrant] ?? 0) + 1 })
+    return c
+  }, [qualified])
+
   return (
     <main className="page">
-      <h1 className="page-title">Goalie Rankings</h1>
+      <h1 className="page-title">Goalie Resilience Lab</h1>
       <p className="page-subtitle">
-        {filtered.length} goalies · sorted by {sortField.replace(/_/g, ' ')} · min {minGames} games
+        {filtered.length} goalies · fatigue resilience quadrant · min {minGames} games
       </p>
+
+      {/* Quadrant KPI summary */}
+      {qualified.length > 0 && (
+        <div className="kpi-grid" style={{ gridTemplateColumns: 'repeat(4, 1fr)', marginBottom: '1.5rem' }}>
+          {QUADRANT_META.map(q => (
+            <div key={q.key} className="kpi-card">
+              <div className="kpi-value" style={{ color: q.color, fontSize: '2rem' }}>
+                {quadrantCounts[q.key] ?? 0}
+              </div>
+              <div className="kpi-label">{q.label}</div>
+              <div className="kpi-delta">{q.desc}</div>
+            </div>
+          ))}
+        </div>
+      )}
 
       <div className="filter-row">
         <label className="filter-label">Min games:</label>
@@ -442,20 +547,21 @@ export default function Goalies() {
         </span>
       </div>
 
-      {/* B2B Scatter + Top/Bottom */}
-      <div className="grid-5545">
-        <div className="chart-card">
-          <div className="chart-title">SV% vs B2B Impact</div>
-          <div className="chart-subtitle">
-            Each dot = one goalie · outlier labels = |delta| &gt; 0.03 · dashed = B2B neutral
-          </div>
-          <GoalieScatter goalies={filtered} />
+      {/* Resilience Quadrant */}
+      <div className="chart-card">
+        <div className="chart-title">Goalie Resilience Quadrant</div>
+        <div className="chart-subtitle">
+          X = career average SV% (skill) · Y = B2B SV% delta (resilience) ·
+          Dot size = career starts · labels shown for goalies with ≥120 starts
         </div>
-        <div className="chart-card">
-          <div className="chart-title">B2B Impact Extremes</div>
-          <div className="chart-subtitle">Min 5 B2B games for inclusion</div>
-          <TopBottomTable goalies={filtered} />
-        </div>
+        <QuadrantScatter goalies={filtered} />
+      </div>
+
+      {/* B2B Extremes */}
+      <div className="chart-card">
+        <div className="chart-title">B2B Impact Extremes</div>
+        <div className="chart-subtitle">Min 5 B2B games for inclusion · most and least resilient goalies</div>
+        <TopBottomTable goalies={filtered} />
       </div>
 
       {/* GSAx Leaders */}

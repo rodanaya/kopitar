@@ -48,6 +48,8 @@ export interface GoalieStat {
   avg_travel_miles: number;
   career_gsax: number | null;
   career_hdsv_pct: number | null;
+  resilience_z: number | null;
+  quadrant: 'iron_man' | 'vulnerable_star' | 'workhorse' | 'high_risk' | null;
 }
 
 export interface RecoveryPoint {
@@ -125,6 +127,9 @@ export interface ScheduleStressMetric {
   n_with: number;
   n_without: number;
   significant: boolean;
+  goals_cost_per_game: number | null;
+  total_extra_goals: number | null;
+  extra_goals_per_team_season: number | null;
 }
 
 export interface RoadTripLeg {
@@ -153,4 +158,107 @@ export interface ScheduleStress {
   road_trip_legs?: RoadTripLeg[];
   altitude?: AltitudeBin[];
   season_phase?: SeasonPhaseStat[];
+}
+
+export interface OtComparison {
+  ot_sv: number;
+  non_ot_sv: number;
+  delta: number;
+  n_ot: number;
+  n_non_ot: number;
+  p_value: number;
+  significant: boolean;
+}
+
+export interface AfterOt {
+  after_ot_sv: number;
+  after_non_ot_sv: number;
+  delta: number;
+  n_after_ot: number;
+  n_after_non_ot: number;
+  p_value: number;
+  significant: boolean;
+}
+
+export interface CompoundStress {
+  ot_then_b2b_sv: number;
+  regular_b2b_sv: number;
+  delta: number;
+  n_compound: number;
+  n_regular_b2b: number;
+  p_value: number;
+  significant: boolean;
+}
+
+export interface ScoreDiffBin {
+  label: string;
+  mean_sv: number;
+  count: number;
+}
+
+export interface MetroCorrection {
+  b2b_all_sv: number | null;
+  b2b_corrected_sv: number | null;
+  same_metro_sv: number | null;
+  rest_sv: number | null;
+  delta_all: number | null;
+  delta_corrected: number | null;
+  n_b2b_all: number;
+  n_b2b_corrected: number;
+  n_same_metro: number;
+  p_all: number | null;
+  p_corrected: number | null;
+}
+
+export interface OtAnalysis {
+  ot_vs_non_ot?: OtComparison;
+  after_ot?: AfterOt;
+  compound_stress?: CompoundStress;
+  score_diff_bins?: ScoreDiffBin[];
+  metro_correction?: MetroCorrection;
+}
+
+export interface SkaterToi {
+  rest_days: number;
+  mean_toi: number;
+  count: number;
+}
+
+export interface SkaterB2bOverall {
+  b2b_toi: number;
+  rest_toi: number;
+  delta: number;
+  p_value: number;
+  significant: boolean;
+  n_b2b: number;
+  n_rest: number;
+}
+
+export interface SkaterPositionB2b {
+  position: string;
+  b2b_toi: number;
+  rest_toi: number;
+  delta: number;
+  p_value: number;
+  n_b2b: number;
+  n_rest: number;
+}
+
+export interface SkaterPlayerStat {
+  player_id: number;
+  player_name: string;
+  position: string;
+  avg_toi: number;
+  b2b_toi: number | null;
+  rest_toi: number | null;
+  b2b_delta: number | null;
+  games: number;
+  b2b_games: number;
+}
+
+export interface SkaterFatigue {
+  toi_by_rest?: SkaterToi[];
+  b2b_overall?: SkaterB2bOverall;
+  by_position?: SkaterPositionB2b[];
+  top_players?: SkaterPlayerStat[];
 }

@@ -2,48 +2,36 @@ import { Routes, Route, NavLink } from 'react-router-dom'
 import Overview from './pages/Overview'
 import Teams from './pages/Teams'
 import Goalies from './pages/Goalies'
-import Research from './pages/Research'
 import Players from './pages/Players'
+import Fatigue from './pages/Fatigue'
+import Compare from './pages/Compare'
+import Research from './pages/Research'
 
 function Header() {
+  const link = (to: string, label: string, end?: boolean) => (
+    <NavLink
+      to={to}
+      end={end}
+      className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}
+    >
+      {label}
+    </NavLink>
+  )
+
   return (
     <header className="header">
       <div className="header-inner">
         <NavLink to="/" className="logo">
-          KOPITAR <span>NHL Fatigue Research</span>
+          KOPITAR <span>NHL Fatigue Lab</span>
         </NavLink>
         <nav className="nav">
-          <NavLink
-            to="/"
-            end
-            className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}
-          >
-            Overview
-          </NavLink>
-          <NavLink
-            to="/teams"
-            className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}
-          >
-            Teams
-          </NavLink>
-          <NavLink
-            to="/goalies"
-            className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}
-          >
-            Goalies
-          </NavLink>
-          <NavLink
-            to="/players"
-            className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}
-          >
-            Players
-          </NavLink>
-          <NavLink
-            to="/research"
-            className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}
-          >
-            Research
-          </NavLink>
+          {link('/', 'Overview', true)}
+          {link('/teams', 'Teams')}
+          {link('/goalies', 'Goalies')}
+          {link('/players', 'Players')}
+          {link('/fatigue', 'Fatigue')}
+          {link('/compare', 'Compare')}
+          {link('/research', 'Research')}
         </nav>
       </div>
     </header>
@@ -59,6 +47,8 @@ export default function App() {
         <Route path="/teams" element={<Teams />} />
         <Route path="/goalies" element={<Goalies />} />
         <Route path="/players" element={<Players />} />
+        <Route path="/fatigue" element={<Fatigue />} />
+        <Route path="/compare" element={<Compare />} />
         <Route path="/research" element={<Research />} />
       </Routes>
     </div>

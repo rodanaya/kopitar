@@ -272,6 +272,34 @@ def export_goalies(gl: pd.DataFrame, ss: pd.DataFrame) -> list:
         })
 
     records.sort(key=lambda x: x["total_games"], reverse=True)
+
+    # ── Resilience scoring ─────────────────────────────────────────────────────
+    qualifiers = [r for r in records if r["b2b_delta"] is not None and r["b2b_games"] >= 5]
+    if len(qualifiers) >= 10:
+        deltas = [r["b2b_delta"] for r in qualifiers]
+        svs = [r["avg_sv"] for r in qualifiers]
+        mean_delta = float(np.mean(deltas))
+        std_delta = float(np.std(deltas))
+        median_sv = float(np.median(svs))
+        for r in records:
+            if r["b2b_delta"] is not None and r["b2b_games"] >= 5:
+                r["resilience_z"] = safe_round((r["b2b_delta"] - mean_delta) / std_delta, 2) if std_delta > 0 else 0.0
+                is_elite = r["avg_sv"] > median_sv
+                is_resilient = r["b2b_delta"] >= 0
+                r["quadrant"] = (
+                    "iron_man" if is_elite and is_resilient else
+                    "vulnerable_star" if is_elite and not is_resilient else
+                    "workhorse" if not is_elite and is_resilient else
+                    "high_risk"
+                )
+            else:
+                r["resilience_z"] = None
+                r["quadrant"] = None
+        counts = {}
+        for r in qualifiers:
+            counts[r["quadrant"]] = counts.get(r["quadrant"], 0) + 1
+        print(f"  Resilience quadrants: {counts}")
+
     return records
 
 
@@ -478,6 +506,10 @@ def export_schedule_stress(gl: pd.DataFrame) -> dict:
     sv = "save_pct"
     result: dict = {}
 
+    # League-average shots against per game (for effect size calculations)
+    avg_shots = float(rs["shots_against"].mean()) if "shots_against" in rs.columns and rs["shots_against"].notna().any() else 31.5
+    seasons_span = rs["season"].nunique() if "season" in rs.columns else 10
+
     # 4-in-6 and 3-in-4
     for key, col, label in [("four_in_six", "is_4_in_6", "4-in-6"), ("three_in_four", "is_3_in_4", "3-in-4")]:
         if col not in rs.columns:
@@ -487,6 +519,7 @@ def export_schedule_stress(gl: pd.DataFrame) -> dict:
         if len(with_f) > 5 and len(without_f) > 5:
             _, p = stats.ttest_ind(with_f, without_f)
             delta = float(with_f.mean() - without_f.mean())
+            goals_cost = abs(delta) * avg_shots
             result[key] = {
                 "label": label,
                 "mean_with": safe_round(float(with_f.mean())),
@@ -496,8 +529,11 @@ def export_schedule_stress(gl: pd.DataFrame) -> dict:
                 "n_with": int(len(with_f)),
                 "n_without": int(len(without_f)),
                 "significant": bool(p < 0.05),
+                "goals_cost_per_game": safe_round(goals_cost, 3),
+                "total_extra_goals": safe_round(goals_cost * len(with_f), 1),
+                "extra_goals_per_team_season": safe_round(goals_cost * len(with_f) / (32 * seasons_span), 2),
             }
-            print(f"  {label}: delta={delta:+.5f}  p={p:.4f}  n_with={len(with_f)}")
+            print(f"  {label}: delta={delta:+.5f}  p={p:.4f}  n_with={len(with_f)}  goals_cost={goals_cost:.3f}/game")
 
     # Road trip legs
     if "road_trip_leg" in rs.columns:
@@ -612,6 +648,233 @@ def export_team_logs(gl: pd.DataFrame, ss: pd.DataFrame):
 
 
 # ---------------------------------------------------------------------------
+# 11. ot_analysis.json
+# ---------------------------------------------------------------------------
+
+def export_ot_analysis(gl: pd.DataFrame) -> dict:
+    print("\n[11/12] Building ot_analysis.json ...")
+    rs = gl[gl["game_type"] == 2].copy()
+    sv = "save_pct"
+    result: dict = {}
+
+    # OT game performance
+    if "ot_flag" in rs.columns:
+        ot = rs[rs["ot_flag"] == 1][sv].dropna()
+        non_ot = rs[rs["ot_flag"] == 0][sv].dropna()
+        if len(ot) > 5 and len(non_ot) > 5:
+            _, p = stats.ttest_ind(ot, non_ot)
+            result["ot_vs_non_ot"] = {
+                "ot_sv": safe_round(float(ot.mean())),
+                "non_ot_sv": safe_round(float(non_ot.mean())),
+                "delta": safe_round(float(ot.mean() - non_ot.mean())),
+                "n_ot": int(len(ot)),
+                "n_non_ot": int(len(non_ot)),
+                "p_value": safe_round(float(p)),
+                "significant": bool(p < 0.05),
+            }
+            print(f"  OT sv={ot.mean():.4f} vs non-OT sv={non_ot.mean():.4f}  p={p:.4f}")
+
+    # Performance after OT game (compound fatigue)
+    if "prev_game_ot" in rs.columns:
+        after_ot = rs[rs["prev_game_ot"] == 1][sv].dropna()
+        after_non_ot = rs[rs["prev_game_ot"] == 0][sv].dropna()
+        if len(after_ot) > 5 and len(after_non_ot) > 5:
+            _, p = stats.ttest_ind(after_ot, after_non_ot)
+            result["after_ot"] = {
+                "after_ot_sv": safe_round(float(after_ot.mean())),
+                "after_non_ot_sv": safe_round(float(after_non_ot.mean())),
+                "delta": safe_round(float(after_ot.mean() - after_non_ot.mean())),
+                "n_after_ot": int(len(after_ot)),
+                "n_after_non_ot": int(len(after_non_ot)),
+                "p_value": safe_round(float(p)),
+                "significant": bool(p < 0.05),
+            }
+            print(f"  After OT sv={after_ot.mean():.4f} vs after non-OT sv={after_non_ot.mean():.4f}  p={p:.4f}")
+
+        # Compound: OT game + next game is B2B
+        if "is_back_to_back" in rs.columns:
+            compound = rs[(rs["prev_game_ot"] == 1) & (rs["is_back_to_back"] == 1)][sv].dropna()
+            regular_b2b = rs[(rs["prev_game_ot"] == 0) & (rs["is_back_to_back"] == 1)][sv].dropna()
+            if len(compound) > 5 and len(regular_b2b) > 5:
+                _, p = stats.ttest_ind(compound, regular_b2b)
+                result["compound_stress"] = {
+                    "ot_then_b2b_sv": safe_round(float(compound.mean())),
+                    "regular_b2b_sv": safe_round(float(regular_b2b.mean())),
+                    "delta": safe_round(float(compound.mean() - regular_b2b.mean())),
+                    "n_compound": int(len(compound)),
+                    "n_regular_b2b": int(len(regular_b2b)),
+                    "p_value": safe_round(float(p)),
+                    "significant": bool(p < 0.05),
+                }
+                print(f"  OT->B2B sv={compound.mean():.4f} vs regular B2B sv={regular_b2b.mean():.4f}  p={p:.4f}")
+
+    # Score differential buckets: how does margin affect SV%?
+    if "score_diff" in rs.columns:
+        bins = [
+            ("Blowout Loss (≤-4)", rs["score_diff"] <= -4),
+            ("Loss (-3 to -1)", rs["score_diff"].between(-3, -1)),
+            ("Tie/OT (0)", rs["score_diff"] == 0),
+            ("Win (+1 to +3)", rs["score_diff"].between(1, 3)),
+            ("Blowout Win (≥+4)", rs["score_diff"] >= 4),
+        ]
+        score_bins = []
+        for label, mask in bins:
+            sub = rs[mask][sv].dropna()
+            if len(sub) < 30:
+                continue
+            score_bins.append({
+                "label": label,
+                "mean_sv": safe_round(float(sub.mean())),
+                "count": int(len(sub)),
+            })
+        result["score_diff_bins"] = score_bins
+        print(f"  Score diff bins: {len(score_bins)}")
+
+    # Same-metro correction: B2B delta with vs without same-metro trips
+    if "same_metro" in rs.columns and "is_back_to_back" in rs.columns:
+        # Standard B2B (all)
+        b2b_all = rs[rs["is_back_to_back"] == 1][sv].dropna()
+        rest_all = rs[rs["is_back_to_back"] == 0][sv].dropna()
+        # Metro-corrected B2B (exclude same-metro)
+        b2b_corrected = rs[(rs["is_back_to_back"] == 1) & (rs["same_metro"] == 0)][sv].dropna()
+        same_metro_only = rs[(rs["is_back_to_back"] == 1) & (rs["same_metro"] == 1)][sv].dropna()
+
+        _, p_all = stats.ttest_ind(b2b_all, rest_all) if (len(b2b_all) > 2 and len(rest_all) > 2) else (None, None)
+        _, p_corr = stats.ttest_ind(b2b_corrected, rest_all) if (len(b2b_corrected) > 2 and len(rest_all) > 2) else (None, None)
+
+        result["metro_correction"] = {
+            "b2b_all_sv": safe_round(float(b2b_all.mean())) if len(b2b_all) > 0 else None,
+            "b2b_corrected_sv": safe_round(float(b2b_corrected.mean())) if len(b2b_corrected) > 0 else None,
+            "same_metro_sv": safe_round(float(same_metro_only.mean())) if len(same_metro_only) > 0 else None,
+            "rest_sv": safe_round(float(rest_all.mean())) if len(rest_all) > 0 else None,
+            "delta_all": safe_round(float(b2b_all.mean() - rest_all.mean())) if len(b2b_all) > 0 else None,
+            "delta_corrected": safe_round(float(b2b_corrected.mean() - rest_all.mean())) if len(b2b_corrected) > 0 else None,
+            "n_b2b_all": int(len(b2b_all)),
+            "n_b2b_corrected": int(len(b2b_corrected)),
+            "n_same_metro": int(len(same_metro_only)),
+            "p_all": safe_round(float(p_all)) if p_all is not None else None,
+            "p_corrected": safe_round(float(p_corr)) if p_corr is not None else None,
+        }
+        print(f"  Metro correction: {len(same_metro_only)} same-metro B2B starts excluded")
+
+    return result
+
+
+# ---------------------------------------------------------------------------
+# 12. skater_fatigue.json
+# ---------------------------------------------------------------------------
+
+def export_skater_fatigue(conn) -> dict:
+    print("\n[12/12] Building skater_fatigue.json ...")
+    try:
+        df = pd.read_sql("""
+            SELECT sg.player_id, sg.season, ss.player_name, ss.position,
+                   sg.game_date, sg.toi_seconds, sg.is_back_to_back, sg.is_3_in_4,
+                   sg.rest_days, sg.road_trip_leg, sg.home_road,
+                   sg.goals, sg.assists, sg.points, sg.shots
+            FROM skater_game_logs sg
+            JOIN skater_season_stats ss
+              ON sg.player_id = ss.player_id AND sg.season = ss.season
+            WHERE ss.game_type = 2
+        """, conn)
+    except Exception as e:
+        print(f"  skater_game_logs not available yet: {e}")
+        return {}
+
+    if df.empty:
+        print("  No skater game log data yet")
+        return {}
+
+    print(f"  {len(df):,} skater game rows loaded")
+    df["toi_min"] = df["toi_seconds"] / 60.0
+    df["pos_group"] = df["position"].map(lambda p: "Forward" if p in ("C", "L", "R") else "Defense" if p == "D" else "Other")
+
+    result: dict = {}
+
+    # TOI by rest days (capped at 10)
+    rested = df[(df["rest_days"].notna()) & (df["rest_days"] <= 10)].copy()
+    rested["rest_days"] = rested["rest_days"].astype(int)
+    toi_by_rest = []
+    for dr, grp in rested.groupby("rest_days"):
+        toi = grp["toi_min"].dropna()
+        if len(toi) < 50:
+            continue
+        toi_by_rest.append({
+            "rest_days": int(dr),
+            "mean_toi": safe_round(float(toi.mean()), 2),
+            "count": int(len(toi)),
+        })
+    result["toi_by_rest"] = sorted(toi_by_rest, key=lambda x: x["rest_days"])
+
+    # B2B TOI delta overall and by position
+    b2b_grp = df[df["is_back_to_back"] == 1]["toi_min"].dropna()
+    rest_grp = df[df["is_back_to_back"] == 0]["toi_min"].dropna()
+    if len(b2b_grp) > 5 and len(rest_grp) > 5:
+        _, p = stats.ttest_ind(b2b_grp, rest_grp)
+        result["b2b_overall"] = {
+            "b2b_toi": safe_round(float(b2b_grp.mean()), 2),
+            "rest_toi": safe_round(float(rest_grp.mean()), 2),
+            "delta": safe_round(float(b2b_grp.mean() - rest_grp.mean()), 2),
+            "p_value": safe_round(float(p)),
+            "significant": bool(p < 0.05),
+            "n_b2b": int(len(b2b_grp)),
+            "n_rest": int(len(rest_grp)),
+        }
+        print(f"  B2B TOI: {b2b_grp.mean():.2f} vs rested {rest_grp.mean():.2f} min  p={p:.4f}")
+
+    # By position
+    pos_records = []
+    for pos_group, pgrp in df.groupby("pos_group"):
+        if pos_group == "Other":
+            continue
+        b2b = pgrp[pgrp["is_back_to_back"] == 1]["toi_min"].dropna()
+        rest = pgrp[pgrp["is_back_to_back"] == 0]["toi_min"].dropna()
+        if len(b2b) < 5 or len(rest) < 5:
+            continue
+        _, p = stats.ttest_ind(b2b, rest)
+        pos_records.append({
+            "position": pos_group,
+            "b2b_toi": safe_round(float(b2b.mean()), 2),
+            "rest_toi": safe_round(float(rest.mean()), 2),
+            "delta": safe_round(float(b2b.mean() - rest.mean()), 2),
+            "p_value": safe_round(float(p)),
+            "n_b2b": int(len(b2b)),
+            "n_rest": int(len(rest)),
+        })
+    result["by_position"] = pos_records
+
+    # Top players by avg TOI (min 50 games, regular season only)
+    player_stats = []
+    for pid, pgrp in df.groupby("player_id"):
+        if len(pgrp) < 50:
+            continue
+        name = pgrp["player_name"].iloc[0]
+        pos = pgrp["pos_group"].iloc[0]
+        avg_toi = float(pgrp["toi_min"].mean())
+        b2b = pgrp[pgrp["is_back_to_back"] == 1]["toi_min"].dropna()
+        rest = pgrp[pgrp["is_back_to_back"] == 0]["toi_min"].dropna()
+        b2b_toi = float(b2b.mean()) if len(b2b) > 0 else None
+        rest_toi = float(rest.mean()) if len(rest) > 0 else None
+        delta = (b2b_toi - rest_toi) if (b2b_toi is not None and rest_toi is not None) else None
+        player_stats.append({
+            "player_id": int(pid),
+            "player_name": name,
+            "position": pos,
+            "avg_toi": safe_round(avg_toi, 2),
+            "b2b_toi": safe_round(b2b_toi, 2),
+            "rest_toi": safe_round(rest_toi, 2),
+            "b2b_delta": safe_round(delta, 2),
+            "games": int(len(pgrp)),
+            "b2b_games": int(len(b2b)),
+        })
+    player_stats.sort(key=lambda x: x["avg_toi"] or 0, reverse=True)
+    result["top_players"] = player_stats[:50]
+    print(f"  Player TOI profiles: {len(player_stats)} players (top 50 exported)")
+
+    return result
+
+
+# ---------------------------------------------------------------------------
 # Main
 # ---------------------------------------------------------------------------
 
@@ -677,6 +940,17 @@ def main():
     # 9. schedule_stress.json
     stress_data = export_schedule_stress(gl)
     sizes["schedule_stress.json"] = write_json(OUT_DIR / "schedule_stress.json", stress_data, "schedule_stress")
+
+    # 10. ot_analysis.json
+    ot_data = export_ot_analysis(gl)
+    sizes["ot_analysis.json"] = write_json(OUT_DIR / "ot_analysis.json", ot_data, "ot_analysis")
+
+    # 11. skater_fatigue.json (requires skater_game_logs table)
+    conn2 = sqlite3.connect(DB_PATH)
+    skater_fat = export_skater_fatigue(conn2)
+    conn2.close()
+    if skater_fat:
+        sizes["skater_fatigue.json"] = write_json(OUT_DIR / "skater_fatigue.json", skater_fat, "skater_fatigue")
 
     print("\n" + "=" * 60)
     print("Export complete!")
