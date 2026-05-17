@@ -1,305 +1,149 @@
-# Kopitar: NHL Performance Analysis Framework
+# Kopitar — NHL Goaltender Fatigue Analysis
 
-![NHL](https://nhl.bamcontent.com/images/photos/324131200/1024x576/cut.jpg)
+> *Named after Anze Kopitar, one of the most durable two-way players in modern NHL history.*
 
-A comprehensive framework for analyzing NHL player performance data across different game conditions, with a focus on situational performance analytics.
+**Live dashboard → [kopitar.vercel.app](https://kopitar.vercel.app)**
 
-## Project Overview
+---
 
-Kopitar is a data analytics framework that collects, processes, and analyzes NHL player performance data to identify patterns across different game conditions, such as:
+## What we set out to answer
 
-- Regular season vs. playoff performance
-- Back-to-back game impact
-- Home vs. away differences
-- Travel impact on performance
+The conventional wisdom in hockey is simple: back-to-back games hurt goaltenders. But the data tells a more complicated story.
 
-The framework includes a full data pipeline from API data collection to interactive visualization via a Streamlit dashboard.
+When you look at raw B2B save percentages versus rested save percentages, the effect nearly disappears. Not because fatigue doesn't exist — but because **coaches already know it does**. Starters get protected on the second night of a back-to-back. What looks like "no B2B effect" is actually evidence of selection bias built directly into the data.
 
-## NHL API Information
+The real signal only appears when you remove that protective layer and look at situations where coaches *have* to play their starter anyway: four games in six nights, three in four, extended road trips into altitude changes. That's where fatigue stops being a coaching decision and becomes a physiological fact.
 
-**Important**: The NHL API used by this project has undergone significant changes. The old API endpoint (`statsapi.web.nhl.com/api/v1`) has been deprecated and replaced with two new endpoints:
+This project attempts to quantify that fact with ten seasons of NHL goaltender data — 28,000+ game logs, 130+ qualified goalies, 33 teams.
 
-1. `api-web.nhle.com` - Web-focused endpoints for schedules, team rosters, etc.
-2. `api.nhle.com/stats/rest` - Stats-focused endpoints for detailed statistics
+---
 
-This project uses the `nhl-api-py` library (version 2.18.0+) which has been updated to work with the new NHL API endpoints. However, due to the undocumented nature of the NHL API, some endpoints may require adjustments as the API continues to evolve.
+## Key Findings
 
-For the most up-to-date API documentation, refer to:
-- [NHL-API-Reference](https://github.com/Zmalski/NHL-API-Reference) - Community-maintained reference
+### 1. The B2B Paradox
+League-wide B2B save percentage shows almost no drop vs. rested (.8992 vs .9000). This is not evidence that back-to-backs don't matter — it's evidence that coaches intervene before the data can capture the true effect. Backup goalies absorb the second-night starts precisely to prevent the performance drop from showing up in the starter's stats.
 
-## Features
+### 2. The 4-in-6 Threshold
+When you condition on four games in six nights — a schedule density that forces starter usage regardless of fatigue — the effect becomes statistically significant (p = 0.035, delta = −0.0069 save percentage points). Translated to real outcomes: **0.20 extra goals allowed per start**, or roughly 1–2 additional goals surrendered per team per season from this schedule pattern alone.
 
-- **Comprehensive Data Collection**: Gather data from the NHL Stats API for teams, players, and game-by-game performance.
-- **Robust Database**: Store structured data in PostgreSQL (managed via Docker) with optimized schemas for performance analytics.
-- **Advanced Analysis**: Run statistical tests to identify performance patterns across various conditions.
-- **Interactive Dashboard**: Visualize performance trends and metrics with a user-friendly Streamlit interface.
+### 3. Recovery Curves
+Save percentage recovers non-linearly. Performance with one day of rest (B2B) sits at the baseline. With two days it rebounds sharply. The curve flattens after four days — meaning beyond that point, additional rest produces diminishing returns. Coaches who hold starters for three or four days of rest between starts are operating near the optimal window.
 
-## Installation
+### 4. Goalie Resilience Archetypes
+Not all goalies respond to schedule stress the same way. We classify every goalie with ≥5 back-to-back starts into four quadrants based on skill (avg save %) and fatigue resilience (B2B delta):
 
-### Prerequisites
+| Quadrant | Definition |
+|---|---|
+| **Iron Man** | Elite save % + maintains or improves on B2Bs |
+| **Vulnerable Star** | Elite save % + significant B2B drop |
+| **Workhorse** | Average save % + fatigue-resistant |
+| **High Risk** | Average save % + B2B degradation |
 
-- Python 3.9+
-- pip (Python package manager)
-- Docker and Docker Compose
+The population splits roughly evenly (~23 / 21 / 20 / 22 across 86 qualified goalies), which suggests these are real archetypes rather than noise.
 
-### Setup
+### 5. Overtime Adds a Hidden Layer
+Goaltenders post *higher* save percentages in overtime (.9059 vs .8982 non-OT, p < 0.001) — a selection effect, since only close games reach OT. But playing into OT does not meaningfully change the *following* game's performance, and an OT game followed by a back-to-back shows no additional compound stress versus a regular B2B. The overtime effect is real but isolated.
 
-1. Clone the repository:
-```bash
-git clone https://github.com/yourusername/kopitar.git
-cd kopitar
-```
+---
 
-2. Create and activate a virtual environment (optional but recommended):
-```bash
-python -m venv venv
-# On Windows
-venv\Scripts\activate
-# On macOS/Linux
-source venv/bin/activate
-```
+## Team Analysis
 
-3. Install the required packages:
-```bash
-pip install -r requirements.txt
-```
+### Most Traveled Teams (avg miles per game, 2015–2025)
 
-4. Create a `.env` file in the project root directory with your PostgreSQL credentials:
-```dotenv
-# .env
-POSTGRES_HOST=localhost
-POSTGRES_PORT=5432
-POSTGRES_DB=Kopitar
-POSTGRES_USER=postgres
-POSTGRES_PASSWORD=your_secret_password
-```
-   *(Replace `your_secret_password` with a strong password, like the `Cr1ms0n_K1ng` provided, or your own. The default user/db name can be kept or changed here and in `docker-compose.yml`)*
+| Rank | Team | Avg Miles/Game | Total Miles |
+|---|---|---|---|
+| 1 | SEA Kraken | 783 mi | 276,000 |
+| 2 | VAN Canucks | 758 mi | 616,000 |
+| 3 | ANA Ducks | 752 mi | 649,000 |
+| 4 | UTA Hockey Club | 744 mi | 65,000 |
+| 5 | EDM Oilers | 743 mi | 626,000 |
+| 6 | SJS Sharks | 728 mi | 614,000 |
+| 7 | CGY Flames | 720 mi | 597,000 |
+| 8 | VGK Golden Knights | 695 mi | 450,000 |
 
-## Usage
+Western Conference teams dominate — the geography of the Pacific and Central divisions means their goalies log far more air miles than Eastern counterparts, regardless of schedule density.
 
-### 1. Start the Database Container
+### Most Back-to-Back Games (by rate)
 
-First, start the PostgreSQL database using Docker Compose:
-```bash
-docker compose up -d db
-```
-Wait a few moments for the database to initialize. You can check its status with `docker compose ps`. The database will persist data in a Docker volume named `postgres_data`.
+| Rank | Team | B2B Games | B2B Rate |
+|---|---|---|---|
+| 1 | CBJ Blue Jackets | 55 | 6.5% |
+| 2 | NJD Devils | 51 | 6.0% |
+| 3 | PHI Flyers | 48 | 5.6% |
+| 4 | FLA Panthers | 42 | 5.0% |
+| 5 | NYR Rangers | 41 | 4.9% |
 
-### 2. Run Individual Components or Full Pipeline
+Columbus leads the league in B2B rate — they face back-to-back situations in 6.5% of all goalie starts, nearly double the rate of the most schedule-protected Western teams.
 
-#### Database Setup (and Initial Data Import)
+### Teams That Suffer Most from B2Bs (SV% delta)
 
-This script now connects using the credentials in the `.env` file. It creates tables and optionally imports data.
+| Rank | Team | B2B SV% | Rested SV% | Delta |
+|---|---|---|---|---|
+| 1 | WSH Capitals | .862 | .902 | **−40.1 pts** |
+| 2 | ARI Coyotes | .872 | .899 | −27.6 pts |
+| 3 | EDM Oilers | .879 | .896 | −17.2 pts |
+| 4 | PHI Flyers | .873 | .888 | −15.3 pts |
+| 5 | CBJ Blue Jackets | .885 | .899 | −13.2 pts |
 
-To create tables and import data from `kopitar/data` (appending to existing data):
-```bash
-python kopitar/database/db_setup.py --data_dir kopitar/data --import_mode append
-```
+Washington's −40 point swing is the largest in the dataset — a combination of goalie instability during the study window and particularly punishing schedule sequences.
 
-To **reset** the database (drop all tables) and then import data:
-```bash
-python kopitar/database/db_setup.py --data_dir kopitar/data --reset --import_mode replace
-```
+### Most Resilient Teams on Back-to-Backs
 
-To only create/reset tables without importing:
-```bash
-python kopitar/database/db_setup.py --reset --skip_import
-```
+| Rank | Team | B2B SV% | Rested SV% | Delta |
+|---|---|---|---|---|
+| 1 | COL Avalanche | .920 | .900 | **+20.2 pts** |
+| 2 | NYI Islanders | .927 | .908 | +19.8 pts |
+| 3 | WPG Jets | .925 | .907 | +18.7 pts |
+| 4 | VGK Golden Knights | .922 | .904 | +17.3 pts |
+| 5 | TOR Maple Leafs | .918 | .901 | +16.9 pts |
 
-#### Data Collection
+Colorado and the Islanders actually post *better* numbers on B2Bs than on rested nights — a combination of starter quality in peak years, smart backup deployment, and favorable B2B opponent matchups.
 
-```bash
-python kopitar/analysis/data_collection.py --seasons 20232024 20222023 --game_types R P --player_types G D F
-```
-*(Note: Ensure the database is set up before running collection if it saves directly to DB)*
+---
 
-#### Performance Analysis
+## Data & Methods
 
-*(Note: Ensure the database is populated before running analysis)*
-```bash
-python kopitar/analysis/player_performance_analysis.py --data-file <path_to_data_or_use_db> --output-dir kopitar/results
-```
-*(Update analysis scripts if they need to read directly from the PostgreSQL DB via `db_utils.py`)*
+**Dataset**: NHL Stats API, 10 regular seasons (2015–16 through 2024–25)  
+**Scope**: 28,069 goaltender game logs · 131 goalies (≥30 RS games) · 33 teams  
+**Travel**: Great-circle distances between arena coordinates; eastward travel penalized 1.5× for timezone asymmetry  
+**Statistics**: Welch's t-tests for all comparisons; effect sizes translated to goals-per-start using avg shots faced (31.5/game)  
+**Quality**: GSAx supplemented from MoneyPuck for career-level goalie quality adjustment
 
-#### Launch Dashboard
+---
 
-*(Note: Ensure the dashboard app reads from the PostgreSQL DB via `db_utils.py`)*
-```bash
-streamlit run kopitar/dashboard/app.py
-```
+## Stack
 
-### Run the Full Pipeline (Example)
+| Layer | Technology |
+|---|---|
+| Data pipeline | Python · Pandas · SQLite |
+| Statistics | SciPy · StatsModels · NumPy |
+| API sources | NHL Stats API (public) · MoneyPuck |
+| Dashboard | React · Recharts · Leaflet |
+| Deployment | Vercel |
 
-*(Note: The `run_analysis.py` script would need to be updated to orchestrate these steps correctly with the new DB setup)*
-
-```bash
-# Example sequence (adapt run_analysis.py or run manually)
-# 1. Start DB (if not running)
-docker compose up -d db
-# 2. Setup/Reset DB and Import Data
-python kopitar/database/db_setup.py --data_dir kopitar/data --reset --import_mode replace
-# 3. Run Analysis (assuming it reads from DB)
-python kopitar/analysis/player_performance_analysis.py --output-dir kopitar/results
-# 4. Launch Dashboard (assuming it reads from DB)
-streamlit run kopitar/dashboard/app.py
-```
-
-## Data Workflow
-
-1. **Data Collection**: Raw data is fetched from the NHL Stats API
-2. **Data Processing**: Raw data is cleaned and transformed (potentially saved as intermediate files or loaded directly)
-3. **Database Storage**: Processed data is stored in a PostgreSQL database (managed by Docker) using `db_setup.py`.
-4. **Analysis**: Statistical tests are run on the stored data, reading from PostgreSQL via `db_utils.py`.
-5. **Visualization**: Results are displayed in an interactive dashboard, reading from PostgreSQL via `db_utils.py`.
-
-## Testing
-
-Run the database tests to ensure database functionality:
-*(Note: `test_database.py` needs to be updated to connect to PostgreSQL)*
-```bash
-# Update test_database.py first!
-# python kopitar/tests/test_database.py
-```
-
-Test the NHL API functionality:
-```bash
-python test_nhl_api.py
-```
+---
 
 ## Project Structure
 
 ```
 kopitar/
-├── .env                     # Environment variables (DB credentials) - DO NOT COMMIT
-├── docker-compose.yml       # Docker configuration for PostgreSQL
-├── analysis/                # Analysis modules
-│   ├── data_collection.py   # Fetches data from NHL API
-│   ├── player_performance_analysis.py  # General player analysis
-│   └── goalie_performance_analysis.py  # Goalie-specific analysis
-├── database/                # Database related code
-│   ├── db_setup.py          # Database setup and schema creation (PostgreSQL)
-│   └── db_utils.py          # Database utility functions (PostgreSQL)
-├── dashboard/               # Visualization components
-│   └── app.py               # Streamlit dashboard application
-├── scripts/                 # Utility scripts
-│   └── run_analysis.py      # Main pipeline runner script (Needs update)
-├── tests/                   # Test modules
-│   └── test_database.py     # Database tests (Needs update)
-├── utils/                   # Utility modules
-│   └── nhl_api.py           # NHL API wrapper
-├── data/                    # Storage for raw and processed data CSVs
-├── results/                 # Output directory for analysis results
-└── requirements.txt         # Project dependencies
+├── scripts/
+│   ├── export_dashboard_data.py      # builds all dashboard JSON from DB
+│   ├── enrich_ot_score_metro.py      # adds OT/score/metro columns to DB
+│   └── fetch_skater_gamelogs.py      # collects per-game skater TOI
+├── kopitar/
+│   └── dashboard-ui/
+│       ├── src/pages/
+│       │   ├── Overview.tsx          # hero narrative + league-level findings
+│       │   ├── Goalies.tsx           # resilience quadrant lab
+│       │   ├── Research.tsx          # statistical deep-dive + effect sizes
+│       │   ├── Fatigue.tsx           # schedule stress + OT analysis
+│       │   └── Players.tsx           # skater TOI fatigue + leaderboard
+│       └── public/data/              # pre-exported JSON served statically
+└── data/
+    └── scraped/kopitar.db            # SQLite — all game logs + enrichments
 ```
 
-## Database Schema
+---
 
-*(Note: The SQL examples below illustrate the general structure. The definitive schema is defined using SQLAlchemy in `kopitar/database/db_setup.py` and is designed for PostgreSQL.)*
-
-### Main Tables
-
-#### Teams Table
-```sql
--- Example structure (see db_setup.py for exact definition)
-CREATE TABLE teams (
-    team_id INTEGER NOT NULL,
-    name TEXT,
-    abbreviation TEXT,
-    team_name TEXT,
-    location TEXT,
-    division TEXT,
-    conference TEXT,
-    season INTEGER NOT NULL,
-    PRIMARY KEY (team_id, season)
-);
-```
-
-#### Players Table
-```sql
--- Example structure
-CREATE TABLE players (
-    player_id INTEGER PRIMARY KEY NOT NULL,
-    full_name TEXT,
-    position TEXT,
-    position_type TEXT, -- 'G', 'D', 'F'
-    team_id INTEGER REFERENCES teams(team_id),
-    season TEXT,
-    is_active BOOLEAN
-);
-```
-
-#### Games Table
-```sql
--- Example structure
-CREATE TABLE games (
-    game_id INTEGER PRIMARY KEY NOT NULL,
-    season INTEGER,
-    game_type TEXT, -- 'R', 'P'
-    date TEXT, -- Consider DATE type
-    home_team_id INTEGER REFERENCES teams(team_id),
-    away_team_id INTEGER REFERENCES teams(team_id),
-    venue TEXT,
-    home_score REAL,
-    away_score REAL,
-    is_playoff BOOLEAN,
-    is_back_to_back BOOLEAN
-);
-```
-
-#### Goalie Game Logs
-```sql
--- Example structure
-CREATE TABLE goalie_game_logs (
-    id SERIAL PRIMARY KEY, -- Auto-incrementing
-    player_id INTEGER REFERENCES players(player_id),
-    game_id INTEGER REFERENCES games(game_id),
-    team_id INTEGER REFERENCES teams(team_id),
-    opponent_id INTEGER REFERENCES teams(team_id),
-    game_date TEXT, -- Consider DATE type
-    season TEXT,
-    game_type TEXT,
-    is_playoff BOOLEAN,
-    save_percentage REAL,
-    goals_against INTEGER,
-    back_to_back BOOLEAN
-);
-```
-
-#### Skater Game Logs
-```sql
--- Example structure
-CREATE TABLE skater_game_logs (
-    id SERIAL PRIMARY KEY,
-    player_id INTEGER REFERENCES players(player_id),
-    game_id INTEGER REFERENCES games(game_id),
-    team_id INTEGER REFERENCES teams(team_id),
-    opponent_id INTEGER REFERENCES teams(team_id),
-    game_date TEXT,
-    season TEXT,
-    game_type TEXT,
-    position TEXT,
-    is_playoff BOOLEAN,
-    goals INTEGER,
-    assists INTEGER,
-    points INTEGER,
-    back_to_back BOOLEAN,
-    time_on_ice_mins REAL
-);
-```
-
-## Contributing
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## Acknowledgments
-
-- NHL Stats API for providing the data
-- Players like Anze Kopitar who demonstrate exceptional performance in all game situations
+*Concept / research project. All data sourced from publicly available NHL statistics.*
